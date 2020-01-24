@@ -52,10 +52,12 @@ namespace The_V_Logger
             var count = 1;
             foreach (var vlogger in allVloggers.OrderByDescending(x =>x.Value.Followers.Count).ThenBy(x=>x.Value.Following.Count))
             {
+                Console.WriteLine($"{count}. {vlogger.Key} : {vlogger.Value.Followers.Count} followers, {vlogger.Value.Following.Count} following");
                 if (count == 1)
                 {
                     foreach (var item in vlogger.Value.Followers.OrderBy(x=> x))
                     {
+                        Console.WriteLine($"*  {item}");
                     }
                 }
                 count++;
