@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Date_Modifier
+namespace DefiningClasses
 {
     public class DateModifier
     {
