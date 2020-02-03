@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Raw_Data
 {
+    public class Car
     {
 
         public Car(string model)
