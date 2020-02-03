@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Date Modifier", "Date Modifier\Date Modifier.csproj", "{CAA517C2-1D16-45F4-89A5-70B9148E84AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAA517C2-1D16-45F4-89A5-70B9148E84AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA517C2-1D16-45F4-89A5-70B9148E84AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA517C2-1D16-45F4-89A5-70B9148E84AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA517C2-1D16-45F4-89A5-70B9148E84AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5ED9CB2-3F07-47A6-8ED7-AAB7DBB67EE9}
+	EndGlobalSection
+EndGlobal
