@@ -11,6 +11,7 @@ namespace Raw_Data
             this.EngineSpeed = speed;
             this.EnginePower = power;
         }
+        
         public double EngineSpeed { get; set; }
         public double EnginePower { get; set; }
 
