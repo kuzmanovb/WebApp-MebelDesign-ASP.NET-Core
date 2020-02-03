@@ -4,7 +4,15 @@ using System.Text;
 
 namespace Raw_Data
 {
-    class Engine
+    public class Engine
     {
+        public Engine(double speed, double power)
+        {
+            this.EngineSpeed = speed;
+            this.EnginePower = power;
+        }
+        public double EngineSpeed { get; set; }
+        public double EnginePower { get; set; }
+
     }
 }

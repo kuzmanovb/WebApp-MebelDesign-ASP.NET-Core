@@ -4,7 +4,14 @@ using System.Text;
 
 namespace Raw_Data
 {
-    class Car
     {
+
+        public Car(string model)
+        {
+            this.Model = model;
+        }
+        public string Model { get; set; }
+
+        public Engine EngineCar { get; set; } =;
     }
 }
