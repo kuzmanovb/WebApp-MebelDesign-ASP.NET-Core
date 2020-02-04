@@ -19,11 +19,16 @@ namespace Trojan_Invasion
             for (int i = 1; i <= wavesNumber; i++)
             {
                 var wavesInput = Console.ReadLine().Split().Select(int.Parse).ToList();
+                if (!platesQueue.Any())
+                {
+                    continue;
+                }
                 if (i % 3 == 0)
                 {
                     var newPlate = int.Parse(Console.ReadLine());
                     platesQueue.Enqueue(newPlate);
                 }
+                //Ако има останали щитове се добавят вълни
                 if (platesQueue.Any())
                 {
                     AddWaves(wavesStack, wavesInput);
