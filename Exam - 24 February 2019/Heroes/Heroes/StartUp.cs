@@ -1,4 +1,3 @@
-﻿namespace Heroes
 ﻿using System;
 
 namespace Heroes
