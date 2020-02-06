@@ -10,55 +10,44 @@ namespace Trojan_Invasion
         {
             int wavesNumber = int.Parse(Console.ReadLine());
 
-            var platesInput = Console.ReadLine().Split().Select(int.Parse).ToList();
-            var platesQueue = new Queue<int>(platesInput);
+            var plates = Console.ReadLine().Split().Select(int.Parse).ToList();
             var wavesStack = new Stack<int>();
 
-            int curentPlate = 0;
 
             for (int i = 1; i <= wavesNumber; i++)
             {
-                var wavesInput = Console.ReadLine().Split().Select(int.Parse).ToList();
-                if (!platesQueue.Any())
+                if (plates.Count == 0)
                 {
-                    continue;
+                    break;
                 }
+
+                var wavesInput = Console.ReadLine().Split().Select(int.Parse).ToList();
+                AddWaves(wavesStack, wavesInput);
+
                 if (i % 3 == 0)
                 {
-                    var newPlate = int.Parse(Console.ReadLine());
-                    platesQueue.Enqueue(newPlate);
-                }
-                //Ако има останали щитове се добавят вълни
-                if (platesQueue.Any())
-                {
-                    AddWaves(wavesStack, wavesInput);
+                    plates.Add(int.Parse(Console.ReadLine()));
                 }
 
-                while (wavesStack.Any())
+
+                while (wavesStack.Count > 0 && plates.Count > 0)
                 {
-                    if (!platesQueue.Any())
-                    {
-                        break;
-                    }
-                    if (curentPlate == 0 && platesQueue.Any())
-                    {
-                        curentPlate = platesQueue.Dequeue();
-                    }
                     int curentWaves = wavesStack.Pop();
+                    int curentPlate = plates[0];
+
                     if (curentPlate > curentWaves)
                     {
-                        curentPlate -= curentWaves;
-                    }
-                    else if (curentPlate < curentWaves)
-                    {
-                        var plateForReturn = curentWaves - curentPlate;
+                        plates[0] = curentPlate - curentWaves;
 
-                        wavesStack.Push(plateForReturn);
-                        curentPlate = 0;
+                    }
+                    else if (curentWaves > curentPlate)
+                    {
+                        wavesStack.Push(curentWaves - curentPlate);
+                        plates.RemoveAt(0);
                     }
                     else if (curentPlate == curentWaves)
                     {
-                        curentPlate = 0;
+                        plates.RemoveAt(0);
                     }
                 }
             }
@@ -68,10 +57,10 @@ namespace Trojan_Invasion
                 Console.WriteLine("The Trojans successfully destroyed the Spartan defense.");
                 Console.WriteLine($"Warriors left: {string.Join(", ", wavesStack)}");
             }
-            else if (platesQueue.Any())
+            else if (plates.Any())
             {
                 Console.WriteLine("The Spartans successfully repulsed the Trojan attack.");
-                Console.WriteLine($"Plates left: {string.Join(", ", platesQueue)}");
+                Console.WriteLine($"Plates left: {string.Join(", ", plates)}");
             }
 
         }
