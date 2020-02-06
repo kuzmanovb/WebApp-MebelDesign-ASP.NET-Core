@@ -18,6 +18,7 @@ namespace FightingArena
         public int Count
         {
             get { return allGladiators.Count; }
+            get { return this.allGladiators.Count; }
         }
 
         public void Add(Gladiator gladiator)
@@ -28,6 +29,7 @@ namespace FightingArena
         public void Remove(string name)
         {
             for (int i = 0; i < allGladiators.Count; i++)
+            for (int i = 0; i < this.allGladiators.Count; i++)
             {
                 if (this.allGladiators[i].Name == name)
                 {
