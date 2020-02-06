@@ -17,7 +17,6 @@ namespace FightingArena
         public string Name { get; set; }
         public int Count
         {
-            get { return allGladiators.Count; }
             get { return this.allGladiators.Count; }
         }
 
@@ -28,7 +27,6 @@ namespace FightingArena
 
         public void Remove(string name)
         {
-            for (int i = 0; i < allGladiators.Count; i++)
             for (int i = 0; i < this.allGladiators.Count; i++)
             {
                 if (this.allGladiators[i].Name == name)
