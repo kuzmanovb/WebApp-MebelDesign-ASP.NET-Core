@@ -2,15 +2,15 @@
 
 namespace DoublyLinkedList
 {
-    public class DoublyLinkedList
+    public class DoublyLinkedList<T>
     {
         private class ListNode
         {
-            public ListNode(int value)
+            public ListNode(T value)
             {
                 this.Value = value;
             }
-            public int Value { get; set; }
+            public T Value { get; set; }
             public ListNode PreviousNode { get; set; }
             public ListNode NextNode { get; set; }
         }
@@ -19,7 +19,7 @@ namespace DoublyLinkedList
         private ListNode tail;
         public int Count { get; private set; }
 
-        public void AddFirst(int element)
+        public void AddFirst(T element)
         {
             if (this.Count == 0)
             {
@@ -36,7 +36,7 @@ namespace DoublyLinkedList
             this.Count++;
         }
 
-        public void AddLast(int element)
+        public void AddLast(T element)
         {
             if (this.Count == 0)
             {
@@ -52,7 +52,7 @@ namespace DoublyLinkedList
             this.Count++;
         }
 
-        public int RemoveFirst()
+        public T RemoveFirst()
         {
             if (Count == 0)
             {
@@ -72,7 +72,7 @@ namespace DoublyLinkedList
             return firstElement;
         }
 
-        public int RemoveLast()
+        public T RemoveLast()
         {
 
             if (Count == 0)
@@ -95,7 +95,7 @@ namespace DoublyLinkedList
             return lastElement;
         }
 
-        public void ForEach(Action<int> action)
+        public void ForEach(Action<T> action)
         {
             var curentNode = this.head;
 
@@ -106,9 +106,9 @@ namespace DoublyLinkedList
             }
 
         }
-        public int[] ToArray()
+        public T[] ToArray()
         {
-            var array = new int[this.Count];
+            var array = new T[this.Count];
 
             var curentNode = this.head;
             int count = 0;

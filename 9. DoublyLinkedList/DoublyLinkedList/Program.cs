@@ -6,7 +6,7 @@ namespace DoublyLinkedList
     {
         static void Main(string[] args)
         {
-            var testList = new DoublyLinkedList();
+            var testList = new DoublyLinkedList<int>();
 
             testList.AddFirst(10);
             testList.AddFirst(11);
