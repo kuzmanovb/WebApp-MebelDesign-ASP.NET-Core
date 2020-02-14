@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Space Station Establishment", "Space Station Establishment\Space Station Establishment.csproj", "{92D044FD-BA93-45C6-A738-946B2A3C9BA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Summer Cocktails", "Summer Cocktails\Summer Cocktails.csproj", "{EC4D1435-C38E-4D9A-A66A-52B4A3666A50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{92D044FD-BA93-45C6-A738-946B2A3C9BA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92D044FD-BA93-45C6-A738-946B2A3C9BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92D044FD-BA93-45C6-A738-946B2A3C9BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92D044FD-BA93-45C6-A738-946B2A3C9BA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4D1435-C38E-4D9A-A66A-52B4A3666A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4D1435-C38E-4D9A-A66A-52B4A3666A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4D1435-C38E-4D9A-A66A-52B4A3666A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4D1435-C38E-4D9A-A66A-52B4A3666A50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {423776A6-3BEA-46AC-9C4F-D714269FB841}
+		SolutionGuid = {7A862385-4D3A-4091-8938-59C86F1BDB35}
 	EndGlobalSection
 EndGlobal
