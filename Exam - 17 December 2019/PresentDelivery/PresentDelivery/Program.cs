@@ -74,8 +74,12 @@ namespace PresentDelivery
                 // Check available gifts
                 if (curentPresent < inputPresent)
                 {
+               
+                //if (curentPresent < inputPresent)
+                //{
                     command = Console.ReadLine();
                 }
+               //}
             }
 
 
