@@ -71,14 +71,10 @@ namespace PresentDelivery
                     matrix[santaRow, santaCol] = '-';
                 }
 
-                // Check available gifts
-                if (curentPresent < inputPresent)
-                {
                
                 //if (curentPresent < inputPresent)
                 //{
                     command = Console.ReadLine();
-                }
                //}
             }
 
