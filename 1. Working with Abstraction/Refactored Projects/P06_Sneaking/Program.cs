@@ -9,30 +9,11 @@ namespace P06_Sneaking
         {
             int n = int.Parse(Console.ReadLine());
             room = new char[n][];
-
-            for (int row = 0; row < n; row++)
-            {
-                var input = Console.ReadLine().ToCharArray();
-                room[row] = new char[input.Length];
-                for (int col = 0; col < input.Length; col++)
-                {
-                    room[row][col] = input[col];
-                }
-            }
+            int[] samPosition = new int[2];
+            FillRoomAndFindSamPosition(n, samPosition);
 
             var moves = Console.ReadLine().ToCharArray();
-            int[] samPosition = new int[2];
-            for (int row = 0; row < room.Length; row++)
-            {
-                for (int col = 0; col < room[row].Length; col++)
-                {
-                    if (room[row][col] == 'S')
-                    {
-                        samPosition[0] = row;
-                        samPosition[1] = col;
-                    }
-                }
-            }
+           
             for (int i = 0; i < moves.Length; i++)
             {
                 for (int row = 0; row < room.Length; row++)
@@ -151,5 +132,22 @@ namespace P06_Sneaking
             }
         }
 
+        private static void FillRoomAndFindSamPosition(int n, int[] samPosition)
+        {
+            for (int row = 0; row < n; row++)
+            {
+                var input = Console.ReadLine().ToCharArray();
+                room[row] = new char[input.Length];
+                for (int col = 0; col < input.Length; col++)
+                {
+                    room[row][col] = input[col];
+                    if (room[row][col] == 'S')
+                    {
+                        samPosition[0] = row;
+                        samPosition[1] = col;
+                    }
+                }
+            }
+        }
     }
 }
