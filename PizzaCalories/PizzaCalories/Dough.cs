@@ -20,9 +20,9 @@ namespace PizzaCalories
         public string Flour
         {
             get => this.flour;
-            set
+            private set
             {
-                if (value != "White" || value != "Wholegrain")
+                if (value.ToLower() != "white" && value.ToLower() != "wholegrain")
                 {
                     throw new ArgumentException("Invalid type of dough.");
                 }
@@ -32,9 +32,9 @@ namespace PizzaCalories
         public string Baking
         {
             get => this.baking;
-            set
+            private set
             {
-                if (value != "Crispy" || value != "Chewy" || value != "Homemade")
+                if (value.ToLower() != "crispy" && value.ToLower() != "chewy" && value.ToLower() != "homemade")
                 {
                     throw new ArgumentException("Invalid type of dough.");
                 }
@@ -46,12 +46,13 @@ namespace PizzaCalories
         public double Grams
         {
             get => this.grams;
-            set
+            private set
             {
                 if (value < 1 || value > 200)
                 {
                     throw new ArgumentException("Dough weight should be in the range [1..200].");
                 }
+                this.grams = value;
             }
         }
 
@@ -60,21 +61,22 @@ namespace PizzaCalories
             double flourValue = 0;
             double bakingValue = 0;
 
-            switch (flour)
+            switch (flour.ToLower())
             {
-                case "White": flourValue = 1.5; break;
-                case "•	Wholegrain": flourValue = 1.0; break;
+                case "white": flourValue = 1.5; break;
+                case "wholegrain": flourValue = 1.0; break;
             }
 
-            switch (baking)
+            switch (baking.ToLower())
             {
-                case "Crispy": bakingValue = 0.9; break; 
-                case "Chewy": bakingValue = 1.1; break;  
-                case "Homemade": bakingValue = 1.0; break;
+                case "crispy": bakingValue = 0.9; break;
+                case "chewy": bakingValue = 1.1; break;
+                case "homemade": bakingValue = 1.0; break;
 
             }
 
-            return 2 * 100 * flourValue * bakingValue;
+            var result = 2 * this.grams * flourValue * bakingValue;
+            return result;
         }
 
     }
