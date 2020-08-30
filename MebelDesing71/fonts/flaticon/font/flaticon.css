@@ -1,0 +1,53 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 30/08/2020 12:06
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.flaticon-location:before { content: "\f100"; }
+.flaticon-mail:before { content: "\f101"; }
+.flaticon-phone:before { content: "\f102"; }
+.flaticon-worker:before { content: "\f103"; }
+.flaticon-carpenter:before { content: "\f104"; }
+.flaticon-saw:before { content: "\f105"; }
+.flaticon-wardrobe:before { content: "\f106"; }
+.flaticon-work-tools:before { content: "\f107"; }
+.flaticon-sketch:before { content: "\f108"; }
+.flaticon-measuring-tape:before { content: "\f109"; }
+.flaticon-professional:before { content: "\f10a"; }
+.flaticon-winner:before { content: "\f10b"; }
+.flaticon-carpenter-1:before { content: "\f10c"; }
+.flaticon-carpenter-2:before { content: "\f10d"; }
