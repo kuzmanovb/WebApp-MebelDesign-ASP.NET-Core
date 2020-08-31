@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 30/08/2020 15:53
+    Creation date: 31/08/2020 11:08
     */
 
     @font-face {
@@ -52,6 +52,9 @@
 .flaticon-carpenter-1:before { content: "\f10c"; }
 .flaticon-carpenter-2:before { content: "\f10d"; }
 .flaticon-delivery-time:before { content: "\f10e"; }
+.flaticon-drill:before { content: "\f10f"; }
+.flaticon-wood:before { content: "\f110"; }
+.flaticon-wood-1:before { content: "\f111"; }
     
     $font-Flaticon-location: "\f100";
     $font-Flaticon-mail: "\f101";
@@ -68,3 +71,6 @@
     $font-Flaticon-carpenter-1: "\f10c";
     $font-Flaticon-carpenter-2: "\f10d";
     $font-Flaticon-delivery-time: "\f10e";
+    $font-Flaticon-drill: "\f10f";
+    $font-Flaticon-wood: "\f110";
+    $font-Flaticon-wood-1: "\f111";

@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 30/08/2020 15:53
+  	Creation date: 31/08/2020 11:08
   	*/
 
 @font-face {
@@ -52,3 +52,6 @@
 .flaticon-carpenter-1:before { content: "\f10c"; }
 .flaticon-carpenter-2:before { content: "\f10d"; }
 .flaticon-delivery-time:before { content: "\f10e"; }
+.flaticon-drill:before { content: "\f10f"; }
+.flaticon-wood:before { content: "\f110"; }
+.flaticon-wood-1:before { content: "\f111"; }
