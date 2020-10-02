@@ -27,12 +27,9 @@
 
   <link rel="stylesheet" href="css/style.css">
 
-<!-- jQuery 1.8 or later, 33 KB -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<!-- Fotorama from CDNJS, 19 KB -->
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+  
+
 
 
 </head>
@@ -106,7 +103,7 @@
 
 
 
-      <div class="site-navbar py-2 js-sticky-header site-navbar-target d-none pl-0 d-lg-block" role="banner">
+      <!-- <div class="site-navbar py-2 js-sticky-header site-navbar-target d-none pl-0 d-lg-block" role="banner">
 
         <div class="container">
           <div class="d-flex align-items-center">
@@ -143,7 +140,7 @@
           </div>
         </div>
 
-      </div>
+      </div> -->
 
     </div>
 
@@ -169,24 +166,6 @@
       <h3 class="section-subtitle mb-1">Тук ще откриете съвети относно нашите услуги</h3>
     </div> -->
 
-    <!-- Add images to <div class="fotorama"></div> -->
-<div class="fotorama"    
-data-width="100%"
-data-height="100%"
-data-allowfullscreen="native">
-  <img src="https://s.fotorama.io/1.jpg">
-  <img src="https://s.fotorama.io/2.jpg">
-</div>
-
-
-
-
-
-
-
-
-
-
 
     <div class="site-section">
       <div class="container">
@@ -194,7 +173,18 @@ data-allowfullscreen="native">
 
           <div class="col-md-6 mb-5 mb-lg-5 col-lg-4">
             <div class="blog-entry">
-              <a href="images/service_custom furniture.jpg" class="img-link">
+                <img src="images/service_custom furniture.jpg" class="img-fluid " onclick="openModal();currentSlide(1)" class="hover-shadow">>
+              <div class="blog-entry-contents">
+                <h5>Проектиране и изработка на мебели по поръчка</h5>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-6 mb-5 mb-lg-5 col-lg-4">
+            <div class="blog-entry">
+              <a href="gallery.html" class="img-link">
                 <img src="images/service_custom furniture.jpg" alt="Image" class="img-fluid">
               </a>
               <div class="blog-entry-contents">
@@ -203,7 +193,7 @@ data-allowfullscreen="native">
             </div>
           </div>
 
-          <div class="col-md-6 mb-5 mb-lg-5 col-lg-4">
+          <!-- <div class="col-md-6 mb-5 mb-lg-5 col-lg-4">
             <div class="blog-entry">
               <a href="images/service_custom furniture.jpg" class="img-link">
                 <img src="images/service_custom furniture.jpg" alt="Image" class="img-fluid">
@@ -256,10 +246,47 @@ data-allowfullscreen="native">
                 <h5>Проектиране и изработка на мебели по поръчка</h5>
               </div>
             </div>
-          </div>
+          </div> -->
 
           
         </div>
+
+
+
+
+        <!-- The Modal/Lightbox -->
+<div id="myModal" class="modal">
+  <span class="close cursor" onclick="closeModal()">&times;</span>
+  <div class="modal-content">
+
+    <div class="mySlides">
+      <div class="numbertext">1 / 4</div>
+      <img src="images/service_custom furniture.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">2 / 4</div>
+      <img src="images/service_custom furniture.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">3 / 4</div>
+      <img src="images/service_custom furniture.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">4 / 4</div>
+      <img src="images/service_custom furniture.jpg" style="width:100%">
+    </div>
+
+    <!-- Next/previous controls -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    <!-- Caption text -->
+    <div class="caption-container">
+      <p id="caption"></p>
+    </div>
 
         <!-- <div class="row text-center mt-5">
           <div class="col-12">
@@ -274,51 +301,7 @@ data-allowfullscreen="native">
     </div>
 
 
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <p class="mb-4"><img src="images/logo2.png" alt="Image" class="img-fluid"></p>
-          </div>
-          <div class="col-lg-3">
-            <h3 class="footer-heading"><span>Компания</span></h3>
-            <ul class="list-unstyled">
-              <li><a href="about.html">За нас</a></li>
-              <li><a href="services.html">Услуги</a></li>
-              <li><a href="project.html">Проекти</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-3">
-            <h3 class="footer-heading"><span>Партньори</span></h3>
-            <ul class="list-unstyled">
-              <li><a href="https://www.blum.com">Blum</a></li>
-              <li><a href="https://salex.bg/">Salex</a></li>
-              <!-- <li><a href="#">Remodeling</a></li> -->
-            </ul>
-          </div>
-          <div class="col-lg-3">
-            <h3 class="footer-heading"><span>Контакти</span></h3>
-            <ul class="list-unstyled">
-              <li><a
-                  href="https://www.google.com/maps/place/%D1%83%D0%BB.+%E2%80%9E%D0%A1%D1%83%D1%85%D0%BE%D0%B4%D0%BE%D0%BB%D1%81%D0%BA%D0%B0%E2%80%9C+64,+1373+%D0%A1%D0%BE%D1%84%D0%B8%D1%8F/@42.6951395,23.2469777,17.75z/data=!4m5!3m4!1s0x40aa9ae45bbdee5d:0xcc3ef40a33ba8142!8m2!3d42.6953748!4d23.2455557">Карта</a>
-              </li>
-              <li><a href="https://www.facebook.com/mebel71">Facebook</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12 text-center">
-            <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-              Copyright &copy;
-              <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
-              with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                target="_blank">Colorlib</a>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-          </div>
-        </div>
+    
       </div>
     </div>
 
@@ -347,6 +330,7 @@ data-allowfullscreen="native">
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/jquery.sticky.js"></script>
   <script src="js/jquery.mb.YTPlayer.min.js"></script>
+  <script src="js/gallery.js"></script>
 
 
 
