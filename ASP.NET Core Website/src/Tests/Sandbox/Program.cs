@@ -5,14 +5,14 @@
     using System.IO;
     using System.Threading.Tasks;
 
-    using AspNetCoreTemplate.Data;
-    using AspNetCoreTemplate.Data.Common;
-    using AspNetCoreTemplate.Data.Common.Repositories;
-    using AspNetCoreTemplate.Data.Models;
-    using AspNetCoreTemplate.Data.Repositories;
-    using AspNetCoreTemplate.Data.Seeding;
-    using AspNetCoreTemplate.Services.Data;
-    using AspNetCoreTemplate.Services.Messaging;
+    using MebelDesign71.Data;
+    using MebelDesign71.Data.Common;
+    using MebelDesign71.Data.Common.Repositories;
+    using MebelDesign71.Data.Models;
+    using MebelDesign71.Data.Repositories;
+    using MebelDesign71.Data.Seeding;
+    using MebelDesign71.Services.Data;
+    using MebelDesign71.Services.Messaging;
 
     using CommandLine;
 
