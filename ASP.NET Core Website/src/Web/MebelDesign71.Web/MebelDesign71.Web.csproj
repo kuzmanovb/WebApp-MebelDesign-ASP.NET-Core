@@ -9,8 +9,203 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\aos.css" />
+    <Content Remove="wwwroot\css\jquery-ui.css" />
+    <Content Remove="wwwroot\css\magnific-popup.css" />
+    <Content Remove="wwwroot\css\mediaelementplayer.css" />
+    <Content Remove="wwwroot\css\style.css" />
+    <Content Remove="wwwroot\fonts\.DS_Store" />
+    <Content Remove="wwwroot\fonts\flaticon\backup.txt" />
+    <Content Remove="wwwroot\fonts\flaticon\font\flaticon.css" />
+    <Content Remove="wwwroot\fonts\flaticon\font\Flaticon.eot" />
+    <Content Remove="wwwroot\fonts\flaticon\font\flaticon.html" />
+    <Content Remove="wwwroot\fonts\flaticon\font\Flaticon.svg" />
+    <Content Remove="wwwroot\fonts\flaticon\font\Flaticon.ttf" />
+    <Content Remove="wwwroot\fonts\flaticon\font\Flaticon.woff" />
+    <Content Remove="wwwroot\fonts\flaticon\font\Flaticon.woff2" />
+    <Content Remove="wwwroot\fonts\flaticon\font\_flaticon.scss" />
+    <Content Remove="wwwroot\fonts\flaticon\license\license.html" />
+    <Content Remove="wwwroot\fonts\icomoon\demo-files\demo.css" />
+    <Content Remove="wwwroot\fonts\icomoon\demo-files\demo.js" />
+    <Content Remove="wwwroot\fonts\icomoon\demo.html" />
+    <Content Remove="wwwroot\fonts\icomoon\fonts\icomoon.eot" />
+    <Content Remove="wwwroot\fonts\icomoon\fonts\icomoon.svg" />
+    <Content Remove="wwwroot\fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Remove="wwwroot\fonts\icomoon\fonts\icomoon.woff" />
+    <Content Remove="wwwroot\fonts\icomoon\Read Me.txt" />
+    <Content Remove="wwwroot\fonts\icomoon\style.css" />
+    <Content Remove="wwwroot\fonts\mycollection.zip" />
+    <Content Remove="wwwroot\fonts\Old fonts.rar" />
+    <Content Remove="wwwroot\images\.DS_Store" />
+    <Content Remove="wwwroot\images\about_1.jpg" />
+    <Content Remove="wwwroot\images\about_2.jpg" />
+    <Content Remove="wwwroot\images\action_1.jpg" />
+    <Content Remove="wwwroot\images\action_2.jpg" />
+    <Content Remove="wwwroot\images\action_3.jpg" />
+    <Content Remove="wwwroot\images\bedrooms_1.jpg" />
+    <Content Remove="wwwroot\images\ChildrenRoom_1.jpg" />
+    <Content Remove="wwwroot\images\contact_1.jpg" />
+    <Content Remove="wwwroot\images\gallary_1.jpg" />
+    <Content Remove="wwwroot\images\img_transparent.png" />
+    <Content Remove="wwwroot\images\kitchen_1.jpg" />
+    <Content Remove="wwwroot\images\livingRoom_1.jpg" />
+    <Content Remove="wwwroot\images\logo.png" />
+    <Content Remove="wwwroot\images\logo2.png" />
+    <Content Remove="wwwroot\images\logoWithwhite.png" />
+    <Content Remove="wwwroot\images\officeFurniture_1.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\114735103-factory-for-production-of-wood-and-furniture-footage-industrial-factory-with-cutting-tools-near-hori.psd" />
+    <Content Remove="wwwroot\images\Old Picture\about_1 clean .psd" />
+    <Content Remove="wwwroot\images\Old Picture\about_1.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\action_3.psd" />
+    <Content Remove="wwwroot\images\Old Picture\action_old.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\contact_12.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\hero_1 old.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\old about_1.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\old hero_1.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\old logo.png" />
+    <Content Remove="wwwroot\images\Old Picture\old logo2.png" />
+    <Content Remove="wwwroot\images\Old Picture\old person_3_sq.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\old person_4_sq.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\phpqkie5k_559x345.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\proba.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\works_1.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\works_2.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\works_3.jpg" />
+    <Content Remove="wwwroot\images\Old Picture\works_4.jpg" />
+    <Content Remove="wwwroot\images\person_1.jpg" />
+    <Content Remove="wwwroot\images\person_2.jpg" />
+    <Content Remove="wwwroot\images\person_3.jpg" />
+    <Content Remove="wwwroot\images\person_3_sq.jpg" />
+    <Content Remove="wwwroot\images\person_4.jpg" />
+    <Content Remove="wwwroot\images\person_4_sq.jpg" />
+    <Content Remove="wwwroot\images\post_h_1.png" />
+    <Content Remove="wwwroot\images\project_1.jpg" />
+    <Content Remove="wwwroot\images\response_1.jpg" />
+    <Content Remove="wwwroot\images\services_1.jpg" />
+    <Content Remove="wwwroot\images\service_custom furniture.jpg" />
+    <Content Remove="wwwroot\images\service_cuttingAndEdging.jpg" />
+    <Content Remove="wwwroot\images\service_draft.jpg" />
+    <Content Remove="wwwroot\images\service_draft2.jpg" />
+    <Content Remove="wwwroot\images\service_new view.jpg" />
+    <Content Remove="wwwroot\images\shopFurniture_1.jpg" />
+    <Content Remove="wwwroot\images\top_1.jpg" />
+    <Content Remove="wwwroot\images\top_2.jpg" />
+    <Content Remove="wwwroot\images\top_3.jpg" />
+    <Content Remove="wwwroot\images\wardrobe_1.jpg" />
+    <Content Remove="wwwroot\images\works_1.jpg" />
+    <Content Remove="wwwroot\images\works_2.jpg" />
+    <Content Remove="wwwroot\images\works_3.jpg" />
+    <Content Remove="wwwroot\images\works_4.jpg" />
+    <Content Remove="wwwroot\images\works_5.jpg" />
+    <Content Remove="wwwroot\images\works_6.jpg" />
+    <Content Remove="wwwroot\images\works_7.jpg" />
+    <Content Remove="wwwroot\js\aos.js" />
+    <Content Remove="wwwroot\js\gallery.js" />
+    <Content Remove="wwwroot\js\jquery-ui.js" />
+    <Content Remove="wwwroot\js\main.js" />
+    <Content Remove="wwwroot\js\typed.js" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\css\aos.css" />
+    <None Include="wwwroot\css\jquery-ui.css" />
+    <None Include="wwwroot\css\magnific-popup.css" />
+    <None Include="wwwroot\css\mediaelementplayer.css" />
+    <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\fonts\.DS_Store" />
+    <None Include="wwwroot\fonts\flaticon\backup.txt" />
+    <None Include="wwwroot\fonts\flaticon\font\flaticon.css" />
+    <None Include="wwwroot\fonts\flaticon\font\Flaticon.eot" />
+    <None Include="wwwroot\fonts\flaticon\font\flaticon.html" />
+    <None Include="wwwroot\fonts\flaticon\font\Flaticon.svg" />
+    <None Include="wwwroot\fonts\flaticon\font\Flaticon.ttf" />
+    <None Include="wwwroot\fonts\flaticon\font\Flaticon.woff" />
+    <None Include="wwwroot\fonts\flaticon\font\Flaticon.woff2" />
+    <None Include="wwwroot\fonts\flaticon\font\_flaticon.scss" />
+    <None Include="wwwroot\fonts\flaticon\license\license.html" />
+    <None Include="wwwroot\fonts\icomoon\demo-files\demo.css" />
+    <None Include="wwwroot\fonts\icomoon\demo-files\demo.js" />
+    <None Include="wwwroot\fonts\icomoon\demo.html" />
+    <None Include="wwwroot\fonts\icomoon\fonts\icomoon.eot" />
+    <None Include="wwwroot\fonts\icomoon\fonts\icomoon.svg" />
+    <None Include="wwwroot\fonts\icomoon\fonts\icomoon.ttf" />
+    <None Include="wwwroot\fonts\icomoon\fonts\icomoon.woff" />
+    <None Include="wwwroot\fonts\icomoon\Read Me.txt" />
+    <None Include="wwwroot\fonts\icomoon\style.css" />
+    <None Include="wwwroot\fonts\mycollection.zip" />
+    <None Include="wwwroot\fonts\Old fonts.rar" />
+    <None Include="wwwroot\images\.DS_Store" />
+    <None Include="wwwroot\images\about_1.jpg" />
+    <None Include="wwwroot\images\about_2.jpg" />
+    <None Include="wwwroot\images\action_1.jpg" />
+    <None Include="wwwroot\images\action_2.jpg" />
+    <None Include="wwwroot\images\action_3.jpg" />
+    <None Include="wwwroot\images\bedrooms_1.jpg" />
+    <None Include="wwwroot\images\ChildrenRoom_1.jpg" />
+    <None Include="wwwroot\images\contact_1.jpg" />
+    <None Include="wwwroot\images\gallary_1.jpg" />
+    <None Include="wwwroot\images\img_transparent.png" />
+    <None Include="wwwroot\images\kitchen_1.jpg" />
+    <None Include="wwwroot\images\livingRoom_1.jpg" />
+    <None Include="wwwroot\images\logo.png" />
+    <None Include="wwwroot\images\logo2.png" />
+    <None Include="wwwroot\images\logoWithwhite.png" />
+    <None Include="wwwroot\images\officeFurniture_1.jpg" />
+    <None Include="wwwroot\images\Old Picture\114735103-factory-for-production-of-wood-and-furniture-footage-industrial-factory-with-cutting-tools-near-hori.psd" />
+    <None Include="wwwroot\images\Old Picture\about_1 clean .psd" />
+    <None Include="wwwroot\images\Old Picture\about_1.jpg" />
+    <None Include="wwwroot\images\Old Picture\action_3.psd" />
+    <None Include="wwwroot\images\Old Picture\action_old.jpg" />
+    <None Include="wwwroot\images\Old Picture\contact_12.jpg" />
+    <None Include="wwwroot\images\Old Picture\hero_1 old.jpg" />
+    <None Include="wwwroot\images\Old Picture\old about_1.jpg" />
+    <None Include="wwwroot\images\Old Picture\old hero_1.jpg" />
+    <None Include="wwwroot\images\Old Picture\old logo.png" />
+    <None Include="wwwroot\images\Old Picture\old logo2.png" />
+    <None Include="wwwroot\images\Old Picture\old person_3_sq.jpg" />
+    <None Include="wwwroot\images\Old Picture\old person_4_sq.jpg" />
+    <None Include="wwwroot\images\Old Picture\phpqkie5k_559x345.jpg" />
+    <None Include="wwwroot\images\Old Picture\proba.jpg" />
+    <None Include="wwwroot\images\Old Picture\works_1.jpg" />
+    <None Include="wwwroot\images\Old Picture\works_2.jpg" />
+    <None Include="wwwroot\images\Old Picture\works_3.jpg" />
+    <None Include="wwwroot\images\Old Picture\works_4.jpg" />
+    <None Include="wwwroot\images\person_1.jpg" />
+    <None Include="wwwroot\images\person_2.jpg" />
+    <None Include="wwwroot\images\person_3.jpg" />
+    <None Include="wwwroot\images\person_3_sq.jpg" />
+    <None Include="wwwroot\images\person_4.jpg" />
+    <None Include="wwwroot\images\person_4_sq.jpg" />
+    <None Include="wwwroot\images\post_h_1.png" />
+    <None Include="wwwroot\images\project_1.jpg" />
+    <None Include="wwwroot\images\response_1.jpg" />
+    <None Include="wwwroot\images\services_1.jpg" />
+    <None Include="wwwroot\images\service_custom furniture.jpg" />
+    <None Include="wwwroot\images\service_cuttingAndEdging.jpg" />
+    <None Include="wwwroot\images\service_draft.jpg" />
+    <None Include="wwwroot\images\service_draft2.jpg" />
+    <None Include="wwwroot\images\service_new view.jpg" />
+    <None Include="wwwroot\images\shopFurniture_1.jpg" />
+    <None Include="wwwroot\images\top_1.jpg" />
+    <None Include="wwwroot\images\top_2.jpg" />
+    <None Include="wwwroot\images\top_3.jpg" />
+    <None Include="wwwroot\images\wardrobe_1.jpg" />
+    <None Include="wwwroot\images\works_1.jpg" />
+    <None Include="wwwroot\images\works_2.jpg" />
+    <None Include="wwwroot\images\works_3.jpg" />
+    <None Include="wwwroot\images\works_4.jpg" />
+    <None Include="wwwroot\images\works_5.jpg" />
+    <None Include="wwwroot\images\works_6.jpg" />
+    <None Include="wwwroot\images\works_7.jpg" />
+    <None Include="wwwroot\js\aos.js" />
+    <None Include="wwwroot\js\gallery.js" />
+    <None Include="wwwroot\js\jquery-ui.js" />
+    <None Include="wwwroot\js\main.js" />
+    <None Include="wwwroot\js\typed.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,5 +229,11 @@
     <ProjectReference Include="..\..\Services\MebelDesign71.Services\MebelDesign71.Services.csproj" />
     <ProjectReference Include="..\MebelDesign71.Web.Infrastructure\MebelDesign71.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\MebelDesign71.Web.ViewModels\MebelDesign71.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\fonts\icomoon\selection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
