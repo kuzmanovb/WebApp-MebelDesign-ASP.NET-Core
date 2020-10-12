@@ -1,5 +1,5 @@
-﻿@using MebelDesign.Common
-@using MebelDesign.Data.Models
+﻿@using MebelDesign71.Common
+@using MebelDesign71.Data.Models
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -24,19 +24,11 @@
     }
     else
     {
-        @*<li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>*@
-
-         <li>
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
         </li>
-        <li>
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
-
     }
 </ul>

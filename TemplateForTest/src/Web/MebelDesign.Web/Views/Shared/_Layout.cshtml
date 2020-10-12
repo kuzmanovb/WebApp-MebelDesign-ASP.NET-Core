@@ -107,11 +107,11 @@
                 <div class="container">
                     <div class="d-flex align-items-center">
 
-                        <div class="mr-auto">
+                        <!--div class="mr-auto"-->
                             <nav class="site-navigation position-relative text-right" role="navigation">
                                 <ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">
                                     <li>
-                                        <a href="index.html" class="nav-link text-left">НАЧАЛО</a>
+                                        <a class="nav-link text-left" asp-area="" asp-controller="Home" asp-action="Index">НАЧАЛО</a>
                                     </li>
                                     <li>
                                         <a href="about.html" class="nav-link text-left">ЗА НАС</a>
@@ -129,10 +129,10 @@
                                         <a href="contact.html" class="nav-link text-left">КОНТАКТИ</a>
                                     </li>
                                 </ul>
-                                </ul>
                             </nav>
+                            <partial name="_LoginPartial" />
 
-                        </div>
+                        <!--/div-->
 
 
                     </div>
@@ -165,12 +165,12 @@
         </nav>*@
         <!--</header>-->
 
-        <div class="container">
+        @*<div class="container">*@
             <partial name="_CookieConsentPartial" />
-            <main role="main" class="pb-3">
+            @*<main role="main" class="pb-3">*@
                 @this.RenderBody()
-            </main>
-        </div>
+            @*</main>*@
+        @*</div>*@
 
         @*<footer class="border-top footer text-muted">
             <div class="container">
@@ -224,7 +224,7 @@
 
     </div>
 
-            <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+            @*<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>*@
             <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
             <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
             @*<script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>*@
