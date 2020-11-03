@@ -35,4 +35,9 @@
     <ProjectReference Include="..\MebelDesign71.Web.Infrastructure\MebelDesign71.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\MebelDesign71.Web.ViewModels\MebelDesign71.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\scss\scss\bootstrap\mixins\" />
+    <Folder Include="wwwroot\scss\scss\bootstrap\utilities\" />
+  </ItemGroup>
 </Project>
