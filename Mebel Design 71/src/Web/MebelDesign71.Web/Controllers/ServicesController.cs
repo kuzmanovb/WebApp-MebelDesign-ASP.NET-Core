@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MebelDesign71.Web.Controllers
 {
-    public class ServiceController : BaseController
+    public class ServicesController : BaseController
     {
 
         public IActionResult ServiceIndex()
