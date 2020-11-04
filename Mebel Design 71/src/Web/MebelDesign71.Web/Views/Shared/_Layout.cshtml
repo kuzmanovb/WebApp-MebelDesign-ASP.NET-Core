@@ -7,7 +7,6 @@
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
-    <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
 
     <!--Stylesheet From Template-->
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Muli:300,400" rel="stylesheet">
@@ -54,7 +53,7 @@
                 <div class="row align-items-center">
                     <div class="col-6 col-lg-3">
                         <a asp-area="" asp-controller="Home" asp-action="Index">
-                            <img src="images/logo.png" alt="Image" class="img-fluid">
+                            <img src="~/images/logo.png" alt="Image" class="img-fluid">
                         </a>
                     </div>
                     <div class="col-lg-3 d-none d-lg-block">
@@ -115,7 +114,7 @@
                                         <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-left">НАЧАЛО</a>
                                     </li>
                                     <li>
-                                        <a href="about.html" class="nav-link text-left">ЗА НАС</a>
+                                        <a asp-area="" asp-controller="Home" asp-action="AboutUs"  class="nav-link text-left">ЗА НАС</a>
                                     </li>
                                     <li>
                                         <a href="services.html" class="nav-link text-left">УСЛУГИ</a>
@@ -159,7 +158,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
-                        <p class="mb-4"><img src="images/logo2.png" alt="Image" class="img-fluid"></p>
+                        <p class="mb-4"><img src="~/images/logo2.png" alt="Image" class="img-fluid"></p>
                     </div>
                     <div class="col-lg-3">
                         <h3 class="footer-heading"><span>Компания</span></h3>
