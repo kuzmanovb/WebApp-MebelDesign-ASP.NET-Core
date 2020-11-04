@@ -4,7 +4,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
+@*<ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">*@
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
@@ -18,17 +18,18 @@
         }
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-dark">Изход</button>
             </form>
         </li>
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+
+        <li>
+            <a class="nav-link text-left" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <li>
+            <a class="nav-link text-left" asp-area="Identity" asp-page="/Account/Login">Вход</a>
         </li>
     }
-</ul>
+@*</ul>*@
