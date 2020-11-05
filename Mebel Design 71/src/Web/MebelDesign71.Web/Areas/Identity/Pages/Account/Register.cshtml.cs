@@ -51,6 +51,11 @@ namespace MebelDesign71.Web.Areas.Identity.Pages.Account
             [Display(Name = "Username")]
             public string Username { get; set; }
 
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
