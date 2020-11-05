@@ -9,5 +9,12 @@ namespace MebelDesign71.Web.Controllers
         {
             return this.View();
         }
+
+        public IActionResult CurrentProject()
+        {
+
+            return this.View();
+        }
+
     }
 }

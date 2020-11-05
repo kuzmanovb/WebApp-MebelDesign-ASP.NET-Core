@@ -17,5 +17,12 @@ namespace MebelDesign71.Web.Controllers
             return this.View();
         }
 
+
+        public IActionResult Reviews()
+        {
+
+            return this.View();
+
+        }
     }
 }
