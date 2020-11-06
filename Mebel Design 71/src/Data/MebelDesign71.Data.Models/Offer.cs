@@ -5,9 +5,9 @@
 
     using MebelDesign71.Data.Common.Models;
 
-    public class Review : BaseDeletableModel<string>
+    public class Offer : BaseDeletableModel<string>
     {
-        public Review()
+        public Offer()
         {
             this.Id = Guid.NewGuid().ToString();
         }
@@ -17,11 +17,13 @@
 
         public ApplicationUser User { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+
+        public string Comment { get; set; }
+
         public int ImageId { get; set; }
 
         public Image Image { get; set; }
-
-        [Required]
-        public string Description { get; set; }
     }
 }

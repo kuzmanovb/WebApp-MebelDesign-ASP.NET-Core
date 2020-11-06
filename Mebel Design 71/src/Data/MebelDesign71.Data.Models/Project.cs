@@ -1,7 +1,7 @@
-﻿using MebelDesign71.Data.Common.Models;
-
-namespace MebelDesign71.Data.Models
+﻿namespace MebelDesign71.Data.Models
 {
+    using MebelDesign71.Data.Common.Models;
+
     public class Project : BaseModel<int>
     {
         public ProjectType ProjectType { get; set; }
