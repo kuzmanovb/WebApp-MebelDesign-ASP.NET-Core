@@ -2,7 +2,7 @@
 
 namespace MebelDesign71.Data.Models
 {
-    public class Service 
+    public class Service
     {
         public int Id { get; set; }
 
