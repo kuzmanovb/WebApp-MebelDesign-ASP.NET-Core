@@ -9,6 +9,9 @@
         [Required]
         public string ImageTitle { get; set; }
 
-        public FileOnFileSystem ImagePath { get; set; }
+        [Required]
+        public string FileId { get; set; }
+
+        public FileOnFileSystem File { get; set; }
     }
 }
