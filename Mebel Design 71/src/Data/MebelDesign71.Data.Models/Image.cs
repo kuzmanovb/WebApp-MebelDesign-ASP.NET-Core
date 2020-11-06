@@ -8,6 +8,6 @@ namespace MebelDesign71.Data.Models
 
         public string ImageTitle { get; set; }
 
-        public string ImageUrl { get; set; }
+        public FileOnFileSystem ImageName { get; set; }
     }
 }

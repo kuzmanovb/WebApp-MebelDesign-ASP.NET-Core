@@ -2,7 +2,7 @@
 
 namespace MebelDesign71.Data.Models
 {
-    public class Project : BaseDeletableModel<int>
+    public class Project : BaseModel<int>
     {
         public ProjectType ProjectType { get; set; }
 

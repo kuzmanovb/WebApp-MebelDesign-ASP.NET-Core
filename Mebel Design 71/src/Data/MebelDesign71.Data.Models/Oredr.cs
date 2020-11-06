@@ -1,6 +1,7 @@
-﻿using MebelDesign71.Data.Common.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+
+using MebelDesign71.Data.Common.Models;
 
 namespace MebelDesign71.Data.Models
 {
@@ -12,6 +13,7 @@ namespace MebelDesign71.Data.Models
         }
 
         public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public decimal? Price { get; set; }
 
