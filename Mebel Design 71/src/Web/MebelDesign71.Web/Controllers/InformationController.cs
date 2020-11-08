@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace MebelDesign71.Web.Controllers
+﻿namespace MebelDesign71.Web.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
     public class InformationController : BaseController
     {
 
@@ -11,12 +11,6 @@ namespace MebelDesign71.Web.Controllers
             return this.View();
 
         }
-
-        public IActionResult Contacts()
-        {
-            return this.View();
-        }
-
 
         public IActionResult Reviews()
         {
