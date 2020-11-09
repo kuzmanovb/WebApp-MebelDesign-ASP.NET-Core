@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MebelDesign71.Data.Common\MebelDesign71.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\MebelDesign71.Data.Models\MebelDesign71.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\MebelDesign71.Web.ViewModels\MebelDesign71.Web.ViewModels.csproj" />
     <ProjectReference Include="..\MebelDesign71.Services.Mapping\MebelDesign71.Services.Mapping.csproj" />
   </ItemGroup>
 

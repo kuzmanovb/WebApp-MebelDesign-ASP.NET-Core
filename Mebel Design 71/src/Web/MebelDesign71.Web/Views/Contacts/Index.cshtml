@@ -1,4 +1,5 @@
 ﻿@model MebelDesign71.Web.ViewModels.Contacts.ContactFormViewModel
+@using MebelDesign71.Common
 @{ this.ViewData["Title"] = "Contacts";}
 
 
@@ -29,7 +30,7 @@
                     </div>
                     <div class="service-1-content">
                         <h3 class="service-heading">Адрес</h3>
-                        <p> гр.София ул.Суходолска 64</p>
+                        <p> @InfoConstant.Sity <br /> @InfoConstant.Address</p>
                     </div>
                 </div>
             </div>
@@ -41,7 +42,8 @@
                     </div>
                     <div class="service-1-content">
                         <h3 class="service-heading">Телефон</h3>
-                        <p>0898 475 421</p>
+                        <p>@InfoConstant.FirstPhoneNumber<br />
+                        @InfoConstant.SecondPhoneNumber</p>
                     </div>
                 </div>
             </div>
@@ -53,7 +55,7 @@
                     </div>
                     <div class="service-1-content">
                         <h3 class="service-heading">Имейл</h3>
-                        <p> mebel_71@mail.bg</p>
+                        <p>@InfoConstant.FirstEmail<br /> @InfoConstant.SecondEmail</p>
                     </div>
                 </div>
             </div>
@@ -91,33 +93,36 @@
 
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <label asp-for="FirstName">Име</label>
+                    <label asp-for="FirstName"></label>
                     <input asp-for="FirstName" class="form-control form-control-lg">
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label asp-for="LastName">Фамилия</label>
+                    <label asp-for="LastName"></label>
                     <input asp-for="LastName" class="form-control form-control-lg">
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6 form-group">
-                    <label asp-for="Email">Имейл адрес</label>
+                <div class="col-md-12 form-group">
+                    <label asp-for="Email"></label>
                     <input asp-for="Email" class="form-control form-control-lg">
                     <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label asp-for="PhoneNumber">Телефонен номер</label>
-                    <input asp-for="PhoneNumber" class="form-control form-control-lg">
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12 form-group">
-                    <label asp-for="Description">Съобщение</label>
+                    <label asp-for="About"></label>
+                    <input asp-for="About" class="form-control form-control-lg">
+                    <span asp-validation-for="About" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label asp-for="Description"></label>
                     <textarea asp-for="Description" cols="30" rows="10" class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
@@ -132,7 +137,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <input type="submit" value="Изпрати" class="btn btn-primary rounded-0 px-3 px-5">
+                    <button type="submit" class="btn btn-primary rounded-0 px-3 px-5">Изпрати</button>
                 </div>
             </div>
 

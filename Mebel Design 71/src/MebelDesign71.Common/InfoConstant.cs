@@ -14,8 +14,8 @@ namespace MebelDesign71.Common
 
         public const string SecondPhoneNumber = "0887 386 101";
 
-        public const string Email = "mebel_71@mail.bg";
+        public const string FirstEmail = "mebel_71@mail.bg";
 
-
+        public const string SecondEmail = "MebelDesign71@gmail.com";
     }
 }

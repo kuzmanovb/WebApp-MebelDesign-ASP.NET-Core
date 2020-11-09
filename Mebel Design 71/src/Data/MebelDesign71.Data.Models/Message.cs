@@ -23,7 +23,7 @@
         public string Email { get; set; }
 
         [Required]
-        public string PhoneNumber { get; set; }
+        public string About { get; set; }
 
         [Required]
         public string Description { get; set; }
