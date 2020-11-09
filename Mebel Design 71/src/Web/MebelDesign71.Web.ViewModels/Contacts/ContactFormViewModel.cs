@@ -20,7 +20,6 @@
         [EmailAddress]
         public string Email { get; set; }
 
-
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете кратко описание на запитването")]
         [StringLength(100, ErrorMessage = "Темата трябва да е поне {2} и не повече от {1} символа.", MinimumLength = 5)]
         [Display(Name = "Тема на запитването")]
