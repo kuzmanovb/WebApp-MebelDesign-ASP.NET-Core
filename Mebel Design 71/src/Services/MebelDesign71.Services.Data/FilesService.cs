@@ -9,11 +9,15 @@
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Web.ViewModels.Files;
+    using MebelDesign71.Web.ViewModels.Information;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
     public class FilesService : IFilesService
     {
+        private const string EmptyString = "";
+
         private readonly IRepository<FileOnFileSystem> dbFileOnSystem;
 
         public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem)
@@ -69,56 +73,45 @@
             return fileToDownloadProperties;
         }
 
-        public async Task<bool> UploadToFileSystem(List<IFormFile> files, string folderInWwwRoot, string description = null)
+        public async Task<string> UploadToFileSystem(IFormFile file, string folderInWwwRoot, string description = null)
         {
-            var countToUpload = 0;
-            var allFileCount = files.Count();
 
-            foreach (var file in files)
+            FileOnFileSystem fileModel = null;
+
+            var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\" + folderInWwwRoot + "\\");
+            bool basePathExists = Directory.Exists(basePath);
+
+            if (!basePathExists)
             {
-                var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\" + folderInWwwRoot + "\\");
-                bool basePathExists = Directory.Exists(basePath);
+                Directory.CreateDirectory(basePath);
+            }
 
-                if (!basePathExists)
+            var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+            var filePath = Path.Combine(basePath, file.FileName);
+            var extension = Path.GetExtension(file.FileName);
+            if (!File.Exists(filePath))
+            {
+                using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    Directory.CreateDirectory(basePath);
+                    await file.CopyToAsync(stream);
                 }
 
-                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                var filePath = Path.Combine(basePath, file.FileName);
-                var extension = Path.GetExtension(file.FileName);
-                if (!File.Exists(filePath))
+                fileModel = new FileOnFileSystem
                 {
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
+                    CreatedOn = DateTime.UtcNow,
+                    FileType = file.ContentType,
+                    Extension = extension,
+                    Name = fileName,
+                    Description = description,
+                    FilePath = filePath,
+                };
 
-                    var fileModel = new FileOnFileSystem
-                    {
-                        CreatedOn = DateTime.UtcNow,
-                        FileType = file.ContentType,
-                        Extension = extension,
-                        Name = fileName,
-                        Description = description,
-                        FilePath = filePath,
-                    };
+                await this.dbFileOnSystem.AddAsync(fileModel);
+                await this.dbFileOnSystem.SaveChangesAsync();
 
-                    await this.dbFileOnSystem.AddAsync(fileModel);
-                    await this.dbFileOnSystem.SaveChangesAsync();
-
-                    countToUpload++;
-                }
             }
 
-            if (countToUpload == allFileCount)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return fileModel.Id == null ? EmptyString : fileModel.Id;
         }
     }
 }

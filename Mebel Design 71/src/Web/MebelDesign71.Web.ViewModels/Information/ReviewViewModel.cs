@@ -5,7 +5,7 @@
     using MebelDesign71.Web.Infrastructure;
     using Microsoft.AspNetCore.Http;
 
-    public class ReviewIFormViewModel
+    public class ReviewViewModel
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете вашето име")]
         [StringLength(30, ErrorMessage = "Името трябва да бъде по-малко от {1}.")]
@@ -21,6 +21,5 @@
         [StringLength(1000, ErrorMessage = "Вашият отзив трябва да бъде не по-малко от {1} символа и не по-голям от {2} символа.")]
         [Display(Name = "Вашият отзив")]
         public string Description { get; set; }
-
     }
 }
