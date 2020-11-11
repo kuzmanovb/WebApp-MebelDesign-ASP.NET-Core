@@ -1,7 +1,9 @@
 ﻿namespace MebelDesign71.Web.ViewModels.Information
 {
-    using MebelDesign71.Data.Models;
     using System.ComponentModel.DataAnnotations;
+
+    using MebelDesign71.Web.Infrastructure;
+    using Microsoft.AspNetCore.Http;
 
     public class ReviewIFormViewModel
     {
@@ -11,7 +13,9 @@
         public string Name { get; set; }
 
         [Display(Name = "Профилна снимка")]
-        public FileOnFileSystem ImageId { get; set; }
+        [FileExtensions(Extensions = ".jpg,.png,.jpeg", ErrorMessage = "Снимката трябва да бъде в jpg, jpeg или png фомат.")]
+        [FileSizeValidatorAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
+        public IFormFile ImageFile { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете вашият отзив")]
         [StringLength(1000, ErrorMessage = "Вашият отзив трябва да бъде не по-малко от {1} символа и не по-голям от {2} символа.")]

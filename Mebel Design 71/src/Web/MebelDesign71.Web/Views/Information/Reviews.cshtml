@@ -82,8 +82,9 @@
 
             <div class="row">
                 <div class="col-md-12 form-group">
-                    <p>Тук може да въведете профилна снимка</p>
-                    <input type="file" name="files" />
+                    <p>Тук може да качите профилна снимка към коментара</p>
+                    <input asp-for="ImageFile" type="file" class="btn btn-outline-primary" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
                 </div>
             </div>
 
@@ -106,9 +107,5 @@
 
         </div>
     </div>
-
-
-
-
-
 </form>
+
