@@ -8,8 +8,8 @@
     public interface IInformationService
     {
 
-        Task<string> AddRewiev(ReviewViewModel input);
+        Task<string> AddRewiev(ReviewInputModel input);
 
-        Task<ICollection<ReviewViewModel>> GetAllReview();
+        Task<ICollection<ReviewInputModel>> GetAllReview();
     }
 }

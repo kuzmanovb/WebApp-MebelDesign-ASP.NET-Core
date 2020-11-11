@@ -13,6 +13,12 @@
         }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }
@@ -20,8 +26,5 @@
         public int ImageId { get; set; }
 
         public Image Image { get; set; }
-
-        [Required]
-        public string Description { get; set; }
     }
 }
