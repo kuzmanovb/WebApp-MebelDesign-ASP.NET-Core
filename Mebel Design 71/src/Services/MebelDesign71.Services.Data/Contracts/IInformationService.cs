@@ -10,6 +10,6 @@
 
         Task<string> AddRewiev(ReviewInputModel input);
 
-        Task<ICollection<ReviewInputModel>> GetAllReview();
+        Task<ICollection<ReviewViewModel>> GetAllReview();
     }
 }
