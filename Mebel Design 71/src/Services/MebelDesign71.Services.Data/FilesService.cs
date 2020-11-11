@@ -1,28 +1,28 @@
 ﻿namespace MebelDesign71.Services.Data
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Web.ViewModels.Files;
-    using MebelDesign71.Web.ViewModels.Information;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
     public class FilesService : IFilesService
     {
         private const string EmptyString = "";
 
         private readonly IRepository<FileOnFileSystem> dbFileOnSystem;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem)
+        public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem, IHttpContextAccessor httpContextAccessor)
         {
             this.dbFileOnSystem = dbFileOnSystem;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<bool> DeleteFileFromFileSystem(string id)
@@ -78,7 +78,7 @@
 
             FileOnFileSystem fileModel = null;
 
-            var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\" + folderInWwwRoot + "\\");
+            var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\" + folderInWwwRoot + "\\");
             bool basePathExists = Directory.Exists(basePath);
 
             if (!basePathExists)
@@ -89,6 +89,8 @@
             var fileName = Path.GetFileNameWithoutExtension(file.FileName);
             var filePath = Path.Combine(basePath, file.FileName);
             var extension = Path.GetExtension(file.FileName);
+            var userId = this.httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             if (!File.Exists(filePath))
             {
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -102,6 +104,7 @@
                     FileType = file.ContentType,
                     Extension = extension,
                     Name = fileName,
+                    UserId = userId,
                     Description = description,
                     FilePath = filePath,
                 };

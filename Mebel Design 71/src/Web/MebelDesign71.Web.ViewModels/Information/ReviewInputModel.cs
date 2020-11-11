@@ -13,8 +13,8 @@
         public string Name { get; set; }
 
         [Display(Name = "Профилна снимка")]
-        [FileExtensions(Extensions = ".jpg,.png,.jpeg", ErrorMessage = "Снимката трябва да бъде в jpg, jpeg или png фомат.")]
-        [FileSizeValidatorAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
+        //[FileExtensions(Extensions = ".jpg,.png,.jpeg", ErrorMessage = "Снимката трябва да бъде в jpg, jpeg или png фомат.")]
+        //[FileSizeValidatorAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
         public IFormFile ImageFile { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете вашият отзив")]

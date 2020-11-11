@@ -1,12 +1,14 @@
 ﻿namespace MebelDesign71.Services.Data
 {
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Web.ViewModels.Information;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
     public class InformationService : IInformationService
@@ -15,20 +17,22 @@
         private readonly IRepository<Image> dbImage;
         private readonly IDeletableEntityRepository<Review> dbReview;
         private readonly IFilesService filesService;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public InformationService(IRepository<Image> dbImage, IDeletableEntityRepository<Review> dbReview, IFilesService filesService)
+        public InformationService(IRepository<Image> dbImage, IDeletableEntityRepository<Review> dbReview, IFilesService filesService, IHttpContextAccessor httpContextAccessor)
         {
             this.dbImage = dbImage;
             this.dbReview = dbReview;
             this.filesService = filesService;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<string> AddRewiev(ReviewInputModel input)
         {
 
-            int imageId = 0;
+            int imageId = 1;
 
-            if (input.ImageFile.Length > 0)
+            if (input.ImageFile != null)
             {
                 var fileId = await this.filesService.UploadToFileSystem(input.ImageFile, "ProfilImage");
                 var newImage = new Image { ImageTitle = "ProfilImage", FileId = fileId };
@@ -39,10 +43,13 @@
                 imageId = newImage.Id;
             }
 
+            var userId = this.httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var newReview = new Review
             {
                 Name = input.Name,
                 ImageId = imageId,
+                UserId = userId,
                 Description = input.Description,
             };
 
