@@ -1,0 +1,48 @@
+﻿@model MebelDesign71.Web.ViewModels.Information.ReviewInputModel;
+
+<form asp-controller="Information" asp-action="Reviews" method="post">
+    <div class="site-section">
+        <div class="container">
+
+            <div class="row mb-5 justify-content-center text-center">
+                <div class="col-lg-5">
+                    <h3 class="section-subtitle">Ако сте ползвали нашите услуги<br> Тук може да опишете вашите впечатления, относно нас.</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control form-control-lg">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <p>Тук може да качите профилна снимка към коментара</p>
+                    <input asp-for="ImageFile" type="file" class="btn btn-outline-primary" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" cols="30" rows="10" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <input type="hidden" id="RecaptchaValue" name="RecaptchaValue" />
+
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary rounded-0 px-3 px-5">Публикувай</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
