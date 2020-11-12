@@ -13,7 +13,6 @@
 
     public class InformationService : IInformationService
     {
-        private readonly IRepository<FileOnFileSystem> dbFileOnSystem;
         private readonly IRepository<Image> dbImage;
         private readonly IDeletableEntityRepository<Review> dbReview;
         private readonly IFilesService filesService;
@@ -78,16 +77,14 @@
 
         private static string RenameFilePath(string fullPath)
         {
-
-            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
-            var lengthWwwroot = "wwwroot".Length;
-
             var oldString = "\\";
             var newString = "/";
             var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
 
-            var pathForView = "~" + replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
+            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
+            var lengthWwwroot = "wwwroot".Length;
 
+            var pathForView = "~" + replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
 
             return pathForView;
         }
