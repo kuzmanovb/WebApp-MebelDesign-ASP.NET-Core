@@ -68,12 +68,28 @@
                 .Select(r => new ReviewViewModel
                 {
                     Name = r.Name,
-                    FilePath = r.Image.File.FilePath,
+                    FilePath = RenameFilePath(r.Image.File.FilePath),
                     Description = r.Description,
                 })
                 .ToListAsync();
 
             return allReview;
+        }
+
+        private static string RenameFilePath(string fullPath)
+        {
+
+            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
+            var lengthWwwroot = "wwwroot".Length;
+
+            var oldString = "\\";
+            var newString = "/";
+            var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
+
+            var pathForView = "~" + replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
+
+
+            return pathForView;
         }
     }
 }

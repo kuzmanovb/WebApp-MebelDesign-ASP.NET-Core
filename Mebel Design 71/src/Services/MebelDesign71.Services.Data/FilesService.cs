@@ -9,6 +9,7 @@
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Web.ViewModels.Files;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
@@ -18,11 +19,13 @@
 
         private readonly IRepository<FileOnFileSystem> dbFileOnSystem;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IHostingEnvironment environment;
 
-        public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem, IHttpContextAccessor httpContextAccessor)
+        public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem, IHttpContextAccessor httpContextAccessor, IHostingEnvironment environment)
         {
             this.dbFileOnSystem = dbFileOnSystem;
             this.httpContextAccessor = httpContextAccessor;
+            this.environment = environment;
         }
 
         public async Task<bool> DeleteFileFromFileSystem(string id)
@@ -78,7 +81,7 @@
 
             FileOnFileSystem fileModel = null;
 
-            var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\" + folderInWwwRoot + "\\");
+            var basePath = Path.Combine(this.environment.WebRootPath + "\\" + folderInWwwRoot + "\\");
             bool basePathExists = Directory.Exists(basePath);
 
             if (!basePathExists)
