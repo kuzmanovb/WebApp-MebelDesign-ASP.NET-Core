@@ -22,8 +22,12 @@
 
         }
 
-        public IActionResult Reviews()
+        public async Task<IActionResult> Reviews()
         {
+
+            var allReview = await this.informationService.GetAllReview();
+
+            this.ViewData["Reviews"] = allReview;
 
             return this.View();
 

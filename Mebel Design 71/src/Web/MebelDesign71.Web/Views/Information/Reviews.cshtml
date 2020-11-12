@@ -1,5 +1,6 @@
 ﻿@model MebelDesign71.Web.ViewModels.Information.ReviewViewModel
 
+
 @{ this.ViewData["Title"] = "Review";}
 
 
@@ -22,46 +23,24 @@
 <div class="site-section">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 mb-5 mb-md-5">
-                <div class="testimonial">
-                    <img src="~/images/person_3_sq.jpg" alt="">
-                    <blockquote>
-                        <p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident deleniti iusto molestias, dolore vel fugiat ab placeat ea?&rdquo;</p>
-                    </blockquote>
-                    <p class="client-name">Matt Keygen</p>
-                </div>
-            </div>
-            <div class="col-md-6 mb-5 mb-md-5">
-                <div class="testimonial">
-                    <img src="~/images/person_4_sq.jpg" alt="">
-                    <blockquote>
-                        <p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident deleniti iusto molestias, dolore vel fugiat ab placeat ea?&rdquo;</p>
-                    </blockquote>
-                    <p class="client-name">Matt Keygen</p>
-                </div>
-            </div>
 
-            <div class="col-md-6 mb-5 mb-md-5">
-                <div class="testimonial">
-                    <img src="~/images/person_3_sq.jpg" alt="">
-                    <blockquote>
-                        <p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident deleniti iusto molestias, dolore vel fugiat ab placeat ea?&rdquo;</p>
-                    </blockquote>
-                    <p class="client-name">Matt Keygen</p>
+            @foreach (var item in this.ViewData["Reviews"] as IList<MebelDesign71.Web.ViewModels.Information.ReviewViewModel>)
+            {
+                <div class="col-md-6 mb-5 mb-md-5">
+                    <div class="testimonial">
+                        <img src=@item.FilePath alt="">
+                        <blockquote>
+                            <p>@item.Description</p>
+                        </blockquote>
+                        <p class="client-name">@item.Name</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 mb-5 mb-md-5">
-                <div class="testimonial">
-                    <img src="~/images/person_4_sq.jpg" alt="">
-                    <blockquote>
-                        <p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident deleniti iusto molestias, dolore vel fugiat ab placeat ea?&rdquo;</p>
-                    </blockquote>
-                    <p class="client-name">Matt Keygen</p>
-                </div>
-            </div>
+
+            }
+
         </div>
     </div>
 </div>
 
-<partial name="_AddReviewPartial"/>
+<partial name="_AddReviewPartial" />
 
