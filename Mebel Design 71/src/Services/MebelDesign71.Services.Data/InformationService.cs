@@ -35,7 +35,7 @@
 
             if (input.ImageFile != null)
             {
-                var fileId = await this.filesService.UploadToFileSystem(input.ImageFile, "ProfilImage");
+                var fileId = await this.filesService.UploadToFileSystem(input.ImageFile, "profilImage");
 
                 if (!string.IsNullOrEmpty(fileId))
                 {
