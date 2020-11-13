@@ -28,6 +28,7 @@
                               new RolesSeeder(),
                               new SettingsSeeder(),
                               new ImageForReviewSeeder(),
+                              new ReviewSeeder(),
                           };
 
             foreach (var seeder in seeders)
