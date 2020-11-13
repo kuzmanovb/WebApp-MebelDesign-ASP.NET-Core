@@ -48,5 +48,10 @@
 
             return this.RedirectToAction("Reviews");
         }
+
+        public IActionResult ThankYou()
+        {
+            return this.View();
+        }
     }
 }
