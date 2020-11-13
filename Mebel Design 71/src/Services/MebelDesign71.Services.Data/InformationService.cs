@@ -13,7 +13,7 @@
 
     public class InformationService : IInformationService
     {
-        private const int _DefaultImageId = 2;
+        private const int _DefaultImageId = 1;
 
         private readonly IRepository<ImageToReview> dbImage;
         private readonly IDeletableEntityRepository<Review> dbReview;
@@ -90,9 +90,15 @@
             var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
             var lengthWwwroot = "wwwroot".Length;
 
-            var pathForView = "~" + replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
+            if (getIndexStartWwwRoot >= 0)
+            {
 
-            return pathForView;
+                var pathForView = "~" + replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
+                return pathForView;
+            }
+
+            return replaceSlashInFullPath;
+
         }
     }
 }

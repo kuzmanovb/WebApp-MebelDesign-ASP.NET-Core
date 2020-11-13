@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MebelDesign71.Common\MebelDesign71.Common.csproj" />
+    <ProjectReference Include="..\..\Services\MebelDesign71.Services.Data\MebelDesign71.Services.Data.csproj" />
     <ProjectReference Include="..\MebelDesign71.Data.Common\MebelDesign71.Data.Common.csproj" />
     <ProjectReference Include="..\MebelDesign71.Data.Models\MebelDesign71.Data.Models.csproj" />
   </ItemGroup>

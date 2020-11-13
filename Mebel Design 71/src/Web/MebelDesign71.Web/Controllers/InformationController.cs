@@ -24,20 +24,21 @@
 
         public async Task<IActionResult> Reviews()
         {
-
             var allReview = await this.informationService.GetAllReview();
 
             this.ViewData["Reviews"] = allReview;
 
             return this.View();
-
         }
 
+        public IActionResult AddReview()
+        {
+            return this.View();
+        }
 
         [HttpPost]
-        public async Task<IActionResult> Reviews(ReviewInputModel input)
+        public async Task<IActionResult> AddReview(ReviewInputModel input)
         {
-
             if (!this.ModelState.IsValid)
             {
                 return this.View();
@@ -45,7 +46,7 @@
 
             await this.informationService.AddRewiev(input);
 
-            return this.RedirectToPage("/");
+            return this.RedirectToAction("Reviews");
         }
     }
 }
