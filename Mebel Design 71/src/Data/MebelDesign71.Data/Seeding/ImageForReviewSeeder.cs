@@ -34,7 +34,6 @@
 
             await dbContext.ImageToReviews.AddAsync(new ImageToReview { FileId = fileId });
 
-
             // Add First Persom Image
             var imageFileOne = new FileOnFileSystem
             {
@@ -70,8 +69,6 @@
             var fileTwoId = imageFileTwo.Id;
 
             await dbContext.ImageToReviews.AddAsync(new ImageToReview { FileId = fileTwoId });
-
-
         }
     }
 }
