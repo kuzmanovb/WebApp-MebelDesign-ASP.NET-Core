@@ -24,18 +24,22 @@
     <div class="container">
         <div class="row">
 
-            @foreach (var item in this.ViewData["Reviews"] as IList<MebelDesign71.Web.ViewModels.Information.ReviewViewModel>)
+            @if (this.ViewData["Reviews"] != null)
             {
-                <div class="col-md-6 mb-5 mb-md-5">
-                    <div class="testimonial">
-                        <img src=@item.FilePath alt="" asp-append-version="true">
-                        <blockquote>
-                            <p>@item.Description</p>
-                        </blockquote>
-                        <p class="client-name">@item.Name</p>
+               
+                @foreach (var item in this.ViewData["Reviews"] as IList<MebelDesign71.Web.ViewModels.Information.ReviewViewModel>)
+                {
+                    <div class="col-md-6 mb-5 mb-md-5">
+                        <div class="testimonial">
+                            <img src=@item.FilePath alt="" asp-append-version="true">
+                            <blockquote>
+                                <p>@item.Description</p>
+                            </blockquote>
+                            <p class="client-name">@item.Name</p>
+                        </div>
                     </div>
-                </div>
 
+                }
             }
 
         </div>

@@ -13,12 +13,14 @@
 
     public class InformationService : IInformationService
     {
-        private readonly IRepository<Image> dbImage;
+        private const int _DefaultImageId = 2;
+
+        private readonly IRepository<ImageToReview> dbImage;
         private readonly IDeletableEntityRepository<Review> dbReview;
         private readonly IFilesService filesService;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public InformationService(IRepository<Image> dbImage, IDeletableEntityRepository<Review> dbReview, IFilesService filesService, IHttpContextAccessor httpContextAccessor)
+        public InformationService(IRepository<ImageToReview> dbImage, IDeletableEntityRepository<Review> dbReview, IFilesService filesService, IHttpContextAccessor httpContextAccessor)
         {
             this.dbImage = dbImage;
             this.dbReview = dbReview;
@@ -29,17 +31,21 @@
         public async Task<string> AddRewiev(ReviewInputModel input)
         {
 
-            int imageId = 1;
+            int imageId = _DefaultImageId;
 
             if (input.ImageFile != null)
             {
                 var fileId = await this.filesService.UploadToFileSystem(input.ImageFile, "ProfilImage");
-                var newImage = new Image { ImageTitle = "ProfilImage", FileId = fileId };
 
-                await this.dbImage.AddAsync(newImage);
-                await this.dbImage.SaveChangesAsync();
+                if (!string.IsNullOrEmpty(fileId))
+                {
+                    var newImage = new ImageToReview { FileId = fileId };
 
-                imageId = newImage.Id;
+                    await this.dbImage.AddAsync(newImage);
+                    await this.dbImage.SaveChangesAsync();
+
+                    imageId = newImage.Id;
+                }
             }
 
             var userId = this.httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -63,7 +69,7 @@
         {
             var allReview = await this.dbReview.All()
                 .Where(r => r.IsDeleted == false)
-                .OrderByDescending(r => r.CreatedOn)
+                .OrderBy(r => r.CreatedOn)
                 .Select(r => new ReviewViewModel
                 {
                     Name = r.Name,

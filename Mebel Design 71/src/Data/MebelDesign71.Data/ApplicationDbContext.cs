@@ -30,7 +30,9 @@
 
         public DbSet<Service> Services { get; set; }
 
-        public DbSet<Image> Images { get; set; }
+        public DbSet<ImageToProject> ImageToProjects { get; set; }
+
+        public DbSet<ImageToReview> ImageToReviews { get; set; }
 
         public DbSet<Project> Projects { get; set; }
 
@@ -39,6 +41,8 @@
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Offer> Offers { get; set; }
+
+        public DbSet<FileOnFileSystem> FileOnFileSystems { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

@@ -169,10 +169,10 @@ namespace MebelDesign71.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FileOnFileSystem");
+                    b.ToTable("FileOnFileSystems");
                 });
 
-            modelBuilder.Entity("MebelDesign71.Data.Models.Image", b =>
+            modelBuilder.Entity("MebelDesign71.Data.Models.ImageToProject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -191,7 +191,25 @@ namespace MebelDesign71.Data.Migrations
 
                     b.HasIndex("FileId");
 
-                    b.ToTable("Images");
+                    b.ToTable("ImageToProjects");
+                });
+
+            modelBuilder.Entity("MebelDesign71.Data.Models.ImageToReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FileId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileId");
+
+                    b.ToTable("ImageToReviews");
                 });
 
             modelBuilder.Entity("MebelDesign71.Data.Models.Message", b =>
@@ -555,7 +573,16 @@ namespace MebelDesign71.Data.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("MebelDesign71.Data.Models.Image", b =>
+            modelBuilder.Entity("MebelDesign71.Data.Models.ImageToProject", b =>
+                {
+                    b.HasOne("MebelDesign71.Data.Models.FileOnFileSystem", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MebelDesign71.Data.Models.ImageToReview", b =>
                 {
                     b.HasOne("MebelDesign71.Data.Models.FileOnFileSystem", "File")
                         .WithMany()
@@ -566,7 +593,7 @@ namespace MebelDesign71.Data.Migrations
 
             modelBuilder.Entity("MebelDesign71.Data.Models.Offer", b =>
                 {
-                    b.HasOne("MebelDesign71.Data.Models.Image", "Image")
+                    b.HasOne("MebelDesign71.Data.Models.ImageToProject", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -602,7 +629,7 @@ namespace MebelDesign71.Data.Migrations
 
             modelBuilder.Entity("MebelDesign71.Data.Models.Project", b =>
                 {
-                    b.HasOne("MebelDesign71.Data.Models.Image", "Image")
+                    b.HasOne("MebelDesign71.Data.Models.ImageToProject", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -611,7 +638,7 @@ namespace MebelDesign71.Data.Migrations
 
             modelBuilder.Entity("MebelDesign71.Data.Models.Review", b =>
                 {
-                    b.HasOne("MebelDesign71.Data.Models.Image", "Image")
+                    b.HasOne("MebelDesign71.Data.Models.ImageToReview", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -626,7 +653,7 @@ namespace MebelDesign71.Data.Migrations
 
             modelBuilder.Entity("MebelDesign71.Data.Models.Service", b =>
                 {
-                    b.HasOne("MebelDesign71.Data.Models.Image", "Image")
+                    b.HasOne("MebelDesign71.Data.Models.ImageToProject", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Restrict)

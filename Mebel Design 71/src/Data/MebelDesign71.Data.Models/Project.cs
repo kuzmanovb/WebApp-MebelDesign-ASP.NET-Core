@@ -8,6 +8,6 @@
 
         public int ImageId { get; set; }
 
-        public Image Image { get; set; }
+        public ImageToProject Image { get; set; }
     }
 }

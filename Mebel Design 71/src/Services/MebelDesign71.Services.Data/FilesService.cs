@@ -79,8 +79,6 @@
         public async Task<string> UploadToFileSystem(IFormFile file, string folderInWwwRoot, string description = null)
         {
 
-            FileOnFileSystem fileModel = null;
-
             var basePath = Path.Combine(this.environment.WebRootPath + "\\" + folderInWwwRoot + "\\");
             bool basePathExists = Directory.Exists(basePath);
 
@@ -89,8 +87,12 @@
                 Directory.CreateDirectory(basePath);
             }
 
+            var generator = new Random();
+
+            string gen = generator.Next(1000).ToString();
+
             var fileName = Path.GetFileNameWithoutExtension(file.FileName);
-            var filePath = Path.Combine(basePath, file.FileName);
+            var filePath = Path.Combine(basePath, gen + file.FileName);
             var extension = Path.GetExtension(file.FileName);
             var userId = this.httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -101,7 +103,7 @@
                     await file.CopyToAsync(stream);
                 }
 
-                fileModel = new FileOnFileSystem
+                var fileModel = new FileOnFileSystem
                 {
                     CreatedOn = DateTime.UtcNow,
                     FileType = file.ContentType,
@@ -115,9 +117,10 @@
                 await this.dbFileOnSystem.AddAsync(fileModel);
                 await this.dbFileOnSystem.SaveChangesAsync();
 
+                return fileModel.Id;
             }
 
-            return fileModel.Id == null ? EmptyString : fileModel.Id;
+            return EmptyString;
         }
     }
 }

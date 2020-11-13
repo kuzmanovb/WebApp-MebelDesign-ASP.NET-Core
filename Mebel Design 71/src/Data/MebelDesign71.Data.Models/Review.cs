@@ -25,6 +25,6 @@
 
         public int ImageId { get; set; }
 
-        public Image Image { get; set; }
+        public ImageToReview Image { get; set; }
     }
 }
