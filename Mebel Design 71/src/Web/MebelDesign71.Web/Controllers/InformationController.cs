@@ -46,7 +46,7 @@
 
             await this.informationService.AddRewiev(input);
 
-            return this.RedirectToAction("Reviews");
+            return this.RedirectToAction("ThankYou");
         }
 
         public IActionResult ThankYou()

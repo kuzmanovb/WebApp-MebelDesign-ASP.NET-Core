@@ -13,7 +13,6 @@
 
     public class InformationService : IInformationService
     {
-        private const int _DefaultImageId = 1;
 
         private readonly IRepository<ImageToReview> dbImage;
         private readonly IDeletableEntityRepository<Review> dbReview;
@@ -31,7 +30,7 @@
         public async Task<string> AddRewiev(ReviewInputModel input)
         {
 
-            int imageId = _DefaultImageId;
+            int imageId = this.dbImage.All().Where(i => i.File.Name == "DefaultImageReview").First().Id;
 
             if (input.ImageFile != null)
             {
