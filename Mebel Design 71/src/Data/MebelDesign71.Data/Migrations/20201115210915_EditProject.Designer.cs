@@ -4,14 +4,16 @@ using MebelDesign71.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MebelDesign71.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115210915_EditProject")]
+    partial class EditProject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,7 +209,8 @@ namespace MebelDesign71.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ProjectId")
+                        .IsUnique();
 
                     b.ToTable("ImageToProjects");
                 });
@@ -219,15 +222,9 @@ namespace MebelDesign71.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FileId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -248,9 +245,6 @@ namespace MebelDesign71.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -263,9 +257,6 @@ namespace MebelDesign71.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -274,8 +265,6 @@ namespace MebelDesign71.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Messages");
                 });
@@ -298,8 +287,8 @@ namespace MebelDesign71.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DocumentId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -313,7 +302,7 @@ namespace MebelDesign71.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DocumentId");
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
@@ -334,6 +323,7 @@ namespace MebelDesign71.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FileId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -348,7 +338,7 @@ namespace MebelDesign71.Data.Migrations
                     b.Property<int>("Progress")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ServiceId")
+                    b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -378,15 +368,13 @@ namespace MebelDesign71.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("HeadImageId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("HeadImageId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -443,35 +431,19 @@ namespace MebelDesign71.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HeadImageId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ServiceType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HeadImageId");
-
-                    b.HasIndex("IsDeleted");
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Services");
                 });
@@ -628,8 +600,8 @@ namespace MebelDesign71.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("MebelDesign71.Data.Models.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
+                        .WithOne("Image")
+                        .HasForeignKey("MebelDesign71.Data.Models.ImageToProject", "ProjectId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -645,9 +617,11 @@ namespace MebelDesign71.Data.Migrations
 
             modelBuilder.Entity("MebelDesign71.Data.Models.Offer", b =>
                 {
-                    b.HasOne("MebelDesign71.Data.Models.FileOnFileSystem", "FileOnFileSystem")
+                    b.HasOne("MebelDesign71.Data.Models.ImageToProject", "Image")
                         .WithMany()
-                        .HasForeignKey("DocumentId");
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("MebelDesign71.Data.Models.ApplicationUser", "User")
                         .WithMany()
@@ -660,11 +634,15 @@ namespace MebelDesign71.Data.Migrations
                 {
                     b.HasOne("MebelDesign71.Data.Models.FileOnFileSystem", "File")
                         .WithMany()
-                        .HasForeignKey("FileId");
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("MebelDesign71.Data.Models.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("MebelDesign71.Data.Models.ApplicationUser", "User")
                         .WithMany()
@@ -688,9 +666,9 @@ namespace MebelDesign71.Data.Migrations
 
             modelBuilder.Entity("MebelDesign71.Data.Models.Service", b =>
                 {
-                    b.HasOne("MebelDesign71.Data.Models.FileOnFileSystem", "HeadImage")
+                    b.HasOne("MebelDesign71.Data.Models.ImageToProject", "Image")
                         .WithMany()
-                        .HasForeignKey("HeadImageId")
+                        .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

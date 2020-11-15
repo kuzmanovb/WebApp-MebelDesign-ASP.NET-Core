@@ -21,12 +21,11 @@
 
         public Progress Progress { get; set; }
 
-        [Required]
         public string FileId { get; set; }
 
         public FileOnFileSystem File { get; set; }
 
-        public int ServiceId { get; set; }
+        public int? ServiceId { get; set; }
 
         public Service Service { get; set; }
     }

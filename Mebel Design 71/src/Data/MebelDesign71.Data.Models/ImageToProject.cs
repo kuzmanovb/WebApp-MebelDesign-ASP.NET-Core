@@ -10,7 +10,6 @@
 
         public string Description { get; set; }
 
-        [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
         public Project Project { get; set; }

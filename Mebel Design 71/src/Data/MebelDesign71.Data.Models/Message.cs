@@ -5,7 +5,7 @@
 
     using MebelDesign71.Data.Common.Models;
 
-    public class Message : BaseModel<string>
+    public class Message : BaseDeletableModel<string>
     {
 
         public Message()

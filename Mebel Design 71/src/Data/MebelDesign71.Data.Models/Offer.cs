@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using MebelDesign71.Data.Common.Models;
 
@@ -22,8 +23,9 @@
 
         public string Comment { get; set; }
 
-        public int ImageId { get; set; }
+        [ForeignKey("FileOnFileSystem")]
+        public string DocumentId { get; set; }
 
-        public ImageToProject Image { get; set; }
+        public FileOnFileSystem FileOnFileSystem { get; set; }
     }
 }

@@ -1,11 +1,10 @@
 ﻿namespace MebelDesign71.Data.Models
 {
+    using MebelDesign71.Data.Common.Models;
     using System.ComponentModel.DataAnnotations;
 
-    public class ImageToReview
+    public class ImageToReview : BaseModel<int>
     {
-            [Key]
-            public int Id { get; set; }
 
             [Required]
             public string FileId { get; set; }

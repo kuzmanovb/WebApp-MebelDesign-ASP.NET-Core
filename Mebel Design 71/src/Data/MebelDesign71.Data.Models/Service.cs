@@ -1,19 +1,24 @@
 ﻿namespace MebelDesign71.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Service
+    using MebelDesign71.Data.Common.Models;
+
+    public class Service : BaseDeletableModel<int>
     {
-        public int Id { get; set; }
 
-        public ServiceType ServiceType { get; set; }
+        [Required]
+        public string Name { get; set; }
 
         [Required]
         public string Description { get; set; }
 
-        public int ImageId { get; set; }
+        [Required]
+        public string HeadImageId { get; set; }
 
-        public ImageToProject Image { get; set; }
+        public FileOnFileSystem HeadImage { get; set; }
+
 
     }
 }
