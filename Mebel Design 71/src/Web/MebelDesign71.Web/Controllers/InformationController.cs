@@ -31,7 +31,6 @@
             return this.View();
         }
 
-        // ToDo: Only registered users
         public IActionResult AddReview()
         {
             return this.View();
