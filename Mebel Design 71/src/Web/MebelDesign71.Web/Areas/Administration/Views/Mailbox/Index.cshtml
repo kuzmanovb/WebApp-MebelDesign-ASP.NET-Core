@@ -1,7 +1,5 @@
 ﻿
-@{
-    ViewData["Title"] = "Mailbox";
-}
+@{ ViewData["Title"] = "Mailbox"; }
 
 @section Styles{
     <environment include="Development,Staging,Production">
@@ -14,7 +12,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Mailbox
+            Поща
             <small>13 new messages</small>
         </h1>
         <ol class="breadcrumb">
@@ -27,7 +25,7 @@
     <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="@Url.Action("Compose", "Mailbox")" class="btn btn-primary btn-block margin-bottom">Compose</a>
+                <a asp-controller="Mailbox" asp-action="Compose" class="btn btn-primary btn-block margin-bottom">Напиши</a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -43,41 +41,18 @@
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active">
                                 <a href="#">
-                                    <i class="fa fa-inbox"></i> Inbox
+                                    <i class="fa fa-inbox"></i> Кутия
                                     <span class="label label-primary pull-right">12</span>
                                 </a>
                             </li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                            <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i> Изпратени</a></li>
                             <li>
-                                <a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
+                                <a href="#"><i class="fa fa-filter"></i> Кошче <span class="label label-warning pull-right">65</span></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
                         </ul>
                     </div>
                     <!-- /.box-body -->
                 </div>
-                <!-- /. box -->
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Labels</h3>
-
-                        <div class="box-tools">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body no-padding">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
-                        </ul>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
             </div>
             <!-- /.col -->
             <div class="col-md-9">
@@ -122,7 +97,7 @@
                                 <tbody>
                                     <tr>
                                         <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
+                                        <td class="mailbox-star"><i></i></td>
                                         <td class="mailbox-name"><a href="@Url.Action("ReadMail", "Mailbox")">Alexander Pierce</a></td>
                                         <td class="mailbox-subject">
                                             <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
@@ -311,56 +286,56 @@
     <!-- /.content -->
 </div>
 
-@section Scripts{ 
-<environment>
-    <!-- iCheck -->
-    <script src="~/adminlte/plugins/iCheck/icheck.min.js"></script>
-    <!-- Page Script -->
-    <script>
-          $(function () {
-            //Enable iCheck plugin for checkboxes
-            //iCheck for checkbox and radio inputs
-            $('.mailbox-messages input[type="checkbox"]').iCheck({
-              checkboxClass: 'icheckbox_flat-blue',
-              radioClass: 'iradio_flat-blue'
+@section Scripts{
+    <environment>
+        <!-- iCheck -->
+        <script src="~/adminlte/plugins/iCheck/icheck.min.js"></script>
+        <!-- Page Script -->
+        <script>
+            $(function () {
+                //Enable iCheck plugin for checkboxes
+                //iCheck for checkbox and radio inputs
+                $('.mailbox-messages input[type="checkbox"]').iCheck({
+                    checkboxClass: 'icheckbox_flat-blue',
+                    radioClass: 'iradio_flat-blue'
+                });
+
+                //Enable check and uncheck all functionality
+                $(".checkbox-toggle").click(function () {
+                    var clicks = $(this).data('clicks');
+                    if (clicks) {
+                        //Uncheck all checkboxes
+                        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+                        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+                    } else {
+                        //Check all checkboxes
+                        $(".mailbox-messages input[type='checkbox']").iCheck("check");
+                        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+                    }
+                    $(this).data("clicks", !clicks);
+                });
+
+                //Handle starring for glyphicon and font awesome
+                $(".mailbox-star").click(function (e) {
+                    e.preventDefault();
+                    //detect type
+                    var $this = $(this).find("a > i");
+                    var glyph = $this.hasClass("glyphicon");
+                    var fa = $this.hasClass("fa");
+
+                    //Switch states
+                    if (glyph) {
+                        $this.toggleClass("glyphicon-star");
+                        $this.toggleClass("glyphicon-star-empty");
+                    }
+
+                    if (fa) {
+                        $this.toggleClass("fa-star");
+                        $this.toggleClass("fa-star-o");
+                    }
+                });
             });
-
-            //Enable check and uncheck all functionality
-            $(".checkbox-toggle").click(function () {
-              var clicks = $(this).data('clicks');
-              if (clicks) {
-                //Uncheck all checkboxes
-                $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-                $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-              } else {
-                //Check all checkboxes
-                $(".mailbox-messages input[type='checkbox']").iCheck("check");
-                $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-              }
-              $(this).data("clicks", !clicks);
-            });
-
-            //Handle starring for glyphicon and font awesome
-            $(".mailbox-star").click(function (e) {
-              e.preventDefault();
-              //detect type
-              var $this = $(this).find("a > i");
-              var glyph = $this.hasClass("glyphicon");
-              var fa = $this.hasClass("fa");
-
-              //Switch states
-              if (glyph) {
-                $this.toggleClass("glyphicon-star");
-                $this.toggleClass("glyphicon-star-empty");
-              }
-
-              if (fa) {
-                $this.toggleClass("fa-star");
-                $this.toggleClass("fa-star-o");
-              }
-            });
-          });
-    </script>
-</environment>
+        </script>
+    </environment>
 }
 

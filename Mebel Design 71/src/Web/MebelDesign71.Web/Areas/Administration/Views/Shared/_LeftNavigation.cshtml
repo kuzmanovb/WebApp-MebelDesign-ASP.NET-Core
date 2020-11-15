@@ -17,21 +17,23 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="@Html.IsSelected(controller: "Todo")>
-                <a href="@Url.Action("Index", "Todo")">
-                    <i class="fa fa-th"></i> <span>Todo</span>
-                    <span class="pull-right-container">
-                        <small class="label pull-right bg-green">CRUD</small>
-                    </span>
-                </a>
-            </li>
-            <li class="@Html.IsSelected(controller: "Post")">
-                <a href="@Url.Action("Index", "Post")">
+       
+            <li class="@Html.IsSelected(controller: "Mailbox")">
+                <a href="@Url.Action("Index", "Mailbox")">
                     <i class="fa fa-envelope"></i> <span>Поща</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-yellow">12</small>
                         <small class="label pull-right bg-green">16</small>
                         <small class="label pull-right bg-red">5</small>
+                    </span>
+                </a>
+            </li>
+
+            <li class="@Html.IsSelected(controller: "Todo")">
+                <a href="@Url.Action("Index", "Todo")">
+                    <i class="fa fa-th"></i> <span>Todo</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">CRUD</small>
                     </span>
                 </a>
             </li>

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MebelDesign71.Web.Areas.Administration.Controllers
 {
     [Area("Administration")]
-    public class PostController : Controller
+    public class MailboxController : Controller
     {
         public IActionResult Index()
         {

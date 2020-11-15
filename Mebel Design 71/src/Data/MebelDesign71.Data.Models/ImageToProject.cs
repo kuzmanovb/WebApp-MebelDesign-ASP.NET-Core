@@ -1,13 +1,19 @@
 ﻿namespace MebelDesign71.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    public class ImageToProject
+    using MebelDesign71.Data.Common.Models;
+
+    public class ImageToProject : BaseDeletableModel<int>
     {
-        public int Id { get; set; }
 
-        [Required]
-        public string ImageTitle { get; set; }
+        public string Description { get; set; }
+
+        [ForeignKey("Project")]
+        public int ProjectId { get; set; }
+
+        public Project Project { get; set; }
 
         [Required]
         public string FileId { get; set; }
