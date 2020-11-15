@@ -12,8 +12,9 @@
         public string Name { get; set; }
 
         [Required]
-        [ForeignKey("FileOnFileSystem")]
         public string HeadImageId{ get; set; }
+
+        public FileOnFileSystem HeadImage { get; set; }
 
 
     }
