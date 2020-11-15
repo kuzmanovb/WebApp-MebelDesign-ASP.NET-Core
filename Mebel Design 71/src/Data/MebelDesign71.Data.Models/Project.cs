@@ -5,11 +5,13 @@
 
     using MebelDesign71.Data.Common.Models;
 
-    public class Project : BaseModel<int>
+    public class Project : BaseDeletableModel<int>
     {
 
         [Required]
         public string Name { get; set; }
+
+        public string Description { get; set; }
 
         [Required]
         public string HeadImageId{ get; set; }

@@ -22,16 +22,14 @@
                 <a href="@Url.Action("Index", "Mailbox")">
                     <i class="fa fa-envelope"></i> <span>Поща</span>
                     <span class="pull-right-container">
-                        <small class="label pull-right bg-yellow">12</small>
-                        <small class="label pull-right bg-green">16</small>
                         <small class="label pull-right bg-red">5</small>
                     </span>
                 </a>
             </li>
 
-            <li class="@Html.IsSelected(controller: "Todo")">
-                <a href="@Url.Action("Index", "Todo")">
-                    <i class="fa fa-th"></i> <span>Todo</span>
+            <li class="@Html.IsSelected(controller: "Project")">
+                <a href="@Url.Action("Index", "Project")">
+                    <i class="fa fa-th"></i> <span>Управление на <br />категориите за проекти</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-green">CRUD</small>
                     </span>
