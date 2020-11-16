@@ -9,5 +9,7 @@
         public string Description { get; set; }
 
         public string HeadImageId { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
