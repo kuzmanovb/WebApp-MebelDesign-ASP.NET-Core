@@ -1,12 +1,12 @@
 ﻿namespace MebelDesign71.Web.Areas.Administration.Api
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
+    using MebelDesign71.Services.Data;
     using MebelDesign71.Web.ViewModels.Projects;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +15,12 @@
     public class ProjectController : Controller
     {
         private readonly IRepository<Project> dbProject;
+        private readonly IFilesService filesService;
 
-        public ProjectController(IDeletableEntityRepository<Project> dbProject)
+        public ProjectController(IDeletableEntityRepository<Project> dbProject, IFilesService filesService)
         {
             this.dbProject = dbProject;
+            this.filesService = filesService;
         }
 
         public IEnumerable<ProjectViewModel> GetAllProjects()
@@ -35,26 +37,101 @@
             return allProjects;
         }
 
-
-        public Task<IActionResult> GetProjectById(int id)
+        public IActionResult GetProjectById(int id)
         {
-            throw new NotImplementedException();
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            var currentProject = this.dbProject.All().Where(p => p.Id == id).FirstOrDefault();
+
+            if (currentProject == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(currentProject);
         }
 
-        public Task<IActionResult> CreateProject(ProjectInputModel input)
+        public async Task<IActionResult> CreateProject(ProjectInputModel input)
         {
-            throw new NotImplementedException();
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images/projecImages");
+
+            var newProject = new Project
+            {
+                Name = input.Name,
+                Description = input.Description,
+                HeadImageId = imageId,
+            };
+
+            await this.dbProject.AddAsync(newProject);
+            await this.dbProject.SaveChangesAsync();
+
+            return this.NoContent();
         }
 
-        public Task<IActionResult> UpdateProject(int id)
+        public async Task<IActionResult> UpdateProject(ProjectInputModel input)
         {
-            throw new NotImplementedException();
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            var currentProject = this.dbProject.All().Where(p => p.Name == input.Name).FirstOrDefault();
+
+            if (currentProject == null)
+            {
+                return this.NotFound();
+            }
+
+            if (input.HeadImage != null)
+            {
+                var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images/projecImages");
+                currentProject.HeadImageId = imageId;
+            }
+
+            currentProject.Name = input.Name;
+            currentProject.Description = input.Description;
+
+            this.dbProject.Update(currentProject);
+            await this.dbProject.SaveChangesAsync();
+
+            return this.NoContent();
         }
 
-        public Task<IActionResult> DeleteProject(int id)
+        public async Task<IActionResult> ChangeIsDeleteProject(int id)
         {
-            throw new NotImplementedException();
-        }
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
 
+            var currentProject = this.dbProject.All().Where(p => p.Id == id).FirstOrDefault();
+
+            if (currentProject == null)
+            {
+                return this.NotFound();
+            }
+
+            if (currentProject.IsDeleted == true)
+            {
+                currentProject.IsDeleted = false;
+            }
+            else
+            {
+                currentProject.IsDeleted = true;
+            }
+
+            this.dbProject.Update(currentProject);
+            await this.dbProject.SaveChangesAsync();
+
+            return this.NoContent();
+        }
     }
 }
