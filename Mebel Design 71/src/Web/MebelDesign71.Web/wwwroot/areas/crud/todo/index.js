@@ -15,7 +15,7 @@
         $.ajax({
 
             type: "GET",
-            url: "/api/todoItem/GettodoItem",
+            url: "/Api/Project/GetAllProjects",
             success: function (result) {
                 if (result.length == 0) {
                     $('table').addClass('hidden');
@@ -27,9 +27,10 @@
                         var tbody = $('#tbody');
                         var tr = "<tr>";
                         tr += "<td>" + result[i].id;
-                        tr += "<td>" + result[i].todo;
-                        tr += "<td>" + '<div class="progress progress-xs"><div class="progress-bar progress-bar-green" style="width: '+result[i].progress+'%"></div></div>';
-                        tr += "<td>" + '<span class="badge bg-green">' + result[i].progress +'%</span>';
+                        tr += "<td>" + result[i].name;
+                        tr += "<td>" + result[i].description;
+                        tr += "<td>" + result[i].isDeleted;
+                        tr += "<td>" + result[i].headImageId;
                         tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result[i].id + ")>" + "Edit";
                         tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result[i].id + ")>" + "Delete";
                         tbody.append(tr);
@@ -134,7 +135,7 @@
     }
 
         function ResetForm() {
-            $('#formTodo').each(function () {
+            $('#ProjectViewModel').each(function () {
                 this.reset();
             });
         }

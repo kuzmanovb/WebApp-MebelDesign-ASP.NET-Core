@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Създай / Промени Проект</h3>
+                        <h3 class="box-title">Създай / Промени категория на проект</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
@@ -41,7 +41,7 @@
                                     <i class="fa fa-paperclip"></i> Добави снимка
                                     <input type="file" name="attachment">
                                 </div>
-                                <p class="text-danger text-uppercase">Задължително трябва да въведете снимка</p>
+                                <p class="text-danger text-uppercase">При съдаване на категория задължително трябва да въведете снимка</p>
                             </div>
 
 
@@ -49,16 +49,14 @@
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <input type="button" id="Create" value="Create" class="btn btn-success" onclick="CreateData()" />
-                            <input type="button" id="Update" value="Update" class="btn btn-info hidden" onclick="UpdateData()" />
+                            <input type="button" id="Create" value="Създай" class="btn btn-success" onclick="CreateData()" />
+                            <input type="button" id="Update" value="Промени" class="btn btn-info hidden" onclick="UpdateData()" />
                         </div>
                     </form>
                 </div>
             </div>
             <!-- /.col -->
             <div class="col-md-6">
-
-
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Всички проекти</h3>
@@ -70,8 +68,12 @@
                                 <tr>
                                     <th style="width: 10px">#</th>
                                     <th>Проект</th>
+                                    <th>Описание</th>
+                                    <th>Активен</th>
+                                    <th>Снимка</th>
                                     <th></th>
                                     <th></th>
+
                                 </tr>
                             </thead>
                             <tbody id="tbody"></tbody>

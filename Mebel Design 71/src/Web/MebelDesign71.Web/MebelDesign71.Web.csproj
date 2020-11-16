@@ -9,6 +9,13 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\ProfilImage\**" />
+    <Content Remove="wwwroot\ProfilImage\**" />
+    <EmbeddedResource Remove="wwwroot\ProfilImage\**" />
+    <None Remove="wwwroot\ProfilImage\**" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
@@ -47,7 +54,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\ProfilImage\" />
     <Folder Include="wwwroot\scss\scss\bootstrap\mixins\" />
     <Folder Include="wwwroot\scss\scss\bootstrap\utilities\" />
   </ItemGroup>
