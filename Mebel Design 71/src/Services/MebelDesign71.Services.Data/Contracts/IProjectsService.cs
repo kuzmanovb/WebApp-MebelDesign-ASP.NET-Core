@@ -1,17 +1,15 @@
-﻿using MebelDesign71.Data.Common.Repositories;
-using MebelDesign71.Data.Models;
-using MebelDesign71.Web.ViewModels.Projects;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace MebelDesign71.Services.Data.Contracts
+﻿namespace MebelDesign71.Services.Data.Contracts
 {
-    public interface IProjectService
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using MebelDesign71.Web.ViewModels.Projects;
+
+    public interface IProjectsService
     {
+        IEnumerable<ProjectViewModel> GetAllProjectsWithDeleted();
 
-        IEnumerable<ProjectViewModel> GetAllProjects();
-
-        Task<ProjectViewModel> GetProjectById(int id);
+        Task<ProjectInputModel> GetProjectById(int id);
 
         Task<int> CreateProject(ProjectInputModel input);
 

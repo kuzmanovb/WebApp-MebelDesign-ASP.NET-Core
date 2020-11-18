@@ -1,17 +1,16 @@
-﻿using MebelDesign71.Data.Common.Repositories;
-using MebelDesign71.Data.Models;
-using MebelDesign71.Services.Data.Contracts;
-using MebelDesign71.Web.ViewModels.Projects;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MebelDesign71.Services.Data
+﻿namespace MebelDesign71.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
+    using MebelDesign71.Data.Common.Repositories;
+    using MebelDesign71.Data.Models;
+    using MebelDesign71.Services.Data.Contracts;
+    using MebelDesign71.Web.ViewModels.Projects;
+    using Microsoft.EntityFrameworkCore;
 
-    public class ProjectsService : IProjectService
+    public class ProjectsService : IProjectsService
     {
         private readonly IDeletableEntityRepository<Project> dbProject;
         private readonly IFilesService filesService;
@@ -22,9 +21,10 @@ namespace MebelDesign71.Services.Data
             this.filesService = filesService;
         }
 
-        public IEnumerable<ProjectViewModel> GetAllProjects()
+        public IEnumerable<ProjectViewModel> GetAllProjectsWithDeleted()
         {
-            var allProjects = this.dbProject.AllAsNoTracking()
+            var allProjects = this.dbProject.AllAsNoTrackingWithDeleted()
+                .OrderBy(p => p.IsDeleted ? 1 : 0)
                 .Select(p => new ProjectViewModel
                 {
                     Id = p.Id,
@@ -37,17 +37,16 @@ namespace MebelDesign71.Services.Data
             return allProjects;
         }
 
-        public async Task<ProjectViewModel> GetProjectById(int id)
+        public async Task<ProjectInputModel> GetProjectById(int id)
         {
 
-            var currentProject = await this.dbProject.All().Where(p => p.Id == id)
-                .Select(p => new ProjectViewModel
+            var currentProject = await this.dbProject.AllWithDeleted().Where(p => p.Id == id)
+                .Select(p => new ProjectInputModel
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    HeadImage = RenameFilePath(p.HeadImage.FilePath),
-                    IsDeleted = p.IsDeleted == false ? "ДА" : "НЕ",
+                    ImagePath = RenameFilePath(p.HeadImage.FilePath),
                 })
                 .FirstOrDefaultAsync();
 
@@ -70,14 +69,12 @@ namespace MebelDesign71.Services.Data
             await this.dbProject.SaveChangesAsync();
 
             return newProject.Id;
-
         }
 
         public async Task UpdateProject(ProjectInputModel input)
         {
 
-            var currentProject = this.dbProject.All().Where(p => p.Name == input.Name).FirstOrDefault();
-
+            var currentProject = this.dbProject.All().Where(p => p.Id == input.Id).FirstOrDefault();
 
             if (input.HeadImage != null)
             {
@@ -85,18 +82,24 @@ namespace MebelDesign71.Services.Data
                 currentProject.HeadImageId = imageId;
             }
 
-            currentProject.Name = input.Name;
-            currentProject.Description = input.Description;
+            if (currentProject.Name != input.Name)
+            {
+                currentProject.Name = input.Name;
+            }
+
+            if (currentProject.Description != input.Description)
+            {
+                currentProject.Description = input.Description;
+            }
 
             this.dbProject.Update(currentProject);
             await this.dbProject.SaveChangesAsync();
-
         }
 
         public async Task ChangeIsDeleteProject(int id)
         {
 
-            var currentProject = this.dbProject.All().Where(p => p.Id == id).FirstOrDefault();
+            var currentProject = this.dbProject.AllWithDeleted().Where(p => p.Id == id).FirstOrDefault();
 
             if (currentProject.IsDeleted == true)
             {
@@ -109,7 +112,6 @@ namespace MebelDesign71.Services.Data
 
             this.dbProject.Update(currentProject);
             await this.dbProject.SaveChangesAsync();
-
         }
 
         private static string RenameFilePath(string fullPath)

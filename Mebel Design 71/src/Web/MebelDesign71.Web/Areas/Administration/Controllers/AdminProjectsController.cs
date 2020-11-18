@@ -1,60 +1,71 @@
 ﻿namespace MebelDesign71.Web.Areas.Administration.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
-    using MebelDesign71.Data.Common.Repositories;
-    using MebelDesign71.Data.Models;
-    using MebelDesign71.Services.Data;
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.Projects;
     using Microsoft.AspNetCore.Mvc;
 
     public class AdminProjectsController : AdministrationController
     {
-        private readonly IProjectService projectService;
+        private readonly IProjectsService projectsService;
 
-        public AdminProjectsController(IProjectService projectService)
+        public AdminProjectsController(IProjectsService projectsService)
         {
-            this.projectService = projectService;
+            this.projectsService = projectsService;
         }
 
         public IActionResult Index()
         {
-            var allProjects = this.projectService.GetAllProjects();
+            var allProjects = this.projectsService.GetAllProjectsWithDeleted();
 
             this.ViewData["AllProjects"] = allProjects;
 
             return this.View();
-
         }
 
+        [HttpGet]
         public IActionResult CreateProject()
         {
-
             return this.View();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateProject(ProjectInputModel input)
         {
-
             if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            var id = await this.projectService.CreateProject(input);
+            if (input.HeadImage == null)
+            {
+                return this.View(input);
+            }
+
+            var id = await this.projectsService.CreateProject(input);
 
             return this.RedirectToAction("Index");
         }
 
-        public IActionResult UpdateProject(int id)
+        public async Task<IActionResult> UpdateProject(int id)
         {
+            var currentProject = await this.projectsService.GetProjectById(id);
 
+            return this.View(currentProject);
+        }
 
-            
+        [HttpPost]
+        public async Task<IActionResult> UpdateProject(ProjectInputModel input)
+        {
+            await this.projectsService.UpdateProject(input);
+
+            return this.RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> ChangeIsDeleted(int id)
+        {
+            await this.projectsService.ChangeIsDeleteProject(id);
 
             return this.RedirectToAction("Index");
         }
