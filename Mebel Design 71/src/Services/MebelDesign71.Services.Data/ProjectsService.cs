@@ -31,7 +31,7 @@
                     Name = p.Name,
                     Description = p.Description,
                     IsDeleted = p.IsDeleted == false ? "ДА" : "НЕ",
-                    HeadImage = p.HeadImage.FilePath,
+                    HeadImage = p.HeadImage.File.FilePath,
                 }).ToList();
 
             return allProjects;
@@ -46,7 +46,7 @@
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    HeadImage = p.HeadImage.FilePath,
+                    HeadImage = p.HeadImage.File.FilePath,
                     IsDeleted = p.IsDeleted == false ? "ДА" : "НЕ",
                 })
                 .FirstOrDefaultAsync();
