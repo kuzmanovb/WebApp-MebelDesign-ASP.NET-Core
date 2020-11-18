@@ -34,7 +34,7 @@
 
             if (input.ImageFile != null)
             {
-                var fileId = await this.filesService.UploadToFileSystem(input.ImageFile, "images/profilImages");
+                var fileId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\profilImages");
 
                 if (!string.IsNullOrEmpty(fileId))
                 {
@@ -97,7 +97,6 @@
             }
 
             return replaceSlashInFullPath;
-
         }
     }
 }

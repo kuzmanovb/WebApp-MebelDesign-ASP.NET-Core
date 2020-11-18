@@ -37,7 +37,7 @@
         }
 
         [HttpPost]
-        public IActionResult CreateProject(ProjectInputModel input)
+        public async Task<IActionResult> CreateProject(ProjectInputModel input)
         {
 
             if (!this.ModelState.IsValid)
@@ -45,7 +45,7 @@
                 return this.View();
             }
 
-            var id = this.projectService.CreateProject(input);
+            var id = await this.projectService.CreateProject(input);
 
             return this.RedirectToAction("Index");
         }

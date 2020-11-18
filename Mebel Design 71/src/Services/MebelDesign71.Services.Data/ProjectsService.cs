@@ -1,15 +1,15 @@
-﻿namespace MebelDesign71.Services.Data
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+﻿using MebelDesign71.Data.Common.Repositories;
+using MebelDesign71.Data.Models;
+using MebelDesign71.Services.Data.Contracts;
+using MebelDesign71.Web.ViewModels.Projects;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-    using MebelDesign71.Data.Common.Repositories;
-    using MebelDesign71.Data.Models;
-    using MebelDesign71.Services.Data.Contracts;
-    using MebelDesign71.Web.ViewModels.Projects;
-    using Microsoft.EntityFrameworkCore;
+namespace MebelDesign71.Services.Data
+{
+
 
     public class ProjectsService : IProjectService
     {
@@ -31,7 +31,7 @@
                     Name = p.Name,
                     Description = p.Description,
                     IsDeleted = p.IsDeleted == false ? "ДА" : "НЕ",
-                    HeadImage = p.HeadImage.File.FilePath,
+                    HeadImage = RenameFilePath(p.HeadImage.FilePath),
                 }).ToList();
 
             return allProjects;
@@ -46,7 +46,7 @@
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    HeadImage = p.HeadImage.File.FilePath,
+                    HeadImage = RenameFilePath(p.HeadImage.FilePath),
                     IsDeleted = p.IsDeleted == false ? "ДА" : "НЕ",
                 })
                 .FirstOrDefaultAsync();
@@ -57,7 +57,7 @@
         public async Task<int> CreateProject(ProjectInputModel input)
         {
 
-            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images/projecImages");
+            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\projecImages", "Project Hade Image ");
 
             var newProject = new Project
             {
@@ -111,5 +111,25 @@
             await this.dbProject.SaveChangesAsync();
 
         }
+
+        private static string RenameFilePath(string fullPath)
+        {
+            var oldString = "\\";
+            var newString = "/";
+            var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
+
+            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
+            var lengthWwwroot = "wwwroot".Length;
+
+            if (getIndexStartWwwRoot >= 0)
+            {
+
+                var pathForView = "~" + replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
+                return pathForView;
+            }
+
+            return replaceSlashInFullPath;
+        }
+
     }
 }

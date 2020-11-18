@@ -11,12 +11,13 @@
         [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         [Required]
-        public string HeadImageId{ get; set; }
+        public string HeadImageId { get; set; }
 
-        public ImageToProject HeadImage { get; set; }
+        public FileOnFileSystem HeadImage { get; set; }
 
 
     }

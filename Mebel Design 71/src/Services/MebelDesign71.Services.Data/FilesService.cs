@@ -21,7 +21,7 @@
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IHostingEnvironment environment;
 
-        public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem, IHttpContextAccessor httpContextAccessor, IHostingEnvironment environment)
+        public FilesService( IRepository<FileOnFileSystem> dbFileOnSystem, IHttpContextAccessor httpContextAccessor, IHostingEnvironment environment)
         {
             this.dbFileOnSystem = dbFileOnSystem;
             this.httpContextAccessor = httpContextAccessor;
