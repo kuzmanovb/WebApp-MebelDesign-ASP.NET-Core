@@ -16,7 +16,7 @@
 
         public IActionResult ReadMail()
         {
-            return this.iew();
+            return this.View();
         }
     }
 }

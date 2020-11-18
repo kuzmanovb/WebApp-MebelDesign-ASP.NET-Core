@@ -2,7 +2,7 @@
 
 namespace MebelDesign71.Web.Controllers
 {
-    public class ProjectsController : BaseController
+    public class ProjectsController : Controller
     {
         [HttpGet]
         public IActionResult Index()

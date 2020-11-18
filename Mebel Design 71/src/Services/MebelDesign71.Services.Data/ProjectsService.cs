@@ -13,7 +13,7 @@
 
     public class ProjectsService : IProjectService
     {
-        private readonly IRepository<Project> dbProject;
+        private readonly IDeletableEntityRepository<Project> dbProject;
         private readonly IFilesService filesService;
 
         public ProjectsService(IDeletableEntityRepository<Project> dbProject, IFilesService filesService)

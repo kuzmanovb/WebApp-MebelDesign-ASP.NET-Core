@@ -11,11 +11,11 @@
     using MebelDesign71.Web.ViewModels.Projects;
     using Microsoft.AspNetCore.Mvc;
 
-    public class ProjectsController : AdministrationController
+    public class AdminProjectsController : AdministrationController
     {
         private readonly IProjectService projectService;
 
-        public ProjectsController(IProjectService projectService)
+        public AdminProjectsController(IProjectService projectService)
         {
             this.projectService = projectService;
         }
@@ -34,6 +34,29 @@
         {
 
             return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateProject(ProjectInputModel input)
+        {
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            var id = this.projectService.CreateProject(input);
+
+            return this.RedirectToAction("Index");
+        }
+
+        public IActionResult UpdateProject(int id)
+        {
+
+
+            
+
+            return this.RedirectToAction("Index");
         }
     }
 }

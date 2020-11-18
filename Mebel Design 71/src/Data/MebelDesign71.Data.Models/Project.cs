@@ -16,7 +16,7 @@
         [Required]
         public string HeadImageId{ get; set; }
 
-        public FileOnFileSystem HeadImage { get; set; }
+        public ImageToProject HeadImage { get; set; }
 
 
     }
