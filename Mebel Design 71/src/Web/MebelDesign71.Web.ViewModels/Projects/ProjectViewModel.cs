@@ -8,8 +8,8 @@
 
         public string Description { get; set; }
 
-        public string HeadImageId { get; set; }
+        public string HeadImage { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public string IsDeleted { get; set; }
     }
 }

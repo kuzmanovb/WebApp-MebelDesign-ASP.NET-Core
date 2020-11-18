@@ -1,23 +1,22 @@
-﻿namespace MebelDesign71.Web.Areas.Administration.Api
+﻿namespace MebelDesign71.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
-    using MebelDesign71.Services.Data;
+    using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.Projects;
-    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
-    [Produces("application/json")]
-    [Route("Api/[controller]/[action]")]
-    public class ProjectController : Controller
+    public class ProjectsService : IProjectService
     {
         private readonly IRepository<Project> dbProject;
         private readonly IFilesService filesService;
 
-        public ProjectController(IDeletableEntityRepository<Project> dbProject, IFilesService filesService)
+        public ProjectsService(IDeletableEntityRepository<Project> dbProject, IFilesService filesService)
         {
             this.dbProject = dbProject;
             this.filesService = filesService;
@@ -31,35 +30,32 @@
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    IsDeleted = p.IsDeleted,
+                    IsDeleted = p.IsDeleted == false ? "ДА" : "НЕ",
+                    HeadImage = p.HeadImage.FilePath,
                 }).ToList();
 
             return allProjects;
         }
 
-        public IActionResult GetProjectById(int id)
+        public async Task<ProjectViewModel> GetProjectById(int id)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return this.BadRequest(this.ModelState);
-            }
 
-            var currentProject = this.dbProject.All().Where(p => p.Id == id).FirstOrDefault();
+            var currentProject = await this.dbProject.All().Where(p => p.Id == id)
+                .Select(p => new ProjectViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    HeadImage = p.HeadImage.FilePath,
+                    IsDeleted = p.IsDeleted == false ? "ДА" : "НЕ",
+                })
+                .FirstOrDefaultAsync();
 
-            if (currentProject == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.Ok(currentProject);
+            return currentProject;
         }
 
-        public async Task<IActionResult> CreateProject(ProjectInputModel input)
+        public async Task<int> CreateProject(ProjectInputModel input)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return this.BadRequest(this.ModelState);
-            }
 
             var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images/projecImages");
 
@@ -73,22 +69,15 @@
             await this.dbProject.AddAsync(newProject);
             await this.dbProject.SaveChangesAsync();
 
-            return this.NoContent();
+            return newProject.Id;
+
         }
 
-        public async Task<IActionResult> UpdateProject(ProjectInputModel input)
+        public async Task UpdateProject(ProjectInputModel input)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return this.BadRequest(this.ModelState);
-            }
 
             var currentProject = this.dbProject.All().Where(p => p.Name == input.Name).FirstOrDefault();
 
-            if (currentProject == null)
-            {
-                return this.NotFound();
-            }
 
             if (input.HeadImage != null)
             {
@@ -102,22 +91,12 @@
             this.dbProject.Update(currentProject);
             await this.dbProject.SaveChangesAsync();
 
-            return this.NoContent();
         }
 
-        public async Task<IActionResult> ChangeIsDeleteProject(int id)
+        public async Task ChangeIsDeleteProject(int id)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return this.BadRequest(this.ModelState);
-            }
 
             var currentProject = this.dbProject.All().Where(p => p.Id == id).FirstOrDefault();
-
-            if (currentProject == null)
-            {
-                return this.NotFound();
-            }
 
             if (currentProject.IsDeleted == true)
             {
@@ -131,7 +110,6 @@
             this.dbProject.Update(currentProject);
             await this.dbProject.SaveChangesAsync();
 
-            return this.NoContent();
         }
     }
 }

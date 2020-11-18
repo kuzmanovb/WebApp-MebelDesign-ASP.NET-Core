@@ -9,6 +9,7 @@
     using MebelDesign71.Data.Repositories;
     using MebelDesign71.Data.Seeding;
     using MebelDesign71.Services.Data;
+    using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Services.Mapping;
     using MebelDesign71.Services.Messaging;
     using MebelDesign71.Web.ViewModels;
@@ -67,6 +68,7 @@
             services.AddTransient<IContactsService, ContactsService>();
             services.AddTransient<IFilesService, FilesService>();
             services.AddTransient<IInformationService, InformationService>();
+            services.AddTransient<IProjectService, ProjectsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

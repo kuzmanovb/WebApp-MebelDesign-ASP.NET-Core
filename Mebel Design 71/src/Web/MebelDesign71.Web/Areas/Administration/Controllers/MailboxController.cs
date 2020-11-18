@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-namespace MebelDesign71.Web.Areas.Administration.Controllers
+﻿namespace MebelDesign71.Web.Areas.Administration.Controllers
 {
-    [Area("Administration")]
-    public class MailboxController : Controller
+    using Microsoft.AspNetCore.Mvc;
+
+    public class MailboxController : AdministrationController
     {
         public IActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public IActionResult Compose()
         {
-            return View();
+            return this.View();
         }
 
         public IActionResult ReadMail()
         {
-            return View();
+            return this.iew();
         }
     }
 }
