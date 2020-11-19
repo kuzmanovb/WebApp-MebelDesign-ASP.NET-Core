@@ -17,7 +17,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">ПАНЕЛ ЗА УПРАВЛЕНИЕ</li>
-       
+
             <li class="@Html.IsSelected(controller: "Mailbox")">
                 <a href="@Url.Action("Index", "Mailbox")">
                     <i class="fa fa-envelope"></i> <span>Поща</span>
@@ -29,7 +29,16 @@
 
             <li class="@Html.IsSelected(controller: "AdminProjects")">
                 <a href="@Url.Action("Index", "AdminProjects")">
-                    <i class="fa fa-th"></i> <span>Управление на <br />категориите за проекти</span>
+                    <i class="fa fa-th"></i> <span>Управление <br />категориите за проекти</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">CRUD</small>
+                    </span>
+                </a>
+            </li>
+
+            <li class="@Html.IsSelected(controller: "AdminProjectsGalleries")">
+                <a href="@Url.Action("Index", "AdminProjectsGalleries")">
+                    <i class="fa fa-th"></i> <span>Управление <br />галериите на категориите</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-green">CRUD</small>
                     </span>
