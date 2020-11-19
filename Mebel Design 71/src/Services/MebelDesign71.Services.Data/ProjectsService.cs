@@ -21,6 +21,21 @@
             this.filesService = filesService;
         }
 
+
+        public IEnumerable<ProjectViewModel> GetAllProjects()
+        {
+            var allProjects = this.dbProject.AllAsNoTracking()
+                .Select(p => new ProjectViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    HeadImage = RenameFilePath(p.HeadImage.FilePath),
+                }).ToList();
+
+            return allProjects;
+        }
+
         public IEnumerable<ProjectViewModel> GetAllProjectsWithDeleted()
         {
             var allProjects = this.dbProject.AllAsNoTrackingWithDeleted()

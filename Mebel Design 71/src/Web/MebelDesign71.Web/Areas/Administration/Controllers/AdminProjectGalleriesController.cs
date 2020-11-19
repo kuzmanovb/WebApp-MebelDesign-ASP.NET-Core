@@ -5,6 +5,10 @@
 
     public class AdminProjectGalleriesController : BaseController
     {
+        public AdminProjectGalleriesController()
+        {
+                
+        }
         public IActionResult Index()
         {
             return this.View();

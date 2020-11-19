@@ -7,6 +7,8 @@
 
     public interface IProjectsService
     {
+        IEnumerable<ProjectViewModel> GetAllProjects();
+
         IEnumerable<ProjectViewModel> GetAllProjectsWithDeleted();
 
         Task<ProjectInputModel> GetProjectById(int id);
