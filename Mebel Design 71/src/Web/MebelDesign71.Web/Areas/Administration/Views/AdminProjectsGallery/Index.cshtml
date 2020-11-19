@@ -15,7 +15,7 @@
     <section class="content">
         <div class="row">
             <!-- /.col -->
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Всички проекти</h3>
@@ -39,8 +39,8 @@
                                     <td>@item.Id</td>
                                     <td>@item.Name</td>
                                     <td><img src="@item.HeadImage" width=150 height=100 asp-append-version="true" /></td>
-                                    <td><a class='btn btn-info ' href="/Administration/AdminProjectGalleries/Gallery?id=Id">Галерия на проекта</a></td>
-                                    <td><a class='btn btn-warning ' href="/Administration/AdminProjects/UpdateProject?id=Id">Добави снимка <br /> към галерията</a></td>
+                                    <td><a class='btn btn-info' href="/Administration/AdminProjectsGallery/Gallery?id=Id">Галерия на проекта</a></td>
+                                    <td><a class='btn btn-warning ' href="/Administration/AdminProjectsGallery/">Добави снимка към галерията</a></td>
                                 </tr>
                             </tbody>
                             }
