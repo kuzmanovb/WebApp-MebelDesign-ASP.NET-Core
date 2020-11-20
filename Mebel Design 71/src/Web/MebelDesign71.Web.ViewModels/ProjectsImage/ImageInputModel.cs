@@ -1,4 +1,4 @@
-﻿namespace MebelDesign71.Web.ViewModels.Projects
+﻿namespace MebelDesign71.Web.ViewModels.ProjectsImage
 {
     using Microsoft.AspNetCore.Http;
 

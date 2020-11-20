@@ -1,6 +1,7 @@
 ﻿namespace MebelDesign71.Web.ViewModels.Projects
 {
     using System.ComponentModel.DataAnnotations;
+
     using MebelDesign71.Web.Infrastructure;
     using Microsoft.AspNetCore.Http;
 
@@ -8,6 +9,7 @@
     {
         public int? Id { get; set; }
 
+        // ToDo: Escape special symbol to name
         [Required]
         [Display(Name ="Име")]
         public string Name { get; set; }

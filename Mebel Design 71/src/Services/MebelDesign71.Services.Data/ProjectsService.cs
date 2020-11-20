@@ -147,6 +147,5 @@
 
             return replaceSlashInFullPath;
         }
-
     }
 }

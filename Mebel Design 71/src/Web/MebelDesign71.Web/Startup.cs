@@ -69,6 +69,7 @@
             services.AddTransient<IFilesService, FilesService>();
             services.AddTransient<IInformationService, InformationService>();
             services.AddTransient<IProjectsService, ProjectsService>();
+            services.AddTransient<IProjectsGalleryService, ProjectsGalleryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

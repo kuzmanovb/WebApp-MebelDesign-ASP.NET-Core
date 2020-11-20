@@ -1,13 +1,14 @@
 ﻿namespace MebelDesign71.Services.Data.Contracts
 {
-    using MebelDesign71.Web.ViewModels.Projects;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using MebelDesign71.Web.ViewModels.ProjectsImage;
 
-    public interface IGalleriesService
+    public interface IProjectsGalleryService
     {
         Task<int> AddImageToGallery(ImageInputModel input);
 
-        Task GetGallery(int id);
+        Task<ICollection<ViewImageModel>> GetGallery(int id);
 
         Task DeleteImage(int id);
 

@@ -1,20 +1,26 @@
 ﻿namespace MebelDesign71.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Data.Contracts;
-    using MebelDesign71.Web.ViewModels.Projects;
-    using System.Threading.Tasks;
+    using MebelDesign71.Web.ViewModels.ProjectsImage;
+    using Microsoft.EntityFrameworkCore;
 
-    public class GalleriesService : IProjectsGalleryService
+    public class ProjectsGalleryService : IProjectsGalleryService
     {
         private readonly IRepository<ImageToProject> dbImageToProject;
+        private readonly IRepository<FileOnFileSystem> dbFileOnFilesystem;
         private readonly IFilesService filesService;
         private readonly IProjectsService projectsService;
 
-        public GalleriesService(IRepository<ImageToProject> dbImageToProject, IFilesService filesService, IProjectsService projectsService)
+        public ProjectsGalleryService(IRepository<ImageToProject> dbImageToProject, IRepository<FileOnFileSystem> dbFileOnFilesystem, IFilesService filesService, IProjectsService projectsService)
         {
             this.dbImageToProject = dbImageToProject;
+            this.dbFileOnFilesystem = dbFileOnFilesystem;
             this.filesService = filesService;
             this.projectsService = projectsService;
         }
@@ -25,7 +31,7 @@
 
             var projectName = currentProject.Name;
 
-            var imageId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\projecImages", "ImageTo" + projectName + "Gallery");
+            var imageId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\projecImages\\" + projectName, "ImageTo" + projectName + "Gallery");
 
             var newImageToProject = new ImageToProject
             {
@@ -41,14 +47,50 @@
             return newImageToProject.Id;
         }
 
-        public Task DeleteImage(int id)
+        public async Task<ICollection<ViewImageModel>> GetGallery(int id)
         {
-            throw new System.NotImplementedException();
+            var projectGallery = await this.dbImageToProject.All()
+                .Where(i => i.ProjectId == id)
+                .Select(i => new ViewImageModel
+                {
+                    Id = i.Id,
+                    Description = i.Description,
+                    ImageFullPath = i.File.FilePath,
+                    ImagePath = RenameFilePath(i.File.FilePath),
+                }).ToListAsync();
+
+            return projectGallery;
         }
 
-        public Task GetGallery(int id)
+        public async Task DeleteImage(int id)
         {
-            throw new System.NotImplementedException();
+            var currentImage = this.dbImageToProject.All().Where(i => i.Id == id).FirstOrDefault();
+            var fileId = currentImage.FileId;
+
+            this.dbImageToProject.Delete(currentImage);
+            await this.dbImageToProject.SaveChangesAsync();
+
+            var currentFile = await this.filesService.DeleteFileFromFileSystem(fileId);
         }
+
+        private static string RenameFilePath(string fullPath)
+        {
+            var oldString = "\\";
+            var newString = "/";
+            var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
+
+            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
+            var lengthWwwroot = "wwwroot".Length;
+
+            if (getIndexStartWwwRoot >= 0)
+            {
+
+                var pathForView = "~" + replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
+                return pathForView;
+            }
+
+            return replaceSlashInFullPath;
+        }
+
     }
 }
