@@ -71,7 +71,7 @@
         public async Task<int> CreateProject(ProjectInputModel input)
         {
 
-            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\projecImages", "Project Hade Image ");
+            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\projecImages", "Project Hade Image");
 
             var newProject = new Project
             {
@@ -127,12 +127,6 @@
 
             this.dbProject.Update(currentProject);
             await this.dbProject.SaveChangesAsync();
-        }
-
-        public async Task AddImageToGallery(int id)
-        {
-            //var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images/projecImages");
-
         }
 
         private static string RenameFilePath(string fullPath)

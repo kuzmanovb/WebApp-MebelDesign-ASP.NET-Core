@@ -27,9 +27,10 @@
 
         public IActionResult AddImage(int id)
         {
+            
+            
             this.ViewData["id"] = id;
             return this.View();
-
         }
 
         [HttpPost]
