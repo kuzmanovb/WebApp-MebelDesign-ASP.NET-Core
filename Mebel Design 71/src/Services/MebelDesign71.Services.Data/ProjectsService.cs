@@ -71,7 +71,7 @@
         public async Task<int> CreateProject(ProjectInputModel input)
         {
 
-            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\projecImages", "Project Hade Image");
+            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\projectImages", "Project Hade Image");
 
             var newProject = new Project
             {

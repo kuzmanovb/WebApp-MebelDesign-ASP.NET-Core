@@ -29,6 +29,7 @@
                               new SettingsSeeder(),
                               new ImageForReviewSeeder(),
                               new ReviewSeeder(),
+                              new ProjectSeeder(),
                           };
 
             foreach (var seeder in seeders)

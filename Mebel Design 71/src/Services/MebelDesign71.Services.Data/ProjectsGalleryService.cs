@@ -31,7 +31,7 @@
 
             var projectName = currentProject.Name;
 
-            var imageId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\projecImages\\" + projectName, "ImageTo" + projectName + "Gallery");
+            var imageId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\projectImages\\" + projectName, "ImageTo" + projectName + "Gallery");
 
             var newImageToProject = new ImageToProject
             {
