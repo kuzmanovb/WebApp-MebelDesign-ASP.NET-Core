@@ -1,4 +1,4 @@
-﻿@{ this.ViewData["Proba"] = "proba";}
+﻿@{ this.ViewData["Title"] = "Projects";}
 
 <div class="intro-section site-blocks-cover innerpage" style="background-image: url('../images/project_1.jpg');">
     <div class="container">
@@ -29,136 +29,26 @@
         </div>
         <div class="row">
 
+            @foreach (var category in this.ViewData["projects"] as IList<MebelDesign71.Web.ViewModels.Projects.ProjectViewModel>)
+            {
 
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="project-item">
-                    <div class="project-item-contents">
-                        <a href="../Projects/CurrentProject?Category=10">
-                            <h2 class="project-item-title">
-                                Кухни
-                            </h2>
-                            <span class="project-item-category">галерия</span>
-                        </a>
+
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="project-item">
+                        <div class="project-item-contents">
+                            <a href="../Projects/CurrentProject?Category=10">
+                                <h2 class="project-item-title">
+                                    @category.Name
+                                </h2>
+                                <span class="project-item-category">галерия</span>
+                            </a>
+                        </div>
+                        <img src=@category.HeadImage alt="Image" class="img-fluid" asp-append-version="true">
                     </div>
-                    <img src="~/images/kitchen_1.jpg" alt="Image" class="img-fluid">
                 </div>
-            </div>
 
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="project-item">
-                    <div class="project-item-contents">
-                        <a href="project-single.html">
-                            <h2 class="project-item-title">
-                                Дневни
-                            </h2>
-                            <span class="project-item-category">галерия</span>
-                        </a>
-                    </div>
-                    <img src="~/images/livingRoom_1.jpg" alt="Image" class="img-fluid">
-                </div>
-            </div>
+            }
 
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="project-item">
-                    <div class="project-item-contents">
-                        <a href="project-single.html">
-                            <h2 class="project-item-title">
-                                Спални
-                            </h2>
-                            <span class="project-item-category">галерия</span>
-                        </a>
-                    </div>
-                    <img src="~/images/bedrooms_1.jpg" alt="Image" class="img-fluid">
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="project-item">
-                    <div class="project-item-contents">
-                        <a href="project-single.html">
-                            <h2 class="project-item-title">
-                                Детски
-                            </h2>
-                            <span class="project-item-category">галерия</span>
-                        </a>
-                    </div>
-                    <img src="~/images/ChildrenRoom_1.jpg" alt="Image" class="img-fluid">
-                </div>
-            </div>
-
-
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="project-item">
-                    <div class="project-item-contents">
-                        <a href="project-single.html">
-                            <h2 class="project-item-title">
-                                Гардероби
-                            </h2>
-                            <span class="project-item-category">галерия</span>
-                        </a>
-                    </div>
-                    <img src="~/images/wardrobe_1.jpg" alt="Image" class="img-fluid">
-                </div>
-            </div>
-
-
-
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="project-item">
-                    <div class="project-item-contents">
-                        <a href="project-single.html">
-                            <h2 class="project-item-title">
-                                Офиси
-                            </h2>
-                            <span class="project-item-category">галерия</span>
-                        </a>
-                    </div>
-                    <img src="~/images/officeFurniture_1.jpg" alt="Image" class="img-fluid">
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="project-item">
-                    <div class="project-item-contents">
-                        <a href="project-single.html">
-                            <h2 class="project-item-title">
-                                Търговски обекти
-                            </h2>
-                            <span class="project-item-category">галерия</span>
-                        </a>
-                    </div>
-                    <img src="~/images/shopFurniture_1.jpg" alt="Image" class="img-fluid">
-                </div>
-            </div>
-
-            <!-- <div class="col-md-6 col-lg-3 mb-4">
-                       <div class="project-item">
-                         <div class="project-item-contents">
-                           <a href="project-single.html">
-                             <h2 class="project-item-title">
-                               Спални
-                             </h2>
-                             <span class="project-item-category">галерия</span>
-                           </a>
-                         </div>
-                         <img src="images/bedrooms_1.jpg" alt="Image" class="img-fluid">
-                       </div>
-                     </div>
-
-                     <div class="col-md-6 col-lg-3 mb-4">
-                       <div class="project-item">
-                         <div class="project-item-contents">
-                           <a href="project-single.html">
-                             <h2 class="project-item-title">
-                               Детски
-                             </h2>
-                             <span class="project-item-category">галерия</span>
-                           </a>
-                         </div>
-                         <img src="images/ChildrenRoom_1.jpg" alt="Image" class="img-fluid">
-                       </div>
-                     </div>
-            -->
 
         </div>
     </div>
