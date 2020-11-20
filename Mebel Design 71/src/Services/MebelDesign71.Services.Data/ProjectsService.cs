@@ -129,6 +129,12 @@
             await this.dbProject.SaveChangesAsync();
         }
 
+        public async Task AddImageToGallery(int id)
+        {
+            //var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images/projecImages");
+
+        }
+
         private static string RenameFilePath(string fullPath)
         {
             var oldString = "\\";

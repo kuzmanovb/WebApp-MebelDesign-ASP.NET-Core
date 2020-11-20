@@ -39,8 +39,8 @@
                                     <td>@item.Id</td>
                                     <td>@item.Name</td>
                                     <td><img src="@item.HeadImage" width=150 height=100 asp-append-version="true" /></td>
-                                    <td><a class='btn btn-info' href="/Administration/AdminProjectsGallery/Gallery?id=Id">Галерия на проекта</a></td>
-                                    <td><a class='btn btn-warning ' href="/Administration/AdminProjectsGallery/">Добави снимка към галерията</a></td>
+                                    <td><a class='btn btn-info' href="/Administration/AdminProjectsGallery/Gallery?id=@item.Id">Галерия на проекта</a></td>
+                                    <td><a class='btn btn-warning ' href="/Administration/AdminProjectsGallery/AddImage?id=@item.Id">Добави снимка към галерията</a></td>
                                 </tr>
                             </tbody>
                             }
