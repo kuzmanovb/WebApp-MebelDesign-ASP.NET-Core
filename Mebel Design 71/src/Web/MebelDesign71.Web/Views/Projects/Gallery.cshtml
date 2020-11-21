@@ -1,0 +1,38 @@
+﻿@{ this.ViewData["Title"] = "Gallery";}
+
+@section Styles{
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="~/css/grid-gallery.css">
+}
+
+
+
+<div class="site-section">
+    <section class="gallery-block grid-gallery">
+        <div class="container">
+            <div class="heading">
+                <h2>@ViewData["projectName"]</h2>
+            </div>
+            <div class="row">
+                @foreach (var image in ViewData["gallery"] as IList<MebelDesign71.Web.ViewModels.ProjectsImage.ViewImageModel>)
+                {
+                    <div class="col-md-6 col-lg-4 item">
+                        <a class="lightbox" href=@image.ImagePath>
+                            <img class="img-fluid image scale-on-hover" src=@image.ImagePath  asp-append-version="true">
+                        </a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js" asp-append-version="true"></script>
+    <script>
+        baguetteBox.run('.grid-gallery', { animation: 'slideIn' });
+    </script>
+}

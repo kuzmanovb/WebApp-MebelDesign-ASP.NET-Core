@@ -8,6 +8,10 @@
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
 
+   
+    @this.RenderSection("Styles", required: false)
+  
+    
     <!--Stylesheet From Template-->
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Muli:300,400" rel="stylesheet">
     <link rel="stylesheet" href="~/fonts/icomoon/style.css">
@@ -28,6 +32,7 @@
     <link href="~/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="~/css/style.css">
+
 
 </head>
 
@@ -115,26 +120,26 @@
                                         <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-left">НАЧАЛО</a>
                                     </li>
                                     <li>
-                                        <a asp-area="" asp-controller="Information" asp-action="AboutUs"  class="nav-link text-left">ЗА НАС</a>
+                                        <a asp-area="" asp-controller="Information" asp-action="AboutUs" class="nav-link text-left">ЗА НАС</a>
                                     </li>
                                     <li>
-                                        <a asp-area="" asp-controller="Services" asp-action="Index"  class="nav-link text-left">УСЛУГИ</a>
+                                        <a asp-area="" asp-controller="Services" asp-action="Index" class="nav-link text-left">УСЛУГИ</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Projects" asp-action="Index"  class="nav-link text-left">ПРОЕКТИ</a>
+                                        <a asp-controller="Projects" asp-action="Index" class="nav-link text-left">ПРОЕКТИ</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Information"  asp-action="Reviews" class="nav-link text-left">ОТЗИВИ</a>
+                                        <a asp-controller="Information" asp-action="Reviews" class="nav-link text-left">ОТЗИВИ</a>
                                     </li>
                                     <li>
-                                        <a asp-area="" asp-controller="Contacts" asp-action="Index"  class="nav-link text-left">КОНТАКТИ</a>
+                                        <a asp-area="" asp-controller="Contacts" asp-action="Index" class="nav-link text-left">КОНТАКТИ</a>
                                     </li>
                                     <li><a></a></li>
                                     <li><a></a></li>
                                     <partial name="_LoginPartial" />
                                 </ul>
 
-                               
+
                             </nav>
                         </div>
 

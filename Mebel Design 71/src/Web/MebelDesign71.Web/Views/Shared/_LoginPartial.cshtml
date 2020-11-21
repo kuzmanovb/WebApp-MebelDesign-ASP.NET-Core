@@ -7,9 +7,9 @@
 @*<ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">*@
     @if (this.SignInManager.IsSignedIn(this.User))
     {
-        <li class="nav-item">
+        @*<li class="nav-item">
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
-        </li>
+        </li>*@
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item">

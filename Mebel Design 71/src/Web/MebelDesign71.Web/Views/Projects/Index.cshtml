@@ -31,12 +31,10 @@
 
             @foreach (var category in this.ViewData["projects"] as IList<MebelDesign71.Web.ViewModels.Projects.ProjectViewModel>)
             {
-
-
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="project-item">
                         <div class="project-item-contents">
-                            <a href="../Projects/CurrentProject?Category=10">
+                            <a href="../Projects/CurrentProject?id=@category.Id">
                                 <h2 class="project-item-title">
                                     @category.Name
                                 </h2>
@@ -46,9 +44,7 @@
                         <img src=@category.HeadImage alt="Image" class="img-fluid" asp-append-version="true">
                     </div>
                 </div>
-
             }
-
 
         </div>
     </div>
