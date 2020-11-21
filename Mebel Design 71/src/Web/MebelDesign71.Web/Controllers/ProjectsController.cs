@@ -16,7 +16,6 @@
             this.projectsGalleryService = projectsGalleryService;
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
             this.ViewData["projects"] = this.projectsService.GetAllProjects();
@@ -26,6 +25,11 @@
 
         public async Task<IActionResult> CurrentProject(int id)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("/");
+            }
+
             var currentProject = await this.projectsService.GetProjectById(id);
 
             return this.View(currentProject);
@@ -33,11 +37,13 @@
 
         public async Task<IActionResult> Gallery(int id, string projectName)
         {
-            var galleryProject = await this.projectsGalleryService.GetGallery(id);
-            this.ViewData["gallery"] = galleryProject;
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("/");
+            }
+
+            this.ViewData["gallery"] = await this.projectsGalleryService.GetGallery(id);
             this.ViewData["projectName"] = projectName;
-            var proba = galleryProject.ToArray();
-            this.ViewData["foo"] = proba[0].ImagePath;
 
             return this.View();
         }

@@ -11,7 +11,7 @@
     <title>Gallery - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" asp-append-version="true">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/adminlte/css/cards-gallery.css">
+    <link rel="stylesheet" href="~/css/cards-gallery.css">
 </head>
 <body>
     <section class="gallery-block cards-gallery">
@@ -26,7 +26,7 @@
                 {
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-0 transform-on-hover">
-                            <a class="lightbox">
+                            <a class="lightbox" href=@image.ImagePath>
                                 <img src=@image.ImagePath alt="Gallery Image" class="card-img-top" width="400" height="250" asp-append-version="true">
                             </a>
                             <div class="card-body">

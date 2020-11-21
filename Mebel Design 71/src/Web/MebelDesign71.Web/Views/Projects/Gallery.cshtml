@@ -19,9 +19,10 @@
                 @foreach (var image in ViewData["gallery"] as IList<MebelDesign71.Web.ViewModels.ProjectsImage.ViewImageModel>)
                 {
                     <div class="col-md-6 col-lg-4 item">
-                        <a class="lightbox" href=@image.ImagePath>
-                            <img class="img-fluid image scale-on-hover" src=@image.ImagePath  asp-append-version="true">
-                        </a>
+                        
+                            <a class="lightbox" href=@image.ImagePath>
+                                <img class="img-fluid image scale-on-hover" src=@image.ImagePath asp-append-version="true">
+                            </a>
                     </div>
                 }
 

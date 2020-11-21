@@ -30,7 +30,7 @@
                 Name = "KitchenProjectImage",
                 UserId = null,
                 Description = "Kitchen Hade Image",
-                FilePath = "~/images/projectImages/Kitchen.jpg",
+                FilePath = "/images/projectImages/Kitchen.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileToKitchen);
@@ -56,7 +56,7 @@
                 Name = "LivingRoomProjectImage",
                 UserId = null,
                 Description = "Living Room Hade Image",
-                FilePath = "~/images/projectImages/LivingRoom.jpg",
+                FilePath = "/images/projectImages/LivingRoom.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileToLivingRoom);
@@ -82,7 +82,7 @@
                 Name = "BedroomProjectImage",
                 UserId = null,
                 Description = "Bedroom Hade Image",
-                FilePath = "~/images/projectImages/Bedroom.jpg",
+                FilePath = "/images/projectImages/Bedroom.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileToBedroom);
@@ -106,7 +106,7 @@
                 Name = "ChildrenRoomProjectImage",
                 UserId = null,
                 Description = "Children Room Hade Image",
-                FilePath = "~/images/projectImages/ChildrenRoom.jpg",
+                FilePath = "/images/projectImages/ChildrenRoom.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileToChildrenRoom);
@@ -130,7 +130,7 @@
                 Name = "WardrobeProjectImage",
                 UserId = null,
                 Description = "Wardrobe Hade Image",
-                FilePath = "~/images/projectImages/Wardrobe.jpg",
+                FilePath = "/images/projectImages/Wardrobe.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileToWardrobe);
@@ -154,7 +154,7 @@
                 Name = "OfficeProjectImage",
                 UserId = null,
                 Description = "Office Hade Image",
-                FilePath = "~/images/projectImages/Office.jpg",
+                FilePath = "/images/projectImages/Office.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileToOffice);
@@ -178,7 +178,7 @@
                 Name = "ShopProjectImage",
                 UserId = null,
                 Description = "Shop Hade Image",
-                FilePath = "~/images/projectImages/Shop.jpg",
+                FilePath = "/images/projectImages/Shop.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileToShop);

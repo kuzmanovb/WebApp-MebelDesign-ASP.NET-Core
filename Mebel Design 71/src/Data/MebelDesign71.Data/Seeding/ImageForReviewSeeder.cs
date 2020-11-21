@@ -25,7 +25,7 @@
                 Name = "DefaultImageReview",
                 UserId = null,
                 Description = "Default image in Review",
-                FilePath = "~/images/profilImages/DefaultFotoReview.jpg",
+                FilePath = "/images/profilImages/DefaultFotoReview.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFile);
@@ -43,7 +43,7 @@
                 Name = "FirstPersonImageReview",
                 UserId = null,
                 Description = "First person image in Review",
-                FilePath = "~/images/profilImages/Person1.jpg",
+                FilePath = "/images/profilImages/Person1.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileOne);
@@ -61,7 +61,7 @@
                 Name = "SecondPersonImageReview",
                 UserId = null,
                 Description = "Second person image in Review",
-                FilePath = "~/images/profilImages/Person2.jpg",
+                FilePath = "/images/profilImages/Person2.jpg",
             };
 
             await dbContext.FileOnFileSystems.AddAsync(imageFileTwo);
