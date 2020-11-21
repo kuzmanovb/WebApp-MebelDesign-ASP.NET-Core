@@ -35,15 +35,18 @@
             return this.View(currentProject);
         }
 
-        public async Task<IActionResult> Gallery(int id, string projectName)
+        public async Task<IActionResult> Gallery(int projectId)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.RedirectToAction("/");
             }
 
-            this.ViewData["gallery"] = await this.projectsGalleryService.GetGallery(id);
-            this.ViewData["projectName"] = projectName;
+            var currentProject = await this.projectsService.GetProjectById(projectId);
+
+            this.ViewData["gallery"] = await this.projectsGalleryService.GetGallery(projectId);
+            this.ViewData["projectName"] = currentProject.Name;
+            this.ViewData["projectDescription"] = currentProject.Description;
 
             return this.View();
         }
