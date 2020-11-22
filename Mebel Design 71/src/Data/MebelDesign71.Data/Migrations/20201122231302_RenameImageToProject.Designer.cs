@@ -4,14 +4,16 @@ using MebelDesign71.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MebelDesign71.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201122231302_RenameImageToProject")]
+    partial class RenameImageToProject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,7 +203,7 @@ namespace MebelDesign71.Data.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("GalleryProjects");
+                    b.ToTable("ImageToProjects");
                 });
 
             modelBuilder.Entity("MebelDesign71.Data.Models.ImageToReview", b =>

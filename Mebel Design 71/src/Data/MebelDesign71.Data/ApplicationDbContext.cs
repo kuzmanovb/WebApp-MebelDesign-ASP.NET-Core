@@ -30,7 +30,7 @@
 
         public DbSet<Service> Services { get; set; }
 
-        public DbSet<GalleryProject> ImageToProjects { get; set; }
+        public DbSet<GalleryProject> GalleryProjects { get; set; }
 
         public DbSet<ImageToReview> ImageToReviews { get; set; }
 
