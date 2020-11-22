@@ -12,12 +12,12 @@
 
     public class ProjectsGalleryService : IProjectsGalleryService
     {
-        private readonly IRepository<ImageToProject> dbImageToProject;
+        private readonly IRepository<GalleryProject> dbImageToProject;
         private readonly IRepository<FileOnFileSystem> dbFileOnFilesystem;
         private readonly IFilesService filesService;
         private readonly IProjectsService projectsService;
 
-        public ProjectsGalleryService(IRepository<ImageToProject> dbImageToProject, IRepository<FileOnFileSystem> dbFileOnFilesystem, IFilesService filesService, IProjectsService projectsService)
+        public ProjectsGalleryService(IRepository<GalleryProject> dbImageToProject, IRepository<FileOnFileSystem> dbFileOnFilesystem, IFilesService filesService, IProjectsService projectsService)
         {
             this.dbImageToProject = dbImageToProject;
             this.dbFileOnFilesystem = dbFileOnFilesystem;
@@ -33,7 +33,7 @@
 
             var imageId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\projectImages\\" + projectName, "ImageTo" + projectName + "Gallery");
 
-            var newImageToProject = new ImageToProject
+            var newImageToProject = new GalleryProject
             {
                 FileId = imageId,
                 Description = input.Description,

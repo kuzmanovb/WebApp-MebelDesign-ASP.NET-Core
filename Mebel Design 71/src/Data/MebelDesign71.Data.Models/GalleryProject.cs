@@ -4,7 +4,7 @@
 
     using MebelDesign71.Data.Common.Models;
 
-    public class ImageToProject : BaseModel<int>
+    public class GalleryProject : BaseModel<int>
     {
 
         public string Description { get; set; }

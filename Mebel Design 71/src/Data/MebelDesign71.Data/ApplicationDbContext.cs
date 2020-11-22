@@ -30,7 +30,7 @@
 
         public DbSet<Service> Services { get; set; }
 
-        public DbSet<ImageToProject> ImageToProjects { get; set; }
+        public DbSet<GalleryProject> ImageToProjects { get; set; }
 
         public DbSet<ImageToReview> ImageToReviews { get; set; }
 
@@ -41,6 +41,8 @@
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Offer> Offers { get; set; }
+
+        public DbSet<UserDocument> UserDocuments { get; set; }
 
         public DbSet<FileOnFileSystem> FileOnFileSystems { get; set; }
 
