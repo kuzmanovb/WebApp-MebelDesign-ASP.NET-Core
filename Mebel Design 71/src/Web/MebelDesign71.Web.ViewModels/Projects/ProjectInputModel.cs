@@ -11,7 +11,7 @@
 
         // ToDo: Escape special symbol to name
         [Required]
-        [Display(Name ="Име")]
+        [Display(Name = "Име")]
         public string Name { get; set; }
 
         [Required]
@@ -20,6 +20,7 @@
 
         [Display(Name = "Снимка на проекта")]
         [ImageSizeValidatorForReiewAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
         public IFormFile HeadImage { get; set; }
 
         public string ImagePath { get; set; }

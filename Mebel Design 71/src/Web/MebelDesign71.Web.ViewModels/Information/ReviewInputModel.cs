@@ -14,11 +14,11 @@
 
         [Display(Name = "Профилна снимка")]
         [ImageSizeValidatorForReiewAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
-        //[RegularExpression(@"(.*?)\.(jpg|jpeg|gif|JPG|JPEG|PNG)$", ErrorMessage = "Снимката трябва да бъде в jpg, jpeg или png фомат.")]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" }, ErrorMessage = "Снимката трябва да бъде в jpg, jpeg или png фомат.")]
         public IFormFile ImageFile { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете вашият отзив")]
-        [StringLength(1000, ErrorMessage = "Вашият отзив трябва да бъде не по-малко от {1} символа и не по-голям от {2} символа.")]
+        [StringLength(1000, MinimumLength =20, ErrorMessage = "Вашият отзив трябва да бъде не по-малко от {2} символа и не по-голям от {1} символа.")]
         [Display(Name = "Вашият отзив")]
         public string Description { get; set; }
     }
