@@ -1,13 +1,11 @@
 ﻿namespace MebelDesign71.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     using MebelDesign71.Data.Common.Models;
 
     public class Service : BaseDeletableModel<int>
     {
-
         [Required]
         public string Name { get; set; }
 
@@ -26,6 +24,5 @@
         public string DownloadDocumentId { get; set; }
 
         public FileOnFileSystem DownloadDocument { get; set; }
-
     }
 }
