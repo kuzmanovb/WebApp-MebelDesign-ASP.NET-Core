@@ -2,6 +2,7 @@
 {
     using MebelDesign71.Services.Data;
     using MebelDesign71.Web.ViewModels.Information;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
@@ -31,12 +32,15 @@
             return this.View();
         }
 
+
+        [Authorize]
         public IActionResult AddReview()
         {
             return this.View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddReview(ReviewInputModel input)
         {
             if (!this.ModelState.IsValid)

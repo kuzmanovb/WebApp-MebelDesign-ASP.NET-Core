@@ -43,9 +43,10 @@
         [HttpPost]
         public async Task<IActionResult> AddImage(ImageInputModel input)
         {
-            if (!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid || input.ImageFile == null)
             {
-                return this.View(input);
+                this.ViewData["id"] = input.ProjectId;
+                return this.View();
             }
 
             await this.projectsGalleryService.AddImageToGallery(input);

@@ -18,7 +18,8 @@
         <div class="container">
             <div class="heading">
                 <h2>Галерия на @ViewData["projectName"]</h2>
-                <a asp-area="Administration" asp-controller="AdminProjectsGallery" asp-action="Index" type="button" class="btn btn-success btn-lg btn-block">Връщане</a>
+                <a asp-area="Administration" asp-controller="AdminProjectsGallery" asp-action="Index" type="button" class="btn btn-primary btn-lg btn-block">Връщане</a>
+                <a href="/Administration/AdminProjectsGallery/AddImage?id=@ViewData["projectId"]" type="button" class="btn btn-warning btn-lg btn-block">Добави снимка</a>
             </div>
             <div class="row">
 
