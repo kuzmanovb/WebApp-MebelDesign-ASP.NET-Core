@@ -19,6 +19,13 @@
 
         public FileOnFileSystem HeadImage { get; set; }
 
+        public string UploadDocumentId { get; set; }
+
+        public FileOnFileSystem UploadDocument { get; set; }
+
+        public string DownloadDocumentId { get; set; }
+
+        public FileOnFileSystem DownloadDocument { get; set; }
 
     }
 }
