@@ -1,4 +1,4 @@
-﻿@using MebelDesign71.Web.HTMLHelpers
+﻿
 
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -18,8 +18,8 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">ПАНЕЛ ЗА УПРАВЛЕНИЕ</li>
 
-            <li class="@Html.IsSelected(controller: "Mailbox")">
-                <a href="@Url.Action("Index", "Mailbox")">
+            <li>
+                <a asp-controller="Mailbox" asp-action="Index" >
                     <i class="fa fa-envelope"></i> <span>Поща</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-red">5</small>
@@ -27,20 +27,20 @@
                 </a>
             </li>
 
-            <li class="@Html.IsSelected(controller: "AdminProjects")">
-                <a href="@Url.Action("Index", "AdminProjects")">
+            <li>
+                <a asp-controller="AdminProjects"   asp-action="Index" >
                     <i class="fa fa-th"></i> <span>Управление <br />категориите за проекти</span>
                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">CRUD</small>
+                        <small class="label pull-right bg-green"></small>
                     </span>
                 </a>
             </li>
 
-            <li class="@Html.IsSelected(controller: "AdminProjectsGallery")">
-                <a href="@Url.Action("Index", "AdminProjectsGallery")">
+            <li>
+                <a asp-controller="AdminProjectsGallery" asp-action="Index">
                     <i class="fa fa-th"></i> <span>Управление <br />галериите на категориите</span>
                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">CRUD</small>
+                        <small class="label pull-right bg-green"></small>
                     </span>
                 </a>
             </li>
