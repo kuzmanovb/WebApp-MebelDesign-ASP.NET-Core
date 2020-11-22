@@ -1,6 +1,6 @@
-﻿@model MebelDesign71.Web.ViewModels.Projects.ProjectInputModel
+﻿@model MebelDesign71.Web.ViewModels.Service.ServiceInputModel
 
-@{this.ViewData["Title"] = "Create Project"; }
+@{this.ViewData["Title"] = "Create Service"; }
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content">
@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Създай категория на проект</h3>
+                        <h3 class="box-title">Създай услуга</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
@@ -17,12 +17,12 @@
                             <input type="hidden" asp-for="Id" />
                             <div class="form-group">
                                 <label asp-for="Name"></label>
-                                <input asp-for="Name" class="form-control" placeholder="Тук въведете името на проекта">
+                                <input asp-for="Name" class="form-control" placeholder="Тук въведете името на услугата">
                                 <span asp-validation-for="Name"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Description"></label>
-                                <textarea cols="40" rows="6" asp-for="Description" class="form-control" placeholder="Въведете описание на проекта "></textarea>
+                                <textarea cols="40" rows="6" asp-for="Description" class="form-control" placeholder="Въведете описание на услугата "></textarea>
                                 <span asp-validation-for="Description"></span>
                             </div>
                             <div class="form-group">
@@ -30,6 +30,13 @@
                                 <input asp-for="HeadImage" />
                                 <span asp-validation-for="HeadImage" class="text-danger"></span>
                                 <p class="text-danger">Задължително трябва да прикачите снимка. Препорачителната резолюция на снимката 1080 x 720</p>
+                            </div>
+                            <div class="form-group">
+                                <h4 class="text-warning text-uppercase">Може да прикачите файл за сваляне към услугата</h4>
+                                <label asp-for="Document"></label>
+                                <input asp-for="Document" />
+                                <span asp-validation-for="Document" class="text-danger"></span>
+                                
                             </div>
 
 
