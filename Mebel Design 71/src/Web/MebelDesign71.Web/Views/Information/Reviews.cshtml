@@ -1,4 +1,8 @@
 ﻿@model MebelDesign71.Web.ViewModels.Information.ReviewViewModel
+@using MebelDesign71.Common
+@using MebelDesign71.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 
 
 @{ this.ViewData["Title"] = "Review";}
@@ -43,6 +47,10 @@
                                 <p>@item.Description</p>
                             </blockquote>
                             <p class="client-name">@item.Name</p>
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                            {
+                                <a href="/Information/DeleteReview?id=@item.Id" type="button" class="btn btn-danger btn-lg">Изтрии</a>
+                            }
                         </div>
                     </div>
 

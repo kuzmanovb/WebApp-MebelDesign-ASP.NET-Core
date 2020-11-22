@@ -53,6 +53,19 @@
             return this.RedirectToAction("ThankYou");
         }
 
+        [Authorize]
+        public async Task<IActionResult> DeleteReview(string id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("Reviews");
+            }
+
+            await this.informationService.DeleteReview(id);
+
+            return this.RedirectToAction("Reviews");
+        }
+
         public IActionResult ThankYou()
         {
             return this.View();

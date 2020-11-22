@@ -67,10 +67,10 @@
         public async Task<ICollection<ReviewViewModel>> GetAllReview()
         {
             var allReview = await this.dbReview.All()
-                .Where(r => r.IsDeleted == false)
                 .OrderBy(r => r.CreatedOn)
                 .Select(r => new ReviewViewModel
                 {
+                    Id = r.Id,
                     Name = r.Name,
                     FilePath = RenameFilePath(r.Image.File.FilePath),
                     Description = r.Description,
@@ -79,6 +79,18 @@
 
             return allReview;
         }
+
+        public async Task DeleteReview(string id)
+        {
+            var currentReview = this.dbReview.All().FirstOrDefault(r => r.Id == id);
+
+            if (currentReview != null)
+            {
+                this.dbReview.Delete(currentReview);
+                await this.dbReview.SaveChangesAsync();
+            }
+        }
+
 
         private static string RenameFilePath(string fullPath)
         {

@@ -11,5 +11,7 @@
         Task<string> AddRewiev(ReviewInputModel input);
 
         Task<ICollection<ReviewViewModel>> GetAllReview();
+
+        Task DeleteReview(string id);
     }
 }

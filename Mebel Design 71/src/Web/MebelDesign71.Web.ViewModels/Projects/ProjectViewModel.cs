@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MebelDesign71.Web.ViewModels.Projects
+﻿namespace MebelDesign71.Web.ViewModels.Projects
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ProjectViewModel
     {
         public int Id { get; set; }
