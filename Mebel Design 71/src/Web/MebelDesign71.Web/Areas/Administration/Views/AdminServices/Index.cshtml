@@ -50,11 +50,11 @@
         <td><a type="button" class="btn btn-success btn-xs" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@service.DocumentId" />@service.DocumentName</td> }
                         else
                         {
-                            <td></td>
+                            <td>Няма</td>
                         }
                         <td>@service.IsDeleted</td>
                         <td><a class='btn btn-warning btn-xs' href="/Administration/AdminServices/ChangeIsDeleted?id=@service.Id">Ативирай/Деактивирай</a></td>
-                        <td><a class='btn btn-info btn-xs' href="/Administration/AdminServices/UpdateProject?id=@service.Id">Промени</a></td>
+                        <td><a class='btn btn-info btn-xs' href="/Administration/AdminServices/UpdateService?id=@service.Id">Промени</a></td>
                         <td><a class='btn btn-danger btn-xs' href="/Administration/AdminServices/Delete?id=@service.Id">Изтрии</a></td>
 
                     </tr>

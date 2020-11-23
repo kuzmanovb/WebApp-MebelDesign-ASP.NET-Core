@@ -8,6 +8,7 @@
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.Service;
+    using Microsoft.EntityFrameworkCore;
 
     public class ServicesService : IServicesService
     {
@@ -84,28 +85,20 @@
 
         public async Task<ServiceInputModel> GetServiceById(int id)
         {
-            //var allServices = this.dbService.All().ToList();
+            var currentServices = await this.dbService.AllWithDeleted()
+                .Where(s => s.Id == id)
+                .Select(s => new ServiceInputModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Description = s.Description,
+                    ImagePath = s.HeadImage.FilePath,
+                    DocumentId = s.DocumentId,
+                    DocumentName = s.Document.Name,
+                })
+                .FirstOrDefaultAsync();
 
-            //var allServicesView = new List<ServiceViewModel>();
-
-            //foreach (var service in allServices)
-            //{
-            //    var decriptionList = service.Description.Split(new char[] { '.', '-' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            //    var newServiceViewModel = new ServiceViewModel
-            //    {
-            //        Name = service.Name,
-            //        Description = decriptionList,
-            //        HeadImageId = service.HeadImageId,
-            //        DocumentId = service.DocumentId,
-            //    };
-
-            //    allServicesView.Add(newServiceViewModel);
-            //}
-
-            //return allServicesView;
-
-            throw new System.NotImplementedException();
+            return currentServices;
         }
 
         public async Task<int> CreateService(ServiceInputModel input)

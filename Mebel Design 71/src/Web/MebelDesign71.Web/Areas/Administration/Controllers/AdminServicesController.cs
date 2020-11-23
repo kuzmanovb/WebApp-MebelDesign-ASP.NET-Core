@@ -49,11 +49,11 @@
             return this.RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> UpdateService(int id)
+        public IActionResult UpdateService(int id)
         {
-            var currentProject = await this.servicesService.Get(id);
+            //var currentProject = await this.servicesService.Get(id);
 
-            return this.View(currentProject);
+            return this.View();
         }
 
         [HttpPost]
