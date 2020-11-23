@@ -25,6 +25,7 @@
             var allServices = this.dbService.All()
                 .Select(s => new ServiceInputModel
                 {
+                    Id = s.Id,
                     Name = s.Name,
                     Description = s.Description,
                     ImagePath = RenameFilePath(s.HeadImage.FilePath),
@@ -42,12 +43,13 @@
             var allServices = this.dbService.AllWithDeleted()
                .Select(s => new ServiceInputModel
                {
+                   Id = s.Id,
                    Name = s.Name,
                    Description = s.Description,
                    ImagePath = RenameFilePath(s.HeadImage.FilePath),
                    DocumentId = s.DocumentId,
                    DocumentName = s.Document.Name,
-                   IsDeleted = s.IsDeleted,
+                   IsDeleted = s.IsDeleted == false ? "ДА" : "НЕ",
                })
                .ToList();
 
