@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using MebelDesign71.Data.Models;
     using MebelDesign71.Web.ViewModels.Files;
     using MebelDesign71.Web.ViewModels.Information;
     using Microsoft.AspNetCore.Http;
@@ -11,7 +11,7 @@
     {
         Task<string> UploadToFileSystem(IFormFile files, string folderInWwwRoot, string description = null);
 
-        Task<PropertiesToDownloadViewModel> PropertiesToDownloadFileFromFileSystem(string id);
+        Task<FileOnFileSystem> GetFileByIdFromFileSystem(string id);
 
         Task<bool> DeleteFileFromFileSystem(string id);
     }

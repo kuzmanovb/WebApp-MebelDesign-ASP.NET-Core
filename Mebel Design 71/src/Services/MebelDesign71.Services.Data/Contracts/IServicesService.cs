@@ -7,13 +7,13 @@
 
     public interface IServicesService
     {
-        IEnumerable<ServiceViewModel> GetAllService();
+        IEnumerable<ServiceInputModel> GetAllService();
 
-        IEnumerable<ServiceViewModel> GetAllServiceWithDeleted();
+        IEnumerable<ServiceInputModel> GetAllServiceWithDeleted();
 
-        Task<ServiceInputModel> GetServiceById(int id);
+        Task<ServiceViewModel> GetServiceByIdToView(int id);
 
-        Task<int> Createservice(ServiceInputModel input);
+        Task<int> CreateService(ServiceInputModel input);
 
         Task UpdateService(ServiceInputModel input);
 

@@ -8,7 +8,6 @@
 
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
-    using MebelDesign71.Web.ViewModels.Files;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
@@ -21,60 +20,14 @@
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IHostingEnvironment environment;
 
-        public FilesService( IRepository<FileOnFileSystem> dbFileOnSystem, IHttpContextAccessor httpContextAccessor, IHostingEnvironment environment)
+        public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem, IHttpContextAccessor httpContextAccessor, IHostingEnvironment environment)
         {
             this.dbFileOnSystem = dbFileOnSystem;
             this.httpContextAccessor = httpContextAccessor;
             this.environment = environment;
         }
 
-        public async Task<bool> DeleteFileFromFileSystem(string id)
-        {
-            var file = await this.dbFileOnSystem.All().Where(x => x.Id == id).FirstOrDefaultAsync();
 
-            if (file == null)
-            {
-                return false;
-            }
-
-            if (File.Exists(file.FilePath))
-            {
-                File.Delete(file.FilePath);
-            }
-
-            this.dbFileOnSystem.Delete(file);
-            await this.dbFileOnSystem.SaveChangesAsync();
-
-            return true;
-        }
-
-        public async Task<PropertiesToDownloadViewModel> PropertiesToDownloadFileFromFileSystem(string id)
-        {
-            var file = await this.dbFileOnSystem.All().Where(x => x.Id == id).FirstOrDefaultAsync();
-
-            if (file == null)
-            {
-                return null;
-            }
-
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(file.FilePath, FileMode.Open))
-            {
-                await stream.CopyToAsync(memory);
-            }
-
-            memory.Position = 0;
-
-            var fileToDownloadProperties = new PropertiesToDownloadViewModel
-            {
-                File = memory.ToArray(),
-                Type = file.FileType,
-                Name = file.Name,
-                Extension = file.Extension,
-            };
-
-            return fileToDownloadProperties;
-        }
 
         public async Task<string> UploadToFileSystem(IFormFile file, string folderInWwwRoot, string description = null)
         {
@@ -122,5 +75,38 @@
 
             return EmptyString;
         }
+
+        public async Task<FileOnFileSystem> GetFileByIdFromFileSystem(string id)
+        {
+            var file = await this.dbFileOnSystem.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (file == null)
+            {
+                return null;
+            }
+
+            return file;
+        }
+
+        public async Task<bool> DeleteFileFromFileSystem(string id)
+        {
+            var file = await this.dbFileOnSystem.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (file == null)
+            {
+                return false;
+            }
+
+            if (File.Exists(file.FilePath))
+            {
+                File.Delete(file.FilePath);
+            }
+
+            this.dbFileOnSystem.Delete(file);
+            await this.dbFileOnSystem.SaveChangesAsync();
+
+            return true;
+        }
+
     }
 }
