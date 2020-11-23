@@ -1,0 +1,46 @@
+﻿@model MebelDesign71.Web.ViewModels.Service.ServiceViewModel
+@{ ViewData["Title"] = "CurrentProject";}
+
+<div class="intro-section site-blocks-cover innerpage" style="background-image: url(@Model.ImagePath);">
+    <div class="container">
+        <div class="row align-items-center text-center border">
+            <div class="col-lg-12 mt-5" data-aos="fade-up">
+                <h1 class="text-uppercase">@Model.Name</h1>
+                <p class="text-white text-center">
+                    <a href="/Services">Услуги</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+
+        <section class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="blog-content text-dark">
+                        <p class="lead">@Model.Name</p>
+
+                        @foreach (var item in Model.Description)
+                        {
+                            <p>@item</p>
+                        }
+
+                        @if (Model.DocumentId != null)
+                        {
+                            <a class="btn btn-primary btn-xs" asp-controller="Services" asp-action="DownloadDocument" asp-route-id="@Model.DocumentId"> @Model.DocumentName </a>
+                        }
+
+                        <div class=" pt-3 mt-4">
+                            <p>Към: <a href="/Services">Всички услуги</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>

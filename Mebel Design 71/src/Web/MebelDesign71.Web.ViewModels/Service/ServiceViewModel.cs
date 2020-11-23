@@ -6,9 +6,13 @@
     {
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public ICollection<string> Description { get; set; }
+
+        public string ImagePath { get; set; }
 
         public string HeadImageId { get; set; }
+
+        public string DocumentName { get; set; }
 
         public string DocumentId { get; set; }
     }

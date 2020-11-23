@@ -1,5 +1,6 @@
 ﻿namespace MebelDesign71.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -64,31 +65,15 @@
                 .Select(s => new ServiceViewModel
                 {
                     Name = s.Name,
-                    Description = s.Description,
+                    Description = s.Description.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToArray(),
+                    ImagePath = RenameFilePath(s.HeadImage.FilePath),
                     HeadImageId = s.HeadImageId,
                     DocumentId = s.DocumentId,
+                    DocumentName = s.Document.Name,
                 })
                 .FirstOrDefaultAsync();
 
-            //var allServicesView = new List<ServiceViewModel>();
-
-            //foreach (var service in allServices)
-            //{
-            //    var decriptionList = service.Description.Split(new char[] { '.', '-' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            //    var newServiceViewModel = new ServiceViewModel
-            //    {
-            //        Name = service.Name,
-            //        Description = decriptionList,
-            //        HeadImageId = service.HeadImageId,
-            //        DocumentId = service.DocumentId,
-            //    };
-
-            //    allServicesView.Add(newServiceViewModel);
-            //}
-
             return allServices;
-
         }
 
         public async Task<ServiceInputModel> GetServiceById(int id)
@@ -179,7 +164,6 @@
             this.dbService.Update(currentService);
             await this.dbService.SaveChangesAsync();
         }
-
 
         private static string RenameFilePath(string fullPath)
         {
