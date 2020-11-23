@@ -28,5 +28,9 @@
         public IFormFile Document { get; set; }
 
         public string ImagePath { get; set; }
+
+        public string DocumentId { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
