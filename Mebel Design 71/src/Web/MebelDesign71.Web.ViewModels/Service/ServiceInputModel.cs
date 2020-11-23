@@ -31,6 +31,8 @@
 
         public string DocumentId { get; set; }
 
+        public string DocumentName { get; set; }
+
         public bool IsDeleted { get; set; }
     }
 }
