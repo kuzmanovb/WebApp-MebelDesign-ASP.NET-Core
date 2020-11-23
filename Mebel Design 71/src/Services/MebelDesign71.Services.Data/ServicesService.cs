@@ -56,7 +56,33 @@
             return allServices;
         }
 
-        public async Task<ServiceViewModel> GetServiceByIdToView(int id)
+        public async Task<ServiceViewModel> GetServiceByIdForView(int id)
+        {
+            //var allServices = this.dbService.All().ToList();
+
+            //var allServicesView = new List<ServiceViewModel>();
+
+            //foreach (var service in allServices)
+            //{
+            //    var decriptionList = service.Description.Split(new char[] { '.', '-' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            //    var newServiceViewModel = new ServiceViewModel
+            //    {
+            //        Name = service.Name,
+            //        Description = decriptionList,
+            //        HeadImageId = service.HeadImageId,
+            //        DocumentId = service.DocumentId,
+            //    };
+
+            //    allServicesView.Add(newServiceViewModel);
+            //}
+
+            //return allServicesView;
+
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<ServiceInputModel> GetServiceById(int id)
         {
             //var allServices = this.dbService.All().ToList();
 

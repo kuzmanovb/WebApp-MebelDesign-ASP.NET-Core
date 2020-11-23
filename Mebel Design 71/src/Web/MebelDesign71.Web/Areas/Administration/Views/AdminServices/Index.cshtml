@@ -1,4 +1,7 @@
-﻿<div class="content-wrapper">
+﻿@model MebelDesign71.Web.ViewModels.Service.ServiceInputModel
+@{ ViewData["Title"] = "All Services"; }
+
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -36,27 +39,27 @@
                             </thead>
                             @foreach (var service in ViewData["AllService"] as IList<MebelDesign71.Web.ViewModels.Service.ServiceInputModel>)
                             {
-                               <tbody>
-                                   <tr>
-                                       <td>@service.Id</td>
-                                       <td>@service.Name</td>
-                                       <td><textarea cols="40" rows="6">@service.Description</textarea></td>
-                                       <td><img src="@service.ImagePath" width=180 height=120 asp-append-version="true" /></td>
-                                       @if (service.DocumentId != null)
-                                       {
-                                           <td><a type="button" class="btn btn-success btn-xs" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@service.DocumentId" />@service.DocumentName</td>
-                                       }
-                                       else
-                                       {
-                                           <td></td>
-                                       }
-                                       <td>@service.IsDeleted</td>
-                                       <td><a class='btn btn-warning btn-xs' href="/Administration/AdminServices/ChangeIsDeleted?id=@service.Id">Ативирай/Деактивирай</a></td>
-                                       <td><a class='btn btn-info btn-xs' href="/Administration/AdminServices/UpdateProject?id=@service.Id">Промени</a></td>
-                                       <td><a class='btn btn-danger btn-xs' href="/Administration/AdminServices/Delete?id=@service.Id">Изтрии</a></td>
-                               
-                                   </tr>
-                               </tbody>}
+                <tbody>
+                    <tr>
+                        <td>@service.Id</td>
+                        <td>@service.Name</td>
+                        <td><textarea cols="40" rows="6">@service.Description</textarea></td>
+                        <td><img src="@service.ImagePath" width=180 height=120 asp-append-version="true" /></td>
+                        @if (service.DocumentId != null)
+                        {
+        <td><a type="button" class="btn btn-success btn-xs" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@service.DocumentId" />@service.DocumentName</td> }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td>@service.IsDeleted</td>
+                        <td><a class='btn btn-warning btn-xs' href="/Administration/AdminServices/ChangeIsDeleted?id=@service.Id">Ативирай/Деактивирай</a></td>
+                        <td><a class='btn btn-info btn-xs' href="/Administration/AdminServices/UpdateProject?id=@service.Id">Промени</a></td>
+                        <td><a class='btn btn-danger btn-xs' href="/Administration/AdminServices/Delete?id=@service.Id">Изтрии</a></td>
+
+                    </tr>
+                </tbody>
+}
                         </table>
                     </div>
                     <!-- /.box-body -->

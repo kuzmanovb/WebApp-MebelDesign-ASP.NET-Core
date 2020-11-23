@@ -11,7 +11,9 @@
 
         IEnumerable<ServiceInputModel> GetAllServiceWithDeleted();
 
-        Task<ServiceViewModel> GetServiceByIdToView(int id);
+        Task<ServiceViewModel> GetServiceByIdForView(int id);
+
+        Task<ServiceInputModel> GetServiceById(int id);
 
         Task<int> CreateService(ServiceInputModel input);
 

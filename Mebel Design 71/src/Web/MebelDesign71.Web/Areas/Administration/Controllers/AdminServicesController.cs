@@ -49,6 +49,21 @@
             return this.RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> UpdateService(int id)
+        {
+            var currentProject = await this.servicesService.Get(id);
+
+            return this.View(currentProject);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateService(ServiceInputModel input)
+        {
+            await this.servicesService.UpdateService(input);
+
+            return this.RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             var currentService = this.db.Services.FirstOrDefault(p => p.Id == id);
