@@ -59,7 +59,16 @@
 
         public async Task<ServiceViewModel> GetServiceByIdForView(int id)
         {
-            //var allServices = this.dbService.All().ToList();
+            var allServices = await this.dbService.All()
+                .Where(s => s.Id == id)
+                .Select(s => new ServiceViewModel
+                {
+                    Name = s.Name,
+                    Description = s.Description,
+                    HeadImageId = s.HeadImageId,
+                    DocumentId = s.DocumentId,
+                })
+                .FirstOrDefaultAsync();
 
             //var allServicesView = new List<ServiceViewModel>();
 
@@ -78,9 +87,8 @@
             //    allServicesView.Add(newServiceViewModel);
             //}
 
-            //return allServicesView;
+            return allServices;
 
-            throw new System.NotImplementedException();
         }
 
         public async Task<ServiceInputModel> GetServiceById(int id)

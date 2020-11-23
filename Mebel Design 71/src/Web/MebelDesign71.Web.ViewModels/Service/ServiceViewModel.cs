@@ -6,7 +6,7 @@
     {
         public string Name { get; set; }
 
-        public ICollection<string> Description { get; set; }
+        public string Description { get; set; }
 
         public string HeadImageId { get; set; }
 
