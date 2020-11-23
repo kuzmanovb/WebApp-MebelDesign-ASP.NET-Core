@@ -64,6 +64,13 @@
             return this.RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> ChangeIsDeleted(int id)
+        {
+            await this.servicesService.ChangeIsDeleteService(id);
+
+            return this.RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             var currentService = this.db.Services.FirstOrDefault(p => p.Id == id);

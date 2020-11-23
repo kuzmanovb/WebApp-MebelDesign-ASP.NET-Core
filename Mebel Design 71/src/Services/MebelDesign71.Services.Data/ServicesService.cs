@@ -157,7 +157,19 @@
 
         public async Task ChangeIsDeleteService(int id)
         {
-            throw new System.NotImplementedException();
+            var currentService = this.dbService.AllWithDeleted().Where(p => p.Id == id).FirstOrDefault();
+
+            if (currentService.IsDeleted == true)
+            {
+                currentService.IsDeleted = false;
+            }
+            else
+            {
+                currentService.IsDeleted = true;
+            }
+
+            this.dbService.Update(currentService);
+            await this.dbService.SaveChangesAsync();
         }
 
 
