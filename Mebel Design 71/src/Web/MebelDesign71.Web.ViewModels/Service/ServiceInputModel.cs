@@ -33,6 +33,6 @@
 
         public string DocumentName { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public string IsDeleted { get; set; }
     }
 }
