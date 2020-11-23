@@ -92,7 +92,7 @@
                     Id = s.Id,
                     Name = s.Name,
                     Description = s.Description,
-                    ImagePath = s.HeadImage.FilePath,
+                    ImagePath = RenameFilePath(s.HeadImage.FilePath),
                     DocumentId = s.DocumentId,
                     DocumentName = s.Document.Name,
                 })
@@ -127,7 +127,32 @@
 
         public async Task UpdateService(ServiceInputModel input)
         {
-            throw new System.NotImplementedException();
+            var currentService = this.dbService.All().FirstOrDefault(s => s.Id == input.Id);
+
+            if (input.HeadImage != null)
+            {
+                var headImageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\serviceImages", "Service Hade Image");
+                currentService.HeadImageId = headImageId;
+            }
+
+            if (input.Document != null)
+            {
+                var documentId = await this.filesService.UploadToFileSystem(input.Document, "serviceDocuments", "Service " + input.Name + "document");
+                currentService.DocumentId = documentId;
+            }
+
+            if (currentService.Name != input.Name)
+            {
+                currentService.Name = input.Name;
+            }
+
+            if (currentService.Description != input.Description)
+            {
+                currentService.Description = input.Description;
+            }
+
+            this.dbService.Update(currentService);
+            await this.dbService.SaveChangesAsync();
         }
 
         public async Task ChangeIsDeleteService(int id)

@@ -1,5 +1,5 @@
 ﻿@model MebelDesign71.Web.ViewModels.Service.ServiceInputModel
-@{this.ViewData["Title"] = "Create Service"; } 
+@{this.ViewData["Title"] = "Create Service"; }
 
 <div class="content-wrapper">
     <!-- Main content -->
@@ -12,7 +12,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form asp-area="Administration" asp-controller="Adminservice" asp-action="Updateservice" metod="post" enctype="multipart/form-data">
+                    <form asp-area="Administration" asp-controller="AdminServices" asp-action="UpdateService" metod="post" enctype="multipart/form-data">
                         <div class="box-body">
                             <input type="hidden" asp-for="Id" />
                             <div class="form-group">
@@ -25,13 +25,25 @@
                                 <textarea cols="40" rows="6" asp-for="Description" class="form-control" placeholder="Въведете описание на проекта "></textarea>
                                 <span asp-validation-for="Description"></span>
                             </div>
-                            @*<img src="@Model.ImagePath" width=180 height=120 asp-append-version="true" />*@
+                            <img src="@Model.ImagePath" width=180 height=120 asp-append-version="true" />
                             <div class="form-group">
                                 <label asp-for="HeadImage"></label>
                                 <input asp-for="HeadImage" />
                                 <span asp-validation-for="HeadImage" class="text-danger"></span>
                                 <p class="text-danger text-uppercase">Добавете снимка ако искате да промените тази снимка</p>
                             </div>
+                            @if (Model.DocumentId != null)
+                            {
+                                <div class="form-group">
+                                    <h4 class="text-black text-uppercase">Документ към услугата</h4>
+                                    <a class="btn btn-warning btn-lg" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@Model.DocumentId">@Model.DocumentName</a>
+                                    <p></p>
+                                    <input asp-for="Document" />
+                                    <span asp-validation-for="Document" class="text-danger"></span>
+                                    <p class="text-danger text-uppercase">Прикачeте файл за да промените съществуващия документ</p>
+                                </div>
+                            }
+
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
