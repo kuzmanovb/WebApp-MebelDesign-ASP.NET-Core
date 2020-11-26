@@ -11,7 +11,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string UsrId { get; set; }
+        public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }
 

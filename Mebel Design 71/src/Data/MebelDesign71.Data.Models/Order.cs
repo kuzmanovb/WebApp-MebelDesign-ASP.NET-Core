@@ -21,6 +21,8 @@
 
         public decimal? Price { get; set; }
 
+        public string Description { get; set; }
+
         public Progress Progress { get; set; } = Progress.Accepted;
 
         public ICollection<UserDocument> Documents { get; set; }
