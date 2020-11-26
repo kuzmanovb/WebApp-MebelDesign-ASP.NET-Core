@@ -1,0 +1,82 @@
+﻿
+@{ ViewData["Title"] = "Order"; }
+
+<div class="site-section">
+    <div class="container">
+
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+
+               <a asp-controller="Orders" asp-action="OrderForm" class="btn btn-outline-primary btn-block margin-bottom mt-5" >Направи поръчка</a>
+             
+            </section>
+
+            <!-- Main content -->
+            <section class="content mt-5">
+                <div class="row">
+                </div>
+              
+                    <h4 class="active">История на поръчките</h4>
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <!-- /.box-header -->
+                        <div class="box-body no-padding">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th></th>
+                                        <th>Вид услуга</th>
+                                        <th>Статус</th>
+                                        <th>Дата на поръчката</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td class="mailbox-name"><a href="@Url.Action("ReadMail", "Mailbox")">Детайли</a></td>
+                                        <td class="mailbox-subject">
+                                            Trying to find a solution to this problem...
+                                        </td>
+                                        <td>Обработвасе</td>
+                                        <td class="mailbox-date">@DateTime.UtcNow.ToShortDateString()</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td class="mailbox-name"><a href="@Url.Action("ReadMail", "Mailbox")">Детайли</a></td>
+                                        <td class="mailbox-subject">
+                                            Trying to find a solution to this problem...
+                                        </td>
+                                        <td>Обработвасе</td>
+                                        <td class="mailbox-date">@DateTime.UtcNow.ToShortDateString()</td>
+                                    </tr>
+
+
+
+
+
+                                </tbody>
+                            </table>
+                            <!-- /.table -->
+                        </div>
+                        <!-- /.mail-box-messages -->
+                    </div>
+                </div>
+                <!-- /. box -->
+            </section>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <!-- /.content -->
+</div>
+</div>
+</div>
+
+
+
+

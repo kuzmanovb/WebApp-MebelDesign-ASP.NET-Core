@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class ProjectsController : Controller
+    public class ProjectsController : BaseController
     {
         private readonly IProjectsService projectsService;
         private readonly IProjectsGalleryService projectsGalleryService;
