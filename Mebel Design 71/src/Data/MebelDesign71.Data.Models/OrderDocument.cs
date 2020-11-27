@@ -4,9 +4,9 @@
 
     using MebelDesign71.Data.Common.Models;
 
-    public class UserDocument : BaseDeletableModel<string>
+    public class OrderDocument : BaseDeletableModel<string>
     {
-        public UserDocument()
+        public OrderDocument()
         {
             this.Id = Guid.NewGuid().ToString();
         }
@@ -18,6 +18,12 @@
         public string DocumentId { get; set; }
 
         public FileOnFileSystem Document { get; set; }
+
+        public string OrderId { get; set; }
+
+        public Order Order { get; set; }
+
+
 
     }
 }

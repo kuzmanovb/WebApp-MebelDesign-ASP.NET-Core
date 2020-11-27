@@ -11,7 +11,7 @@
         public Order()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Documents = new HashSet<UserDocument>();
+            this.Documents = new HashSet<OrderDocument>();
         }
 
         [Required]
@@ -25,10 +25,10 @@
 
         public Progress Progress { get; set; } = Progress.Accepted;
 
-        public ICollection<UserDocument> Documents { get; set; }
-
         public int? ServiceId { get; set; }
 
         public Service Service { get; set; }
+
+        public ICollection<OrderDocument> Documents { get; set; }
     }
 }

@@ -42,7 +42,7 @@
 
         public DbSet<Offer> Offers { get; set; }
 
-        public DbSet<UserDocument> UserDocuments { get; set; }
+        public DbSet<OrderDocument> OrderDocument { get; set; }
 
         public DbSet<FileOnFileSystem> FileOnFileSystems { get; set; }
 

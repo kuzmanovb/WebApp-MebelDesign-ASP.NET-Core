@@ -4,14 +4,16 @@ using MebelDesign71.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MebelDesign71.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201126232003_AddOrderIdToUserDocument")]
+    partial class AddOrderIdToUserDocument
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -358,45 +360,6 @@ namespace MebelDesign71.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("MebelDesign71.Data.Models.OrderDocument", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DocumentId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DocumentId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("OrderDocument");
-                });
-
             modelBuilder.Entity("MebelDesign71.Data.Models.Project", b =>
                 {
                     b.Property<int>("Id")
@@ -554,6 +517,45 @@ namespace MebelDesign71.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("MebelDesign71.Data.Models.UserDocument", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DocumentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDocuments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -717,21 +719,6 @@ namespace MebelDesign71.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MebelDesign71.Data.Models.OrderDocument", b =>
-                {
-                    b.HasOne("MebelDesign71.Data.Models.FileOnFileSystem", "Document")
-                        .WithMany()
-                        .HasForeignKey("DocumentId");
-
-                    b.HasOne("MebelDesign71.Data.Models.Order", "Order")
-                        .WithMany("Documents")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("MebelDesign71.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("MebelDesign71.Data.Models.Project", b =>
                 {
                     b.HasOne("MebelDesign71.Data.Models.FileOnFileSystem", "HeadImage")
@@ -765,6 +752,21 @@ namespace MebelDesign71.Data.Migrations
                         .HasForeignKey("HeadImageId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MebelDesign71.Data.Models.UserDocument", b =>
+                {
+                    b.HasOne("MebelDesign71.Data.Models.FileOnFileSystem", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId");
+
+                    b.HasOne("MebelDesign71.Data.Models.Order", "Order")
+                        .WithMany("Documents")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("MebelDesign71.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
