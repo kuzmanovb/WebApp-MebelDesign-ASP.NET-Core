@@ -2,8 +2,9 @@
 {
     public enum Progress
     {
-        Accepted = 1,
-        Process = 2,
-        Finished = 3,
+        Wait = 1,
+        Accepted = 2,
+        Progress = 3,
+        Finish = 4,
     }
 }

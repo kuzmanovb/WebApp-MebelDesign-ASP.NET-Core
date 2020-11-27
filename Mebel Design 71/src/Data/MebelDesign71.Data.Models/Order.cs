@@ -23,7 +23,7 @@
 
         public string Description { get; set; }
 
-        public Progress Progress { get; set; } = Progress.Accepted;
+        public Progress Progress { get; set; } = Progress.Wait;
 
         public int? ServiceId { get; set; }
 

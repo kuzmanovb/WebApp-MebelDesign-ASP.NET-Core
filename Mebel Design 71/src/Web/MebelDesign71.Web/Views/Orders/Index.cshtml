@@ -8,16 +8,16 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h3 class="text-center mt-5">Тук може да видите детайли за вашата поръчка или да направите поръчка.</h3>
-               <a asp-controller="Orders" asp-action="OrderForm" class="btn btn-outline-primary btn-block margin-bottom mt-5" >Направи поръчка</a>
-             
+                <a asp-controller="Orders" asp-action="OrderForm" class="btn btn-outline-primary btn-block margin-bottom mt-5">Направи поръчка</a>
+
             </section>
 
             <!-- Main content -->
             <section class="content mt-5">
                 <div class="row">
                 </div>
-              
-                    <h4 class="active">История на поръчките</h4>
+
+                <h4 class="active">История на поръчките</h4>
                 <!-- /.col -->
                 <div class="col-md-12">
                     <div class="box box-primary">
@@ -31,31 +31,27 @@
                                         <th>Вид услуга</th>
                                         <th>Статус</th>
                                         <th>Дата на поръчката</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                    @{int count = 1;} 
+                                    @foreach (var order in this.ViewData["orders"] as IList<MebelDesign71.Web.ViewModels.Orders.OrderViewModel>)
+                                    {
                                     <tr>
-                                        <td>1</td>
+                                        <td>@count</td>
                                         <td class="mailbox-name"><a href="@Url.Action("ReadMail", "Mailbox")">Детайли</a></td>
                                         <td class="mailbox-subject">
-                                            Trying to find a solution to this problem...
+                                            @order.ServiceName
                                         </td>
-                                        <td>Обработва се</td>
-                                        <td class="mailbox-date">@DateTime.UtcNow.ToShortDateString()</td>
+                                        <td>@order.Progress</td>
+                                        <td class="mailbox-date">@order.CreatedOn.ToShortDateString()</td>
+                                        <td><a class='btn btn-danger btn-xs' href="/Orders/DeletedOrder?id=@order.OrderId">Изтрии</a></td>
                                     </tr>
 
-                                    <tr>
-                                        <td>1</td>
-                                        <td class="mailbox-name"><a href="@Url.Action("ReadMail", "Mailbox")">Детайли</a></td>
-                                        <td class="mailbox-subject">
-                                            Trying to find a solution to this problem...
-                                        </td>
-                                        <td>Обработва се</td>
-                                        <td class="mailbox-date">@DateTime.UtcNow.ToShortDateString()</td>
-                                    </tr>
-
-
+                                        count++;
+                                    }
 
 
 

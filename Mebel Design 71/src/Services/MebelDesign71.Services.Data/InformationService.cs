@@ -103,7 +103,6 @@
 
             if (getIndexStartWwwRoot >= 0)
             {
-
                 var pathForView = replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
                 return pathForView;
             }

@@ -1,5 +1,7 @@
 ﻿namespace MebelDesign71.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data.Common.Repositories;
@@ -43,25 +45,99 @@
             {
                 ServiceId = input.ServiceId,
                 Description = input.Description,
+                UserId = input.UserId,
             };
 
             await this.dbOrder.AddAsync(newOrder);
             await this.dbOrder.SaveChangesAsync();
 
-            var fileId = await this.filesService.UploadToFileSystem(input.Document, "documents\\service", "Service Document");
-            var newUserDocument = new OrderDocument
+            foreach (var document in input.Documents)
             {
-                UserId = input.UserId,
-                DocumentId = fileId,
-                OrderId = newOrder.Id,
-            };
-
-            await this.dbOrderDocument.AddAsync(newUserDocument);
-            await this.dbOrderDocument.SaveChangesAsync();
+                await this.AddDocumentToOrder(document, newOrder.Id, input.UserId);
+            }
 
             return newOrder.Id;
         }
 
+        public ICollection<OrderViewModel> GetOrdersByUserId(string userId)
+        {
+            var allOrdersToUser = this.dbOrder.All()
+                .Where(o => o.UserId == userId)
+                .OrderByDescending(o => o.CreatedOn)
+                .Select(o => new OrderViewModel
+                {
+                    OrderId = o.Id,
+                    UserId = o.UserId,
+                    Price = o.Price,
+                    Description = o.Description,
+                    CreatedOn = o.CreatedOn,
+                    Progress = BgNameProgress(o.Progress),
+                    ServiceId = o.ServiceId ?? default(int),
+                    ServiceName = o.Service.Name,
+                    DocumentsPathToFile = o.Documents.Select(d => RenameFilePath(d.Document.FilePath)).ToList(),
+                }).ToList();
+
+            return allOrdersToUser;
+        }
+
+        public async Task DeletedOrder(string orderId)
+        {
+            var curentOrder = this.dbOrder.All().Where(o => o.Id == orderId).FirstOrDefault();
+
+            var documentsToOrder = this.dbOrderDocument.All().Where(od => od.OrderId == curentOrder.Id).ToArray();
+
+            foreach (var od in documentsToOrder)
+            {
+                await this.filesService.DeleteFileFromFileSystem(od.DocumentId);
+                this.dbOrderDocument.HardDelete(od);
+            }
+
+            this.dbOrder.HardDelete(curentOrder);
+
+            await this.dbOrderDocument.SaveChangesAsync();
+            await this.dbOrder.SaveChangesAsync();
+        }
+
+
+
+        private static string RenameFilePath(string fullPath)
+        {
+            var oldString = "\\";
+            var newString = "/";
+            var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
+
+            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
+            var lengthWwwroot = "wwwroot".Length;
+
+            if (getIndexStartWwwRoot >= 0)
+            {
+
+                var pathForView = replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
+                return pathForView;
+            }
+
+            return replaceSlashInFullPath;
+        }
+
+        private static string BgNameProgress(Progress progress)
+        {
+            if (progress == Progress.Wait)
+            {
+                return "Чакаща";
+            }
+            else if (progress == Progress.Accepted)
+            {
+                return "Приета";
+            }
+            else if (progress == Progress.Progress)
+            {
+                return "Обработва се";
+            }
+            else
+            {
+                return "Завършена";
+            }
+        }
 
     }
 }

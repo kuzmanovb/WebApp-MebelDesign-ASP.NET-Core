@@ -29,9 +29,9 @@
             </div>
 
             <div class="form-group">
-                <p class="text-black-50">Прикачи файл</p>
-                <input class="btn btn-primary" asp-for="Document" />
-                <span asp-validation-for="Document" class="text-danger"></span>
+                <p class="text-black-50">Може да прикачи един или няколко файлове</p>
+                <input class="btn btn-primary" asp-for="Documents" multiple="multiple" />
+                <span asp-validation-for="Documents" class="text-danger"></span>
             </div>
             <div class="row m-5 justify-content-center">
                 <div class="box-footer">
