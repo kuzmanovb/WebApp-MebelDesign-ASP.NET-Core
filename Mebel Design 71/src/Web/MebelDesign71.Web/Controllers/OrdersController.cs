@@ -2,8 +2,10 @@
 {
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.Orders;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class OrdersController : BaseController
     {
         private readonly IServicesService servicesService;
@@ -28,8 +30,16 @@
         [HttpPost]
         public IActionResult OrderForm(OrderInputModel input)
         {
-            this.ViewData["services"] = this.servicesService.GetAllService();
-            return this.View();
+
+            if (!this.ModelState.IsValid)
+            {
+                this.ViewData["services"] = this.servicesService.GetAllService();
+                return this.View(input);
+            }
+
+
+
+            return this.RedirectToAction("Index");
         }
     }
 }
