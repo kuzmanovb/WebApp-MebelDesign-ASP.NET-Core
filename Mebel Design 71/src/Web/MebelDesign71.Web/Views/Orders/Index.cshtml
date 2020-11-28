@@ -17,7 +17,7 @@
                 <div class="row">
                 </div>
 
-                <h4 class="active">История на поръчките</h4>
+                <h4 class="active">История на поръчките <small class="font-italic"> &nbsp &nbsp &nbsp може да отмените поръчка докато нейният статус е "Чакаща"</small></h4>
                 <!-- /.col -->
                 <div class="col-md-12">
                     <div class="box box-primary">
@@ -31,7 +31,7 @@
                                         <th>Вид услуга</th>
                                         <th>Статус</th>
                                         <th>Дата на поръчката</th>
-                                        <th></th>
+                                        <th>Отмени</th>
                                     </tr>
                                 </thead>
 
@@ -41,13 +41,16 @@
                                     {
                                     <tr>
                                         <td>@count</td>
-                                        <td class="mailbox-name"><a href="@Url.Action("ReadMail", "Mailbox")">Детайли</a></td>
+                                        <td class="mailbox-name"><a href="/Orders/Details?id=@order.OrderId">Детайли</a></td>
                                         <td class="mailbox-subject">
                                             @order.ServiceName
                                         </td>
                                         <td>@order.Progress</td>
                                         <td class="mailbox-date">@order.CreatedOn.ToShortDateString()</td>
-                                        <td><a class='btn btn-danger btn-xs' href="/Orders/DeletedOrder?id=@order.OrderId">Изтрии</a></td>
+                                        @if (order.Progress == "Чакаща")
+                                        {
+                                            <td><a class='btn btn-danger btn-xs' href="/Orders/DeletedOrder?id=@order.OrderId">Отмени</a></td>
+                                        }
                                     </tr>
 
                                         count++;

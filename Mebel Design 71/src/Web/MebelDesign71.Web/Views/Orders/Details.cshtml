@@ -1,0 +1,57 @@
+﻿@model MebelDesign71.Web.ViewModels.Orders.OrderViewModel
+@{ ViewData["Title"] = "Details"; }
+
+<div class="site-section">
+    <div class="container">
+
+        <div class="table-title m-5">
+            <div class="row">
+                <div class="col-sm-12 text-center"><h2>Детайли на поръчката</h2></div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Вид услуга</th>
+                    <th>@Model.ServiceName</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Дата на поръчката</td>
+                    <td>@Model.CreatedOn.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <td>Статус</td>
+                    <td>@Model.Progress</td>
+                </tr>
+                <tr>
+                    <td>Забележка към поръчката</td>
+                    <td>@Model.Description</td>
+                </tr>
+                <tr>
+                    <td>Цена</td>
+                    @if (Model.Price == null)
+                    {
+                        <td>След прием на поръчката и изчисляване на материалите и труда ще бъде публикувана цена</td>
+                    }
+                    else
+                    {
+                        <td>@Model.Price</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Прикачени файлове</td>
+                    <td>
+                        @foreach (var document in Model.Documents)
+                        {
+                           <a class="btn btn-outline-primary btn-lg" asp-controller="Orders" asp-action="DownloadDocument" asp-route-id="@document.Id">@document.Name</a>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

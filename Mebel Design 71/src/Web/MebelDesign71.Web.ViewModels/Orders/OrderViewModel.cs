@@ -23,6 +23,7 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public ICollection<string> DocumentsPathToFile { get; set; }
+        public ICollection<DocumentViewModel> Documents { get; set; }
     }
+
 }

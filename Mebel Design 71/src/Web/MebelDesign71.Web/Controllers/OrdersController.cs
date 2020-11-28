@@ -1,8 +1,10 @@
 ﻿namespace MebelDesign71.Web.Controllers
 {
+    using System.IO;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data.Models;
+    using MebelDesign71.Services.Data;
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.Orders;
     using Microsoft.AspNetCore.Authorization;
@@ -14,12 +16,14 @@
     {
         private readonly IOrdersService ordersService;
         private readonly IServicesService servicesService;
+        private readonly IFilesService filesService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public OrdersController(IOrdersService ordersService, IServicesService servicesService, UserManager<ApplicationUser> userManager)
+        public OrdersController(IOrdersService ordersService, IServicesService servicesService, IFilesService filesService, UserManager<ApplicationUser> userManager)
         {
             this.ordersService = ordersService;
             this.servicesService = servicesService;
+            this.filesService = filesService;
             this.userManager = userManager;
         }
 
@@ -51,6 +55,32 @@
             return this.RedirectToAction("Index");
         }
 
+        public IActionResult Details(string id)
+        {
+            var order = this.ordersService.GetOrderById(id);
+
+            return this.View(order);
+        }
+
+        public async Task<IActionResult> DownloadDocument(string id)
+        {
+            var file = await this.filesService.GetFileByIdFromFileSystem(id);
+
+            if (file == null)
+            {
+                return null;
+            }
+
+            var memory = new MemoryStream();
+
+            using (var stream = new FileStream(file.FilePath, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+
+            memory.Position = 0;
+            return this.File(memory, file.FileType, file.Name + file.Extension);
+        }
 
         public async Task<IActionResult> DeletedOrder(string id)
         {

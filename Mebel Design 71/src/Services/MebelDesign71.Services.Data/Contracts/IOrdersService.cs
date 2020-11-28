@@ -14,6 +14,8 @@
 
         ICollection<OrderViewModel> GetOrdersByUserId(string userId);
 
+        OrderViewModel GetOrderById(string orderId);
+
         Task DeletedOrder(string orderId);
 
     }

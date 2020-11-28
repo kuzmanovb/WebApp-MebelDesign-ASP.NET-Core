@@ -74,10 +74,30 @@
                     Progress = BgNameProgress(o.Progress),
                     ServiceId = o.ServiceId ?? default(int),
                     ServiceName = o.Service.Name,
-                    DocumentsPathToFile = o.Documents.Select(d => RenameFilePath(d.Document.FilePath)).ToList(),
+                    Documents = o.Documents.Select(d => new DocumentViewModel { Id = d.Document.Id, Name = d.Document.Name }).ToList(),
                 }).ToList();
 
             return allOrdersToUser;
+        }
+
+        public OrderViewModel GetOrderById(string orderId)
+        {
+            var currentOrder= this.dbOrder.All()
+                 .Where(o => o.Id == orderId)
+                 .Select(o => new OrderViewModel
+                 {
+                     OrderId = o.Id,
+                     UserId = o.UserId,
+                     Price = o.Price,
+                     Description = o.Description,
+                     CreatedOn = o.CreatedOn,
+                     Progress = BgNameProgress(o.Progress),
+                     ServiceId = o.ServiceId ?? default(int),
+                     ServiceName = o.Service.Name,
+                     Documents = o.Documents.Select(d => new DocumentViewModel { Id = d.Document.Id, Name = d.Document.Name }).ToList(),
+                 }).FirstOrDefault();
+
+            return currentOrder;
         }
 
         public async Task DeletedOrder(string orderId)
@@ -96,27 +116,6 @@
 
             await this.dbOrderDocument.SaveChangesAsync();
             await this.dbOrder.SaveChangesAsync();
-        }
-
-
-
-        private static string RenameFilePath(string fullPath)
-        {
-            var oldString = "\\";
-            var newString = "/";
-            var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
-
-            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
-            var lengthWwwroot = "wwwroot".Length;
-
-            if (getIndexStartWwwRoot >= 0)
-            {
-
-                var pathForView = replaceSlashInFullPath.Substring(getIndexStartWwwRoot + lengthWwwroot);
-                return pathForView;
-            }
-
-            return replaceSlashInFullPath;
         }
 
         private static string BgNameProgress(Progress progress)
@@ -138,6 +137,5 @@
                 return "Завършена";
             }
         }
-
     }
 }
