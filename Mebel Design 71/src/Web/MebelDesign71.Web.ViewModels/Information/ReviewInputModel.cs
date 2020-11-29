@@ -13,7 +13,7 @@
         public string Name { get; set; }
 
         [Display(Name = "Профилна снимка")]
-        [ImageSizeValidatorForReiewAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
+        [FileSizeValidationAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
         [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" }, ErrorMessage = "Снимката трябва да бъде в jpg, jpeg или png фомат.")]
         public IFormFile ImageFile { get; set; }
 

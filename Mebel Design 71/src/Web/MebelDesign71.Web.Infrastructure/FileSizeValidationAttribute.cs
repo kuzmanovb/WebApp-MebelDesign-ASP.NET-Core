@@ -6,9 +6,9 @@
     using Microsoft.AspNetCore.Http;
 
     [AttributeUsage(validOn: AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public class ImageSizeValidatorForReiewAttribute : ValidationAttribute
+    public class FileSizeValidationAttribute : ValidationAttribute
     {
-        public ImageSizeValidatorForReiewAttribute(long sizeInBytes)
+        public FileSizeValidationAttribute(long sizeInBytes)
         {
             this.SizeInBytes = sizeInBytes;
         }
