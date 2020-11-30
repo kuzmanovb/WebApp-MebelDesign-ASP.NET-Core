@@ -1,4 +1,6 @@
-﻿
+﻿@using MebelDesign71.Data.Models
+@using MebelDesign71.Web.Infrastructure
+@using System.ComponentModel.DataAnnotations;
 @{ ViewData["Title"] = "Order"; }
 
 <div class="site-section">
@@ -27,33 +29,30 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Номер</th>
                                         <th></th>
                                         <th>Вид услуга</th>
                                         <th>Статус</th>
                                         <th>Дата на поръчката</th>
-                                        <th>Отмени</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @{int count = 1;} 
+                                    @{int count = 1;}
                                     @foreach (var order in this.ViewData["orders"] as IList<MebelDesign71.Web.ViewModels.Orders.OrderViewModel>)
                                     {
-                                    <tr>
-                                        <td>@count</td>
-                                        <td class="mailbox-name"><a href="/Orders/Details?id=@order.OrderId">Детайли</a></td>
-                                        <td class="mailbox-subject">
-                                            @order.ServiceName
-                                        </td>
-                                        <td>@order.Progress</td>
-                                        <td class="mailbox-date">@order.CreatedOn.ToShortDateString()</td>
-                                        @if (order.Progress == "Чакаща")
-                                        {
-                                            <td><a class='btn btn-danger btn-xs' href="/Orders/DeletedOrder?id=@order.OrderId">Отмени</a></td>
-                                        }
-                                    </tr>
-
-                                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@order.Number</td>
+                            <td><a href="/Orders/Details?id=@order.OrderId">Детайли</a></td>
+                            <td>@order.ServiceName</td>
+                            <td>@order.ProgressDisplay</td>
+                            <td>@order.CreatedOn</td>
+                            @if (order.Progress == MebelDesign71.Data.Models.Progress.Wait)
+                            {
+                                <td><a class='btn btn-outline-danger btn-sm' href="/Orders/DeletedOrder?id=@order.OrderId">Отмени</a></td>}
+                        </tr>count++;
                                     }
 
 

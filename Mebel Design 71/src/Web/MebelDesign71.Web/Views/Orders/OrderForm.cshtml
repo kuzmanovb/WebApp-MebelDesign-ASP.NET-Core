@@ -10,15 +10,16 @@
     <div class="container">
 
         <form asp-controller="Orders" asp-action="OrderForm" method="post" enctype="multipart/form-data">
-            <input type="hidden" asp-for="UserId" value=@UserManager.GetUserId(User)/>
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <input type="hidden" asp-for="UserId" value=@UserManager.GetUserId(User) />
             <div class="form-group">
                 <label asp-for="ServiceId">Избери услуга</label>
                 <select class="form-control" name="ServiceId">
                     <option selected>Услуги...</option>
                     @foreach (var item in this.ViewData["services"] as IList<MebelDesign71.Web.ViewModels.Service.ServiceInputModel>)
                     {
-        <option value="@item.Id">@item.Name</option>
-}
+                       <option value="@item.Id">@item.Name</option>
+                    }
                 </select>
             </div>
 
@@ -38,7 +39,7 @@
                     <button type="submit" value="Потвърди" class="btn btn-outline-success">Потвърди</button>
                 </div>
                 <div class="box-footer ml-5">
-                    <a asp-area="" asp-controller="Orders" asp-action="Index" type="button" value="Отхвърли" class="btn btn-outline-danger">Отхвърли</a>
+                    <a asp-controller="Orders" asp-action="Index" type="button" value="Отхвърли" class="btn btn-outline-danger">Отхвърли</a>
                 </div>
             </div>
 

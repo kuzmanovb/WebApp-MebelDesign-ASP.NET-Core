@@ -47,6 +47,7 @@
             if (!this.ModelState.IsValid)
             {
                 this.ViewData["services"] = this.servicesService.GetAllService();
+                this.ModelState.AddModelError("serviceId", "Трябва да изберете услуга от падащото меню");
                 return this.View(input);
             }
 
