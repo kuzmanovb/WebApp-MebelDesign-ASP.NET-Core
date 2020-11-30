@@ -1,0 +1,74 @@
+﻿@model MebelDesign71.Web.ViewModels.Orders.OrderViewModel
+@using MebelDesign71.Data.Models
+@{ ViewData["Title"] = "Admin Orders"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Управление на поръчките
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content mt-5">
+        <div class="row">
+
+
+            <!-- /.col -->
+            <div class="col-md-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <form asp-area="Administration" asp-controller="AdminOrders" asp-action="Index" method="post" class="col-md-6 col-md-offset-0">
+                        <label>Намери всички поръчки на потребител</label>
+                        <select class="form-control" style="width: 100%;" name="Id">
+                            <option selected="selected">Изберете потребител...</option>
+                            @foreach (var user in this.ViewData["users"] as IList<MebelDesign71.Data.Models.ApplicationUser>)
+                            {
+                                    <option value=@user.Id>@user.Email</option>
+                            }
+                        </select>
+                        <div class="box-footer">
+                            <button type="submit" value="Създай" class="btn btn-primary btn-lg btn-block">Търсене </button>
+                        </div>
+                    </form>
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Клиент</th>
+                                <th></th>
+                                <th>Вид услуга</th>
+                                <th>Статус</th>
+                                <th>Дата на поръчката</th>
+                                <th>Промени</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int count = 1;}
+                            @foreach (var order in this.ViewData["orders"] as IList<MebelDesign71.Web.ViewModels.Orders.OrderViewModel>)
+                            {
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@order.UserEmail</td>
+                                    <td><a class='btn btn-success btn-xs' href="/Orders/Details?id=@order.OrderId">Детайли</a></td>
+                                    <td>@order.ServiceName</td>
+                                    <td>@order.ProgressDisplay</td>
+                                    <td>@order.CreatedOn</td>
+                                    <td><a class='btn btn-danger btn-xs' href="AdminOrders/UpdateOrder?id=@order.OrderId">Промени</a></td>}
+                                </tr>
+                                     count++;
+                            }
+
+                        </tbody>
+                    </table>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
