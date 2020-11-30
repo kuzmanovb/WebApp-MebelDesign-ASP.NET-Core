@@ -1,5 +1,6 @@
 ﻿namespace MebelDesign71.Web.Controllers
 {
+    using MebelDesign71.Common;
     using MebelDesign71.Services.Data;
     using MebelDesign71.Web.ViewModels.Information;
     using Microsoft.AspNetCore.Authorization;
@@ -18,9 +19,7 @@
 
         public IActionResult AboutUs()
         {
-
             return this.View();
-
         }
 
         public async Task<IActionResult> Reviews()
@@ -53,7 +52,7 @@
             return this.RedirectToAction("ThankYou");
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> DeleteReview(string id)
         {
             if (!this.ModelState.IsValid)
