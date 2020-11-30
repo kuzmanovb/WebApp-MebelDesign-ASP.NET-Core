@@ -23,7 +23,11 @@
             var file = value as IFormFile;
             var files = value as IList<IFormFile>;
 
-            if (files.Count == 0 && file == null)
+            if (files == null)
+            {
+                isValid = true;
+            }
+            else if (files.Count == 0 && file == null)
             {
                 isValid = true;
             }
