@@ -83,7 +83,7 @@
         public async Task DeleteReview(string id)
         {
             var currentReview = this.dbReview.All().FirstOrDefault(r => r.Id == id);
-            this.dbReview.Delete(currentReview);
+            this.dbReview.HardDelete(currentReview);
             await this.dbReview.SaveChangesAsync();
 
             var profilImage = this.dbImage.All().FirstOrDefault(i => i.Id == currentReview.ImageId);
@@ -91,6 +91,8 @@
             await this.dbImage.SaveChangesAsync();
 
             await this.filesService.DeleteFileFromFileSystem(profilImage.FileId);
+
+
         }
 
         private static string RenameFilePath(string fullPath)
