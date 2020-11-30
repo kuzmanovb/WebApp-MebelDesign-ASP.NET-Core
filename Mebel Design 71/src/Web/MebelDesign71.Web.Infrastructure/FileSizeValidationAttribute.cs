@@ -1,6 +1,7 @@
 ﻿namespace MebelDesign71.Web.Infrastructure
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Http;
@@ -17,15 +18,35 @@
 
         public override bool IsValid(object value)
         {
-            bool isValid = false;
+            var isValid = false;
 
-            if (value == null)
+            var file = value as IFormFile;
+            var files = value as IList<IFormFile>;
+
+            if (files == null && file == null)
             {
                 isValid = true;
             }
-            else if (value is IFormFile file)
+
+            if (file != null)
             {
                 isValid = file.Length <= this.SizeInBytes;
+            }
+
+            if (files != null)
+            {
+                foreach (var f in files)
+                {
+                    if (file.Length > this.SizeInBytes)
+                    {
+                        isValid = false;
+                        break;
+                    }
+                    else
+                    {
+                        isValid = true;
+                    }
+                }
             }
 
             return isValid;
