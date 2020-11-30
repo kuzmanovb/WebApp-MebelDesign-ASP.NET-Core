@@ -11,7 +11,21 @@
             <section class="content-header">
                 <h3 class="text-center mt-5">Тук може да видите детайли за вашата поръчка или да направите поръчка.</h3>
                 <a asp-controller="Orders" asp-action="OrderForm" class="btn btn-outline-primary btn-block margin-bottom mt-5">Направи поръчка</a>
+            </section>
 
+            <section class="mt-5">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Сортиране
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index" asp-route-sortby="Service">По вид услуга</a>
+                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index" asp-route-sortby="ProgressUp">Статус възходящ</a>
+                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index" asp-route-sortby="ProgressDown">Статус низходящ</a>
+                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index" asp-route-sortby="DateUp">Дата възходящ</a>
+                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index" asp-route-sortby="DateDown">Дата низходяща</a>
+                </div>
+            </div>
             </section>
 
             <!-- Main content -->
@@ -19,8 +33,12 @@
                 <div class="row">
                 </div>
 
-                <h4 class="active">История на поръчките <small class="font-italic"> &nbsp &nbsp &nbsp може да отмените поръчка докато нейният статус е "Чакаща"</small></h4>
-                <!-- /.col -->
+
+
+
+                @*  <h4 class="active">История на поръчките <small class="font-italic"> &nbsp &nbsp &nbsp може да отмените поръчка докато нейният статус е "Чакаща"</small></h4>*@
+
+
                 <div class="col-md-12">
                     <div class="box box-primary">
                         <!-- /.box-header -->
@@ -33,10 +51,16 @@
                                         <th></th>
                                         <th>Вид услуга</th>
                                         <th>Статус</th>
-                                        <th>Дата на поръчката</th>
+                                        <th>Дата</th>
                                         <th></th>
                                     </tr>
                                 </thead>
+
+
+
+
+
+
 
                                 <tbody>
                                     @{int count = 1;}
@@ -51,7 +75,7 @@
                             <td>@order.CreatedOn</td>
                             @if (order.Progress == MebelDesign71.Data.Models.Progress.Wait)
                             {
-                                <td><a class='btn btn-outline-danger btn-sm' href="/Orders/DeletedOrder?id=@order.OrderId">Отмени</a></td>}
+            <td><a class='btn btn-outline-danger btn-sm' href="/Orders/DeletedOrder?id=@order.OrderId">Отмени</a></td>}
                         </tr>count++;
                                     }
 

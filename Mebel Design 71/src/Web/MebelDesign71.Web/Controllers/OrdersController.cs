@@ -1,6 +1,7 @@
 ﻿namespace MebelDesign71.Web.Controllers
 {
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data.Models;
@@ -27,11 +28,21 @@
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortby)
         {
-            this.ViewData["orders"] = this.ordersService.GetOrdersByUserId(this.userManager.GetUserId(this.User));
-            return this.View();
+            var allOrders = this.ordersService.GetOrdersByUserId(this.userManager.GetUserId(this.User)).ToList();
 
+            switch (sortby)
+            {
+                case "Service": allOrders = allOrders.OrderByDescending(o => o.ServiceId).ToList(); break;
+                case "ProgressUp": allOrders = allOrders.OrderBy(o => o.Progress).ToList(); break;
+                case "ProgressDown": allOrders = allOrders.OrderByDescending(o => o.Progress).ToList(); break;
+                case "DateUp": allOrders = allOrders.OrderBy(o => o.CreatedOn).ToList(); break;
+                case "DateDown": allOrders = allOrders.OrderByDescending(o => o.CreatedOn).ToList(); break;
+            }
+
+            this.ViewData["orders"] = allOrders;
+            return this.View();
         }
 
         public IActionResult OrderForm()
@@ -53,7 +64,7 @@
 
             await this.ordersService.AddOrder(input);
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("ThankYou");
         }
 
         public IActionResult Details(string id)
@@ -88,6 +99,11 @@
             await this.ordersService.DeletedOrder(id);
 
             return this.RedirectToAction("Index");
+        }
+
+        public IActionResult ThankYou()
+        {
+            return this.View();
         }
     }
 }
