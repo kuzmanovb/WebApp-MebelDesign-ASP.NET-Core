@@ -37,7 +37,7 @@
             {
                 foreach (var f in files)
                 {
-                    if (file.Length > this.SizeInBytes)
+                    if (f.Length > this.SizeInBytes)
                     {
                         isValid = false;
                         break;
