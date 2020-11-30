@@ -25,50 +25,53 @@
                             <option selected="selected">Изберете потребител...</option>
                             @foreach (var user in this.ViewData["users"] as IList<MebelDesign71.Data.Models.ApplicationUser>)
                             {
-                                    <option value=@user.Id>@user.Email</option>
+                                <option value=@user.Id>@user.Email</option>
                             }
                         </select>
                         <div class="box-footer">
                             <button type="submit" value="Създай" class="btn btn-primary btn-lg btn-block">Търсене </button>
                         </div>
                     </form>
-                    
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Клиент</th>
-                                <th></th>
-                                <th>Вид услуга</th>
-                                <th>Статус</th>
-                                <th>Дата на поръчката</th>
-                                <th>Промени</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{int count = 1;}
-                            @foreach (var order in this.ViewData["orders"] as IList<MebelDesign71.Web.ViewModels.Orders.OrderViewModel>)
-                            {
-                                <tr>
-                                    <td>@count</td>
-                                    <td>@order.UserEmail</td>
-                                    <td><a class='btn btn-success btn-xs' href="/Orders/Details?id=@order.OrderId">Детайли</a></td>
-                                    <td>@order.ServiceName</td>
-                                    <td>@order.ProgressDisplay</td>
-                                    <td>@order.CreatedOn</td>
-                                    <td><a class='btn btn-danger btn-xs' href="AdminOrders/UpdateOrder?id=@order.OrderId">Промени</a></td>}
-                                </tr>
-                                     count++;
-                            }
-
-                        </tbody>
-                    </table>
-                    <!-- /.box-body -->
                 </div>
-                <!-- /.box -->
             </div>
-            <!-- /.col -->
-        </div>
+
+
+                    <div class="col-md-12">
+                        <div class="box">
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Клиент</th>
+                                        <th>Вид услуга</th>
+                                        <th>Статус</th>
+                                        <th>Дата на поръчката</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{int count = 1;}
+                                    @foreach (var order in this.ViewData["orders"] as IList<MebelDesign71.Web.ViewModels.Orders.OrderViewModel>)
+                                    {
+                        <tr>
+                            <td>@count</td>
+                            <td>@order.UserEmail</td>
+                            <td>@order.ServiceName</td>
+                            <td>@order.ProgressDisplay</td>
+                            <td>@order.CreatedOn</td>
+                            <td><a class='btn btn-warning btn-xs' href="AdminOrders/UpdateOrder?id=@order.OrderId">Разгледай/Промени</a></td>}
+                        </tr>count++;
+                                    }
+
+                                </tbody>
+                            </table>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
     </section>
     <!-- /.content -->
 </div>
