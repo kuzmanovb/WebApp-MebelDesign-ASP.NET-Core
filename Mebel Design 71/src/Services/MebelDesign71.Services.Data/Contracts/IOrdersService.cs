@@ -14,9 +14,13 @@
 
         ICollection<OrderViewModel> GetOrdersByUserId(string userId);
 
+        ICollection<OrderViewModel> GetAllOrders();
+
         OrderViewModel GetOrderById(string orderId);
 
         Task DeletedOrder(string orderId);
+
+        Task UpdateOrder(OrderViewModel input);
 
     }
 }

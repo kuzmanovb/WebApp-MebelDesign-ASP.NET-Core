@@ -1,5 +1,6 @@
 ﻿namespace MebelDesign71.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -7,6 +8,7 @@
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Data.Contracts;
+    using MebelDesign71.Web.Infrastructure;
     using MebelDesign71.Web.ViewModels.Orders;
     using Microsoft.AspNetCore.Http;
 
@@ -46,6 +48,7 @@
                 ServiceId = input.ServiceId,
                 Description = input.Description,
                 UserId = input.UserId,
+                Number = DateTime.UtcNow.ToString("yMdhms"),
             };
 
             await this.dbOrder.AddAsync(newOrder);
@@ -59,6 +62,29 @@
             return newOrder.Id;
         }
 
+        public ICollection<OrderViewModel> GetAllOrders()
+        {
+            var allOrders = this.dbOrder.All()
+                 .OrderByDescending(o => o.CreatedOn)
+                 .Select(o => new OrderViewModel
+                 {
+                     OrderId = o.Id,
+                     Number = o.Number,
+                     UserId = o.UserId,
+                     UserEmail = o.User.Email,
+                     Price = o.Price,
+                     Description = o.Description,
+                     CreatedOn = o.CreatedOn.ToShortDateString(),
+                     Progress = o.Progress,
+                     ProgressDisplay = o.Progress.GetDescription<Progress>(),
+                     ServiceId = o.ServiceId ?? default(int),
+                     ServiceName = o.Service.Name,
+                     Documents = o.Documents.Select(d => new DocumentViewModel { Id = d.Document.Id, Name = d.Document.Name }).ToList(),
+                 }).ToList();
+
+            return allOrders;
+        }
+
         public ICollection<OrderViewModel> GetOrdersByUserId(string userId)
         {
             var allOrdersToUser = this.dbOrder.All()
@@ -67,11 +93,14 @@
                 .Select(o => new OrderViewModel
                 {
                     OrderId = o.Id,
+                    Number = o.Number,
                     UserId = o.UserId,
+                    UserEmail = o.User.Email,
                     Price = o.Price,
                     Description = o.Description,
-                    CreatedOn = o.CreatedOn,
-                    Progress = BgNameProgress(o.Progress),
+                    CreatedOn = o.CreatedOn.ToShortDateString(),
+                    Progress = o.Progress,
+                    ProgressDisplay = o.Progress.GetDescription<Progress>(),
                     ServiceId = o.ServiceId ?? default(int),
                     ServiceName = o.Service.Name,
                     Documents = o.Documents.Select(d => new DocumentViewModel { Id = d.Document.Id, Name = d.Document.Name }).ToList(),
@@ -82,22 +111,48 @@
 
         public OrderViewModel GetOrderById(string orderId)
         {
-            var currentOrder= this.dbOrder.All()
+            var currentOrder = this.dbOrder.All()
                  .Where(o => o.Id == orderId)
                  .Select(o => new OrderViewModel
                  {
                      OrderId = o.Id,
+                     Number = o.Number,
                      UserId = o.UserId,
+                     UserEmail = o.User.Email,
                      Price = o.Price,
                      Description = o.Description,
-                     CreatedOn = o.CreatedOn,
-                     Progress = BgNameProgress(o.Progress),
+                     CreatedOn = o.CreatedOn.ToShortDateString(),
+                     Progress = o.Progress,
+                     ProgressDisplay = o.Progress.GetDescription<Progress>(),
                      ServiceId = o.ServiceId ?? default(int),
                      ServiceName = o.Service.Name,
                      Documents = o.Documents.Select(d => new DocumentViewModel { Id = d.Document.Id, Name = d.Document.Name }).ToList(),
                  }).FirstOrDefault();
 
             return currentOrder;
+        }
+
+        public async Task UpdateOrder(OrderViewModel input)
+        {
+            var currentOrder = this.dbOrder.All().Where(o => o.Id == input.OrderId).FirstOrDefault();
+
+            if (currentOrder.Description != input.Description)
+            {
+                currentOrder.Description = input.Description;
+            }
+
+            if (currentOrder.Price != input.Price)
+            {
+                currentOrder.Price = input.Price;
+            }
+
+            if (currentOrder.Progress != input.Progress)
+            {
+                currentOrder.Progress = input.Progress;
+            }
+
+            this.dbOrder.Update(currentOrder);
+            await this.dbOrder.SaveChangesAsync();
         }
 
         public async Task DeletedOrder(string orderId)
@@ -118,24 +173,5 @@
             await this.dbOrder.SaveChangesAsync();
         }
 
-        private static string BgNameProgress(Progress progress)
-        {
-            if (progress == Progress.Wait)
-            {
-                return "Чакаща";
-            }
-            else if (progress == Progress.Accepted)
-            {
-                return "Приета";
-            }
-            else if (progress == Progress.Progress)
-            {
-                return "Обработва се";
-            }
-            else
-            {
-                return "Завършена";
-            }
-        }
     }
 }
