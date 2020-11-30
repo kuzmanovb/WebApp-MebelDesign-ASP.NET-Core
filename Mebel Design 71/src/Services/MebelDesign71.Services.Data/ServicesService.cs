@@ -101,7 +101,7 @@
 
             if (input.Document != null)
             {
-                documentId = await this.filesService.UploadToFileSystem(input.Document, "serviceDocuments", "Service " + input.Name + " document");
+                documentId = await this.filesService.UploadToFileSystem(input.Document, "documents\\service\\official", "Service " + input.Name + " document");
             }
 
             var newService = new Service
@@ -130,7 +130,7 @@
 
             if (input.Document != null)
             {
-                var documentId = await this.filesService.UploadToFileSystem(input.Document, "serviceDocuments", "Service " + input.Name + "document");
+                var documentId = await this.filesService.UploadToFileSystem(input.Document, "documents\\service\\official", "Service " + input.Name + "document");
                 currentService.DocumentId = documentId;
             }
 

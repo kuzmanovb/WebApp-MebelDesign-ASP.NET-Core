@@ -10,7 +10,7 @@
     {
         Task<string> AddOrder(OrderInputModel input);
 
-        Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId);
+        Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId, string number);
 
         ICollection<OrderViewModel> GetOrdersByUserId(string userId);
 

@@ -25,9 +25,9 @@
             this.filesService = filesService;
         }
 
-        public async Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId)
+        public async Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId, string number)
         {
-            var fileId = await this.filesService.UploadToFileSystem(document, "documents\\service", "Service Document");
+            var fileId = await this.filesService.UploadToFileSystem(document, "documents\\service\\orders" + number, "Service Document");
             var newUserDocument = new OrderDocument
             {
                 UserId = userId,
@@ -56,7 +56,7 @@
 
             foreach (var document in input.Documents)
             {
-                await this.AddDocumentToOrder(document, newOrder.Id, input.UserId);
+                await this.AddDocumentToOrder(document, newOrder.Id, input.UserId, newOrder.Number);
             }
 
             return newOrder.Id;
