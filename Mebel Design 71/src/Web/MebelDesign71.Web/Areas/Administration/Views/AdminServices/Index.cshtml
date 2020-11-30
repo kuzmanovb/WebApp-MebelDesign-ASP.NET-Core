@@ -1,4 +1,7 @@
 ﻿@model MebelDesign71.Web.ViewModels.Service.ServiceInputModel
+@using MebelDesign71.Web.ViewModels.Service
+@using MebelDesign71.Web.ViewModels.Orders
+@using System.Linq;
 @{ ViewData["Title"] = "All Services"; }
 
 <div class="content-wrapper">
@@ -37,7 +40,7 @@
 
                                 </tr>
                             </thead>
-                            @foreach (var service in ViewData["AllService"] as IList<MebelDesign71.Web.ViewModels.Service.ServiceInputModel>)
+                            @foreach (var service in ViewData["AllService"] as IList<ServiceInputModel>)
                             {
                                 <tbody>
                                     <tr>
@@ -50,12 +53,16 @@
                                              <td><a class="btn btn-success btn-xs" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@service.DocumentId" />@service.DocumentName</td> }
                                         else
                                         {
-                                            <td>Няма</td>
+                                            <td>Няма прикачен документ</td>
                                         }
                                         <td>@service.IsDeleted</td>
                                         <td><a class='btn btn-warning btn-xs' href="/Administration/AdminServices/ChangeIsDeleted?id=@service.Id">Ативирай/Деактивирай</a></td>
                                         <td><a class='btn btn-info btn-xs' href="/Administration/AdminServices/UpdateService?id=@service.Id">Промени</a></td>
-                                        <td><a class='btn btn-danger btn-xs' href="/Administration/AdminServices/Delete?id=@service.Id">Изтрии</a></td>
+                                        @{ var orders = this.ViewData["Orders"] as List<OrderViewModel>;}
+                                        @if (!orders.Any(o => o.ServiceId == service.Id))
+                                        {
+                                              <td><a class='btn btn-danger btn-xs' href="/Administration/AdminServices/Delete?id=@service.Id">Изтрии</a></td>
+                                        }
                                     </tr>
                                 </tbody>
                              }

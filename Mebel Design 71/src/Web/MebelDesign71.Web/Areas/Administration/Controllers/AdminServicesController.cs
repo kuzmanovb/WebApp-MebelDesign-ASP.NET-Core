@@ -13,20 +13,22 @@
     {
         private readonly IServicesService servicesService;
         private readonly IFilesService filesService;
-        private readonly ApplicationDbContext db;
+        private readonly IOrdersService ordersService;
 
-        public AdminServicesController(IServicesService servicesService, IFilesService filesService, ApplicationDbContext db)
+        public AdminServicesController(IServicesService servicesService, IFilesService filesService, IOrdersService ordersService)
         {
             this.servicesService = servicesService;
             this.filesService = filesService;
-            this.db = db;
+            this.ordersService = ordersService;
         }
 
         public IActionResult Index()
         {
             var allService = this.servicesService.GetAllServiceWithDeleted();
+            var orders = this.ordersService.GetAllOrders();
 
             this.ViewData["AllService"] = allService;
+            this.ViewData["Orders"] = orders;
 
             return this.View();
         }
