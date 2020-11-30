@@ -20,5 +20,7 @@
         Task UpdateService(ServiceInputModel input);
 
         Task ChangeIsDeleteService(int id);
+
+        Task Delete(int id);
     }
 }

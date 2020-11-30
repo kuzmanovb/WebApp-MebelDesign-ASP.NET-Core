@@ -165,6 +165,20 @@
             await this.dbService.SaveChangesAsync();
         }
 
+        public async Task Delete(int id)
+        {
+            var currentService = this.dbService.All().FirstOrDefault(p => p.Id == id);
+
+            this.dbService.HardDelete(currentService);
+            await this.dbService.SaveChangesAsync();
+
+            await this.filesService.DeleteFileFromFileSystem(currentService.HeadImageId);
+            if (currentService.DocumentId != null)
+            {
+                await this.filesService.DeleteFileFromFileSystem(currentService.DocumentId);
+            }
+        }
+
         private static string RenameFilePath(string fullPath)
         {
             var oldString = "\\";

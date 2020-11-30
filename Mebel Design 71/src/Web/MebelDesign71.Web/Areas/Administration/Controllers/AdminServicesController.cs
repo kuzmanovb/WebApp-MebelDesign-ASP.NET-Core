@@ -73,15 +73,7 @@
 
         public async Task<IActionResult> Delete(int id)
         {
-            var currentService = this.db.Services.FirstOrDefault(p => p.Id == id);
-            this.db.Services.Remove(currentService);
-            await this.db.SaveChangesAsync();
-
-            await this.filesService.DeleteFileFromFileSystem(currentService.HeadImageId);
-            if (currentService.DocumentId != null)
-            {
-                await this.filesService.DeleteFileFromFileSystem(currentService.DocumentId);
-            }
+            await this.servicesService.Delete(id);
 
             return this.RedirectToAction("Index");
         }
