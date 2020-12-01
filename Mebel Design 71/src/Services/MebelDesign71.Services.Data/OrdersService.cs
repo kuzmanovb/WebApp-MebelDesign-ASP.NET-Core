@@ -27,7 +27,7 @@
 
         public async Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId, string number)
         {
-            var fileId = await this.filesService.UploadToFileSystem(document, "documents\\service\\orders" + number, "Service Document");
+            var fileId = await this.filesService.UploadToFileSystem(document, "documents\\service\\orders\\" + number, "Service Document");
             var newUserDocument = new OrderDocument
             {
                 UserId = userId,
