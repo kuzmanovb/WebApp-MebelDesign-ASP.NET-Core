@@ -30,6 +30,7 @@
                               new ImageForReviewSeeder(),
                               new ReviewSeeder(),
                               new ProjectSeeder(),
+                              new GalleriesSeeder(),
                           };
 
             foreach (var seeder in seeders)
