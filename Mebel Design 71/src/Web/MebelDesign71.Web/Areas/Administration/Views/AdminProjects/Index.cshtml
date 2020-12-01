@@ -1,4 +1,7 @@
 ﻿@model MebelDesign71.Web.ViewModels.Projects.ProjectViewModel
+@using MebelDesign71.Web.ViewModels.ProjectsImage
+@using System.Linq;
+@inject MebelDesign71.Services.Data.Contracts.IProjectsGalleryService galleryService
 @{ ViewData["Title"] = "All Projects"; }
 
 <div class="content-wrapper">
@@ -37,6 +40,8 @@
 
                                 </tr>
                             </thead>
+
+                            
                             @foreach (var item in ViewData["AllProjects"] as IList<MebelDesign71.Web.ViewModels.Projects.ProjectViewModel>)
                             {
                                 <tbody>
@@ -48,7 +53,13 @@
                                         <td>@item.IsDeleted</td>
                                         <td><a class='btn btn-warning btn-xs' href="/Administration/AdminProjects/ChangeIsDeleted?id=@item.Id">Ативирай/Деактивирай</a></td>
                                         <td><a class='btn btn-info btn-xs' href="/Administration/AdminProjects/UpdateProject?id=@item.Id">Промени</a></td>
-                                        <td><a class='btn btn-danger btn-xs' href="/Administration/AdminProjects/Delete?id=@item.Id">Изтрии</a></td>
+
+                                        @{var gallery = galleryService.GetGallery(item.Id).Result.Count;}
+                                        
+                                        @if (gallery == 0)
+                                       {
+                                           <td><a class='btn btn-danger btn-xs' href="/Administration/AdminProjects/Delete?id=@item.Id">Изтрии</a></td>
+                                       }
                                
                                     </tr>
                                 </tbody>

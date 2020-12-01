@@ -18,5 +18,7 @@
         Task UpdateProject(ProjectInputModel input);
 
         Task ChangeIsDeleteProject(int id);
+
+        Task DeleteProject(int id);
     }
 }

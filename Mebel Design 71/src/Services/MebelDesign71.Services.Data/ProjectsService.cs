@@ -129,6 +129,15 @@
             await this.dbProject.SaveChangesAsync();
         }
 
+        public async Task DeleteProject(int id)
+        {
+            var currentProject = this.dbProject.All().FirstOrDefault(p => p.Id == id);
+            this.dbProject.HardDelete(currentProject);
+            await this.dbProject.SaveChangesAsync();
+
+            await this.filesService.DeleteFileFromFileSystem(currentProject.HeadImageId);
+        }
+
         private static string RenameFilePath(string fullPath)
         {
             var oldString = "\\";
@@ -147,5 +156,6 @@
 
             return replaceSlashInFullPath;
         }
+
     }
 }

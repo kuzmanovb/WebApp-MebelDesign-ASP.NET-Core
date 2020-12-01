@@ -11,14 +11,10 @@
     public class AdminProjectsController : AdministrationController
     {
         private readonly IProjectsService projectsService;
-        private readonly IFilesService filesService;
-        private readonly ApplicationDbContext db;
 
-        public AdminProjectsController(IProjectsService projectsService, IFilesService filesService, ApplicationDbContext db)
+        public AdminProjectsController(IProjectsService projectsService)
         {
             this.projectsService = projectsService;
-            this.filesService = filesService;
-            this.db = db;
         }
 
         public IActionResult Index()
@@ -78,11 +74,7 @@
 
         public async Task<IActionResult> Delete (int id)
         {
-            var currentProject = this.db.Projects.FirstOrDefault(p => p.Id == id);
-            this.db.Projects.Remove(currentProject);
-            await this.db.SaveChangesAsync();
-
-            await this.filesService.DeleteFileFromFileSystem(currentProject.HeadImageId);
+            await this.projectsService.DeleteProject(id);
 
             return this.RedirectToAction("Index");
         }
