@@ -11,10 +11,6 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            if (dbContext.GalleryProjects.Any())
-            {
-                return;
-            }
 
             var allProjecrs = dbContext.Projects.ToArray();
 
@@ -22,7 +18,7 @@
             {
                 var images = new List<FileOnFileSystem>();
 
-                if (project.Name == "Кухни")
+                if (project.Name == "Кухни" && !dbContext.GalleryProjects.Any(g => g.ProjectId == project.Id))
                 {
                     var name = "GalleryKitchenImage";
                     var description = "Image To Kitchen Gallery";
@@ -34,7 +30,7 @@
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Кухни/Kitchen-5.jpg"));
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Кухни/Kitchen-6.jpg"));
                 }
-                else if (project.Name == "Дневни")
+                else if (project.Name == "Дневни" && !dbContext.GalleryProjects.Any(g => g.ProjectId == project.Id))
                 {
                     var name = "GalleryLivingRoomImage";
                     var description = "Image To Living Room Gallery";
@@ -46,7 +42,7 @@
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Дневни/Living_Room-5.jpg"));
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Дневни/Living_Room-6.jpg"));
                 }
-                else if (project.Name == "Спални")
+                else if (project.Name == "Спални" && !dbContext.GalleryProjects.Any(g => g.ProjectId == project.Id))
                 {
                     var name = "GalleryBedroomImage";
                     var description = "Image To Bedroom Gallery";
@@ -58,7 +54,7 @@
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Спални/Bedroom-5.jpg"));
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Спални/Bedroom-6.jpg"));
                 }
-                else if (project.Name == "Детски")
+                else if (project.Name == "Детски" && !dbContext.GalleryProjects.Any(g => g.ProjectId == project.Id))
                 {
                     var name = "GalleryChildrenRoomImage";
                     var description = "Image To Children Room Gallery";
@@ -70,7 +66,7 @@
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Детски/Children_Room-5.jpg"));
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Детски/Children_Room-6.jpg"));
                 }
-                else if (project.Name == "Гардероби")
+                else if (project.Name == "Гардероби" && !dbContext.GalleryProjects.Any(g => g.ProjectId == project.Id))
                 {
                     var name = "GalleryWardrobeImage";
                     var description = "Image To Wardrobe Gallery";
@@ -82,7 +78,7 @@
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Гардероби/Wardrobe-5.jpg"));
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Гардероби/Wardrobe-6.jpg"));
                 }
-                else if (project.Name == "Офиси")
+                else if (project.Name == "Офиси" && !dbContext.GalleryProjects.Any(g => g.ProjectId == project.Id))
                 {
                     var name = "GalleryOfficeImage";
                     var description = "Image To Office Gallery";
@@ -95,13 +91,16 @@
                     images.Add(this.CreateFileImage(name, description, "/images/projectImages/Офиси/Office-6.jpg"));
                 }
 
-                foreach (var i in images)
+                if (images.Count > 0)
                 {
-                    dbContext.FileOnFileSystems.Add(i);
-                    dbContext.GalleryProjects.Add(new GalleryProject { FileId = i.Id, ProjectId = project.Id });
-                }
+                    foreach (var i in images)
+                    {
+                        dbContext.FileOnFileSystems.Add(i);
+                        dbContext.GalleryProjects.Add(new GalleryProject { FileId = i.Id, ProjectId = project.Id });
+                    }
 
-                await dbContext.SaveChangesAsync();
+                    await dbContext.SaveChangesAsync();
+                }
             }
         }
 
