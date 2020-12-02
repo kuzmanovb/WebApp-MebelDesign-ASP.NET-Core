@@ -31,6 +31,7 @@
                               new ReviewSeeder(),
                               new ProjectSeeder(),
                               new GalleriesSeeder(),
+                              new ServiceSeeder(),
                           };
 
             foreach (var seeder in seeders)

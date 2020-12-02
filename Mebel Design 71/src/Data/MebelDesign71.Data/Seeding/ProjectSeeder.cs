@@ -29,7 +29,7 @@
                 Extension = ".jpg",
                 Name = "KitchenProjectImage",
                 UserId = null,
-                Description = "Kitchen Hade Image",
+                Description = "Kitchen Head Image",
                 FilePath = "/images/projectImages/Kitchen.jpg",
             };
 
@@ -55,7 +55,7 @@
                 Extension = ".jpg",
                 Name = "LivingRoomProjectImage",
                 UserId = null,
-                Description = "Living Room Hade Image",
+                Description = "Living Room Head Image",
                 FilePath = "/images/projectImages/LivingRoom.jpg",
             };
 
@@ -81,7 +81,7 @@
                 Extension = ".jpg",
                 Name = "BedroomProjectImage",
                 UserId = null,
-                Description = "Bedroom Hade Image",
+                Description = "Bedroom Head Image",
                 FilePath = "/images/projectImages/Bedroom.jpg",
             };
 
@@ -105,7 +105,7 @@
                 Extension = ".jpg",
                 Name = "ChildrenRoomProjectImage",
                 UserId = null,
-                Description = "Children Room Hade Image",
+                Description = "Children Room Head Image",
                 FilePath = "/images/projectImages/ChildrenRoom.jpg",
             };
 
@@ -129,7 +129,7 @@
                 Extension = ".jpg",
                 Name = "WardrobeProjectImage",
                 UserId = null,
-                Description = "Wardrobe Hade Image",
+                Description = "Wardrobe Head Image",
                 FilePath = "/images/projectImages/Wardrobe.jpg",
             };
 
@@ -153,7 +153,7 @@
                 Extension = ".jpg",
                 Name = "OfficeProjectImage",
                 UserId = null,
-                Description = "Office Hade Image",
+                Description = "Office Head Image",
                 FilePath = "/images/projectImages/Office.jpg",
             };
 
@@ -177,7 +177,7 @@
                 Extension = ".jpg",
                 Name = "ShopProjectImage",
                 UserId = null,
-                Description = "Shop Hade Image",
+                Description = "Shop Head Image",
                 FilePath = "/images/projectImages/Shop.jpg",
             };
 
