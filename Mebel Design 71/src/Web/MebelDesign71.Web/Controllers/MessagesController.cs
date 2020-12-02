@@ -1,15 +1,16 @@
 ﻿namespace MebelDesign71.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using MebelDesign71.Services.Data;
     using MebelDesign71.Web.ViewModels.Contacts;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
-    public class ContactsController : BaseController
+    public class MessagesController : BaseController
     {
-        private readonly IContactsService contactsService;
+        private readonly IMessagesService contactsService;
 
-        public ContactsController(IContactsService contactsService)
+        public MessagesController(IMessagesService contactsService)
         {
             this.contactsService = contactsService;
         }
@@ -17,11 +18,10 @@
         public IActionResult Index()
         {
             return this.View();
-
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(ContactFormViewModel input)
+        public async Task<IActionResult> Index(MessageInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -30,21 +30,12 @@
 
             var messageId = await this.contactsService.AddMessageAsync(input);
 
-            this.TempData["Email"] = input.Email;
-            this.TempData["About"] = input.About;
-
-            //ToDo: SendEmai
-
             return this.RedirectToAction("ThankYou");
-
-
         }
 
         public IActionResult ThankYou()
         {
-
             return this.View();
-
         }
 
     }

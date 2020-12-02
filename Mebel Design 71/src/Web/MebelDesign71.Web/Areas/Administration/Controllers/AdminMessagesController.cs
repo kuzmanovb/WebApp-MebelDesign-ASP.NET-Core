@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class MailboxController : AdministrationController
+    public class AdminMessagesController : AdministrationController
     {
         public IActionResult Index()
         {

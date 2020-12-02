@@ -1,11 +1,11 @@
-﻿namespace MebelDesign71.Web.ViewModels.Contacts
+﻿namespace MebelDesign71.Web.ViewModels.Messages
 {
     using System.ComponentModel.DataAnnotations;
 
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Mapping;
 
-    public class ContactFormViewModel : IMapFrom<Message>
+    public class MessageInputModel : IMapFrom<Message>
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете вашето име")]
         [Display(Name = "Име")]

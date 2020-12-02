@@ -8,6 +8,7 @@
 
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
+    using MebelDesign71.Services.Data.Contracts;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;

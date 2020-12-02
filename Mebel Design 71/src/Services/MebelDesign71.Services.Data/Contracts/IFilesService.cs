@@ -1,4 +1,4 @@
-﻿namespace MebelDesign71.Services.Data
+﻿namespace MebelDesign71.Services.Data.Contracts
 {
     using System.Threading.Tasks;
 

@@ -5,18 +5,18 @@
 
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
-    using MebelDesign71.Web.ViewModels.Contacts;
+    using MebelDesign71.Web.ViewModels.Messages;
 
-    public class ContactsService : IContactsService
+    public class MessagesService : IMessagesService
     {
         private readonly IRepository<Message> messageRepository;
 
-        public ContactsService(IRepository<Message> messageRepository)
+        public MessagesService(IRepository<Message> messageRepository)
         {
             this.messageRepository = messageRepository;
         }
 
-        public async Task<string> AddMessageAsync(ContactFormViewModel input)
+        public async Task<string> AddMessageAsync(MessageInputModel input)
         {
             var newMessage = new Message
             {
@@ -25,7 +25,6 @@
                 Email = input.Email,
                 About = input.About,
                 Description = input.Description,
-                CreatedOn = DateTime.UtcNow,
             };
 
             await this.messageRepository.AddAsync(newMessage);
@@ -34,7 +33,8 @@
             return newMessage.Id;
         }
 
-        public void SendEmail(ContactFormViewModel input)
+        
+        public void SendEmail(MessageInputModel input)
         {
             throw new NotImplementedException();
         }
