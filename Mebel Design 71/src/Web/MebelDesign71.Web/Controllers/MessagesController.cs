@@ -2,8 +2,8 @@
 {
     using System.Threading.Tasks;
 
-    using MebelDesign71.Services.Data;
-    using MebelDesign71.Web.ViewModels.Contacts;
+    using MebelDesign71.Services.Data.Contracts;
+    using MebelDesign71.Web.ViewModels.Messages;
     using Microsoft.AspNetCore.Mvc;
 
     public class MessagesController : BaseController

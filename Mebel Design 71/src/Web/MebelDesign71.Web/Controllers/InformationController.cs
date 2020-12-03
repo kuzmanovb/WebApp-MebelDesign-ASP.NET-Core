@@ -1,12 +1,12 @@
 ﻿namespace MebelDesign71.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using MebelDesign71.Common;
-    using MebelDesign71.Services.Data;
+    using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.Information;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class InformationController : BaseController
     {
