@@ -21,14 +21,13 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="@Url.Action("Index", "Home", new { area = "" })" class="logo">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">Mebel</span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg">Mebel Desing 71</span>
             </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            @Html.Partial("_HeaderNavbar")
+            <nav class="navbar navbar-static-top"></nav>
         </header>
 
         <!-- =============================================== -->
@@ -41,9 +40,7 @@
         <!-- /.content-wrapper -->
 
         @Html.Partial("_Footer")
-
-        <!-- Control Sidebar -->
-        @Html.Partial("_ControlSidebar")
+      
     </div>
 
    
