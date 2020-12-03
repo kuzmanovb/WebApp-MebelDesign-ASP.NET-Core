@@ -1,0 +1,29 @@
+﻿@using MebelDesign71.Services.Data.Contracts
+@inject IMessagesService messageService
+
+@{
+    var messagesCount = messageService.GetAllMessages().Count;
+    var deletedMessagesCount = messageService.GetIsDeletedMessages().Count;
+
+  }
+<div class="box box-solid">
+    <div class="box-body no-padding">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active">
+                <a href="#">
+                    <i class="fa fa-inbox"></i> Кутия <span class="label label-primary pull-right">@messagesCount</span>
+                </a>
+            </li>
+            <li><a href="#">
+                <i class="fa fa-envelope-o"></i> Изпратени <span class="label label-success pull-right">100</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <i class="fa fa-filter"></i> Кошче <span class="label label-warning pull-right">@deletedMessagesCount</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.box-body -->
+</div>

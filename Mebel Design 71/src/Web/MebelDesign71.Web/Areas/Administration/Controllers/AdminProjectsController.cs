@@ -1,9 +1,6 @@
 ﻿namespace MebelDesign71.Web.Areas.Administration.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
-    using MebelDesign71.Data;
-    using MebelDesign71.Services.Data;
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.Projects;
     using Microsoft.AspNetCore.Mvc;

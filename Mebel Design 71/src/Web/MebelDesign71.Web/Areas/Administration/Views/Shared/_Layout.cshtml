@@ -16,30 +16,19 @@
     @RenderSection("Styles", required: false)
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-    <!-- Site wrapper -->
     <div class="wrapper">
 
         <header class="main-header">
             <!-- Logo -->
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">Mebel</span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">Mebel Desing 71</span>
-            </a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">Към сайта</a>
             <nav class="navbar navbar-static-top"></nav>
         </header>
 
-        <!-- =============================================== -->
-        <!-- Left side column. contains the sidebar -->
-        @Html.Partial("_LeftNavigation")
-
-        <!-- =============================================== -->
-        <!-- Content Wrapper. Contains page content -->
+        <partial name="_LeftNavigation" />
+        
         @RenderBody()
-        <!-- /.content-wrapper -->
 
-        @Html.Partial("_Footer")
+       <partial name="_Footer" />
       
     </div>
 

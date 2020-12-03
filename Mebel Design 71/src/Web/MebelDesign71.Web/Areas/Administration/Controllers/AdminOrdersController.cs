@@ -33,7 +33,6 @@
         [HttpPost]
         public async Task<IActionResult> Index(string id, string sortby)
         {
-
             if (id != null)
             {
                 this.ViewData["users"] = await this.userManager.Users.ToListAsync();
@@ -69,14 +68,9 @@
                     case "DateDown": orders = orders.OrderByDescending(o => o.CreatedOn).ToList(); break;
                 }
 
-
                 this.ViewData["users"] = await this.userManager.Users.ToListAsync();
                 this.ViewData["orders"] = orders;
-
-
             }
-
-
 
             return this.View();
         }

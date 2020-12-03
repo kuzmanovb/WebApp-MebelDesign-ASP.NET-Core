@@ -54,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Administration\Models\" />
     <Folder Include="wwwroot\scss\scss\bootstrap\mixins\" />
     <Folder Include="wwwroot\scss\scss\bootstrap\utilities\" />
   </ItemGroup>

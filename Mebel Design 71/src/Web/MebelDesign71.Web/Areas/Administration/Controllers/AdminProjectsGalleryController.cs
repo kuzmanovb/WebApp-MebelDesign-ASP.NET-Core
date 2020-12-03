@@ -1,9 +1,10 @@
 ﻿namespace MebelDesign71.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.ProjectsImage;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class AdminProjectsGalleryController : AdministrationController
     {
