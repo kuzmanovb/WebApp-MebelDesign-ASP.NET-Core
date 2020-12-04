@@ -13,10 +13,12 @@
     public class MessagesService : IMessagesService
     {
         private readonly IDeletableEntityRepository<Message> dbMessage;
+        private readonly IDeletableEntityRepository<SendMessage> dbSenrMessage;
 
-        public MessagesService(IDeletableEntityRepository<Message> dbMessage)
+        public MessagesService(IDeletableEntityRepository<Message> dbMessage, IDeletableEntityRepository<SendMessage> dbSenrMessage)
         {
             this.dbMessage = dbMessage;
+            this.dbSenrMessage = dbSenrMessage;
         }
 
         public async Task<string> AddMessageAsync(MessageInputModel input)
@@ -58,9 +60,23 @@
             return allMessage;
         }
 
-        public ICollection<MessageViewModel> GetSendMessages()
+        public ICollection<SendMessageViewModel> GetAllSendMessages()
         {
-            throw new NotImplementedException();
+            var allSendMessage = this.dbSenrMessage.All()
+                .OrderByDescending(m => m.CreatedOn)
+                 .Select(m => new SendMessageViewModel
+                 {
+                     Id = m.Id,
+                     Email = m.ToEmail,
+                     ToMessageId = m.ToMessageId,
+                     About = m.About,
+                     Description = m.Description,
+                     CreateOn = m.CreatedOn.ToString("dd.MM.yyyy HH:mm"),
+                     TimeAgo = CalculateTimeBetweenCreateAndNow(m.CreatedOn),
+                     ModifiedOn = m.ModifiedOn.GetValueOrDefault().ToString("dd.MM.yyyy"),
+                     IsDeleted = m.IsDeleted,
+                 }).ToList();
+            return allSendMessage;
         }
 
         public ICollection<MessageViewModel> GetIsDeletedMessages()
@@ -120,16 +136,22 @@
             await this.dbMessage.SaveChangesAsync();
         }
 
+        public async Task Restore(string id)
+        {
+            var currentMessage = this.dbMessage.AllWithDeleted().FirstOrDefault(m => m.Id == id);
+            this.dbMessage.Undelete(currentMessage);
+            await this.dbMessage.SaveChangesAsync();
+        }
+
         public async Task HardDelete(string id)
         {
-            var currentMessage = this.dbMessage.All().FirstOrDefault(m => m.Id == id);
+            var currentMessage = this.dbMessage.AllWithDeleted().FirstOrDefault(m => m.Id == id);
             this.dbMessage.HardDelete(currentMessage);
             await this.dbMessage.SaveChangesAsync();
         }
 
         private static string CalculateTimeBetweenCreateAndNow(DateTime createOnTime)
         {
-
             var differentTime = DateTime.UtcNow - createOnTime;
             var differentToMinets = (int)differentTime.TotalMinutes;
 
@@ -147,6 +169,5 @@
             return differentToMinets.ToString() + " mins ago";
 
         }
-
     }
 }

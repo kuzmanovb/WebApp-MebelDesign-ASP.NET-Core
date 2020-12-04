@@ -19,8 +19,6 @@
             var allMessages = this.messagesService.GetAllMessages();
             var deletedMessage = this.messagesService.GetIsDeletedMessages();
             this.ViewData["allMessages"] = allMessages;
-            this.ViewData["messagesCount"] = allMessages.Count;
-            this.ViewData["deletedMessagesCount"] = deletedMessage.Count;
 
             return this.View();
         }
@@ -52,9 +50,32 @@
             return this.View(currentMessage);
         }
 
+        public IActionResult Send()
+        {
+            var allSendMessages = this.messagesService.GetAllSendMessages();
+            this.ViewData["allMessages"] = allSendMessages;
+
+            return this.View();
+        }
+
+        public IActionResult Trash()
+        {
+            var allDeletedMessages = this.messagesService.GetIsDeletedMessages();
+            this.ViewData["allDeletedMessages"] = allDeletedMessages;
+
+            return this.View();
+        }
+
         public async Task<IActionResult> Delete(string id)
         {
             await this.messagesService.Delete(id);
+
+            return this.RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Undelete(string id)
+        {
+            await this.messagesService.Restore(id);
 
             return this.RedirectToAction("Index");
         }
