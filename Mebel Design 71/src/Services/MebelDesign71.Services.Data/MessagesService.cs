@@ -113,6 +113,20 @@
             throw new NotImplementedException();
         }
 
+        public async Task Delete(string id)
+        {
+            var currentMessage = this.dbMessage.All().FirstOrDefault(m => m.Id == id);
+            this.dbMessage.Delete(currentMessage);
+            await this.dbMessage.SaveChangesAsync();
+        }
+
+        public async Task HardDelete(string id)
+        {
+            var currentMessage = this.dbMessage.All().FirstOrDefault(m => m.Id == id);
+            this.dbMessage.HardDelete(currentMessage);
+            await this.dbMessage.SaveChangesAsync();
+        }
+
         private static string CalculateTimeBetweenCreateAndNow(DateTime createOnTime)
         {
 

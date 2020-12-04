@@ -18,5 +18,9 @@
         MessageViewModel GetMessageById(string id);
 
         void SendEmail(MessageInputModel input);
+
+        Task Delete(string id);
+
+        Task HardDelete(string id);
     }
 }
