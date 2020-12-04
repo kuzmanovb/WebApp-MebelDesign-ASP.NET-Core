@@ -15,7 +15,7 @@
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await SeedUserAsync(userManager, GlobalConstants.AdministratorName);
+            await SeedUserAsync(userManager, GlobalConstants.AdministratorEmail);
         }
 
         private static async Task SeedUserAsync(UserManager<ApplicationUser> userManager, string userName)
