@@ -45,16 +45,22 @@
                     Id = m.Id,
                     FirstName = m.FirstName,
                     LastName = m.LastName,
+                    FullName = m.FirstName + " " + m.LastName,
                     Email = m.Email,
                     About = m.About,
                     Description = m.Description,
-                    CreateOn = m.CreatedOn.ToShortDateString(),
+                    CreateOn = m.CreatedOn.ToString("dd.MM.yyyy HH:mm"),
                     TimeAgo = CalculateTimeBetweenCreateAndNow(m.CreatedOn),
                     ModifiedOn = m.ModifiedOn.GetValueOrDefault().ToString("dd.MM.yyyy"),
                     IsDeleted = m.IsDeleted,
                 }).ToList();
 
             return allMessage;
+        }
+
+        public ICollection<MessageViewModel> GetSendMessages()
+        {
+            throw new NotImplementedException();
         }
 
         public ICollection<MessageViewModel> GetIsDeletedMessages()
@@ -67,16 +73,39 @@
                      Id = m.Id,
                      FirstName = m.FirstName,
                      LastName = m.LastName,
+                     FullName = m.FirstName + " " + m.LastName,
                      Email = m.Email,
                      About = m.About,
                      Description = m.Description,
-                     CreateOn = m.CreatedOn.ToShortDateString(),
+                     CreateOn = m.CreatedOn.ToString("dd.MM.yyyy HH:mm"),
                      TimeAgo = CalculateTimeBetweenCreateAndNow(m.CreatedOn),
                      ModifiedOn = m.ModifiedOn.GetValueOrDefault().ToString("dd.MM.yyyy"),
                      IsDeleted = m.IsDeleted,
                  }).ToList();
 
             return allDeletedMessage;
+        }
+
+        public MessageViewModel GetMessageById(string id)
+        {
+            var message = this.dbMessage.AllWithDeleted()
+                 .Where(m => m.Id == id)
+                 .Select(m => new MessageViewModel
+                 {
+                     Id = m.Id,
+                     FirstName = m.FirstName,
+                     LastName = m.LastName,
+                     FullName = m.FirstName + " " + m.LastName,
+                     Email = m.Email,
+                     About = m.About,
+                     Description = m.Description,
+                     CreateOn = m.CreatedOn.ToString("dd.MM.yyyy HH:mm"),
+                     TimeAgo = CalculateTimeBetweenCreateAndNow(m.CreatedOn),
+                     ModifiedOn = m.ModifiedOn.GetValueOrDefault().ToString("dd.MM.yyyy"),
+                     IsDeleted = m.IsDeleted,
+                 }).FirstOrDefault();
+
+            return message;
         }
 
         public void SendEmail(MessageInputModel input)
@@ -88,7 +117,7 @@
         {
 
             var differentTime = DateTime.UtcNow - createOnTime;
-            var differentToMinets = differentTime.TotalMinutes;
+            var differentToMinets = (int)differentTime.TotalMinutes;
 
             if (differentToMinets > 60 * 24)
             {

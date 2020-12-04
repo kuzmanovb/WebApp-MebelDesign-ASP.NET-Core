@@ -11,7 +11,11 @@
 
         ICollection<MessageViewModel> GetAllMessages();
 
+        ICollection<MessageViewModel> GetSendMessages();
+
         ICollection<MessageViewModel> GetIsDeletedMessages();
+
+        MessageViewModel GetMessageById(string id);
 
         void SendEmail(MessageInputModel input);
     }

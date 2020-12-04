@@ -13,7 +13,6 @@
     <section class="content-header">
         <h1>
             Поща
-            <small>13 new messages</small>
         </h1>
         <ol class="breadcrumb">
             <li><a asp-area="Administration" asp-controller="AdminMessages" asp-action="Index"><i class="fa fa-dashboard"></i>Поща</a></li>
@@ -25,34 +24,9 @@
     <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a asp-controller="AdminMessages" asp-action="Compose" class="btn btn-primary btn-block margin-bottom">Напиши</a>
+                <a asp-controller="AdminMessages" asp-action="Write" class="btn btn-primary btn-block margin-bottom">Напиши</a>
 
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Folders</h3>
-
-                        <div class="box-tools">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body no-padding">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="active">
-                                <a href="#">
-                                    <i class="fa fa-inbox"></i> Кутия
-                                    <span class="label label-primary pull-right">@ViewData["messagesCount"]</span>
-                                </a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i> Изпратени</a></li>
-                            <li>
-                                <a href="#"><i class="fa fa-filter"></i> Кошче <span class="label label-warning pull-right">@this.ViewData["deletedMessagesCount"]</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
+                <partial name="_MesagesPanelPartial" />
             </div>
             <!-- /.col -->
             <div class="col-md-9">
@@ -95,20 +69,21 @@
                         <div class="table-responsive mailbox-messages">
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                   @foreach (var message in this.ViewData["allMessages"] as IList<MessageViewModel>)
-                                   {
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><i></i></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("ReadMail", "AdminMessages")">@message.FirstName @message.LastName</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>@message.About</b> - @message.Description.Substring(0, 50) .....
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">@message.TimeAgo</td>
-                                    </tr>
-                                   }
-                                  
+                                    @foreach (var message in this.ViewData["allMessages"] as IList<MessageViewModel>)
+                                    {
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td></td>
+                                            <td class="mailbox-name">
+                                                <a asp-area="Administration" asp-controller="AdminMessages" asp-action="Read" asp-route-id=@message.Id>@message.FirstName @message.LastName</a>
+                                            </td>
+                                            <td class="mailbox-subject">
+                                                <b>@message.About</b> - @message.Description.Substring(0, 50) .....
+                                            </td>
+                                            <td class="mailbox-attachment"></td>
+                                            <td class="mailbox-date">@message.TimeAgo</td>
+                                        </tr>}
+
                                 </tbody>
                             </table>
                             <!-- /.table -->

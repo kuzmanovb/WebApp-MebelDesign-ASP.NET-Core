@@ -1,0 +1,74 @@
+﻿@model MebelDesign71.Web.ViewModels.Messages.SendMessageInputModel
+
+@{ ViewData["Title"] = "Write"; }
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Ново съобщение
+        </h1>
+        <ol class="breadcrumb">
+            <li><a asp-area="Administration" asp-controller="AdminMessages" asp-action="Index"><i class="fa fa-dashboard"></i> Поща</a></li>
+            <li class="active">Ново съобщение</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+
+            <div class="col-md-3">
+                <a asp-area="Administration" asp-controller="AdminMessages" asp-action="Index" class="btn btn-primary btn-block margin-bottom">Обратно към пощата</a>
+
+                <partial name="_MesagesPanelPartial" />
+
+            </div>
+
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Напиши ново съобщение</h3>
+                    </div>
+
+                    <form asp-area="Administration" asp-controller="AdminMessages" asp-action="Write" method="post">
+                        <div class="box-body">
+                            <input type="hidden" asp-for="@Model.ToMessageId" value="@ViewData["toMessageId"]" />
+                            <div class="form-group">
+                                <label asp-for="@Model.Email"></label>
+                                <input asp-for="@Model.Email" class="form-control" placeholder="До:"  value="@ViewData["email"]"/>
+                                <span asp-validation-for="@Model.Email"></span>
+                            </div>
+                            <div>
+                                <label asp-for="@Model.About"></label>
+                                <input asp-for="@Model.About" class=" form-control" placeholder="Относно:" value="@ViewData["about"] = about" />
+                                <span asp-validation-for="@Model.About"></span>
+                            </div>
+                            <div>
+                                <label asp-for="@Model.Description"></label>
+                                <textarea asp-for="@Model.Description" rows="10" class="form-control" placeholder="Вашето съобщение"></textarea>
+                                <span asp-validation-for="@Model.Description"></span>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Изпрати</button>
+                            </div>
+                            <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Отмени</button>
+                        </div>
+                    </form>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /. box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
