@@ -4,6 +4,8 @@
     {
         public const string SystemName = "MebelDesign71";
 
+        public const string AdministratorName = "Admin";
+
         public const string AdministratorRoleName = "Administrator";
     }
 }
