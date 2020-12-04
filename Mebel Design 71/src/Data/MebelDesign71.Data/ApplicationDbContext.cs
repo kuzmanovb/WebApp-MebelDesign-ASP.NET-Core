@@ -40,7 +40,7 @@
 
         public DbSet<Review> Reviews { get; set; }
 
-        public DbSet<Offer> Offers { get; set; }
+        public DbSet<SendMessage> SendMessages { get; set; }
 
         public DbSet<OrderDocument> OrderDocument { get; set; }
 
