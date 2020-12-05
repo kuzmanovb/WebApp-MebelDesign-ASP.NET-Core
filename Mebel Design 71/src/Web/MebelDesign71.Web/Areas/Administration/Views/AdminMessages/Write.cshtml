@@ -33,7 +33,7 @@
                         <h3 class="box-title">Напиши ново съобщение</h3>
                     </div>
 
-                    <form asp-area="Administration" asp-controller="AdminMessages" asp-action="Write" method="post">
+                    <form asp-area="Administration" asp-controller="AdminMessages" asp-action="Send" method="post">
                         <div class="box-body">
                             <input type="hidden" asp-for="@Model.ToMessageId" value="@ViewData["toMessageId"]" />
                             <div class="form-group">

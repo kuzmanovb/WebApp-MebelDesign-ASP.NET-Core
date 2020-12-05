@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MebelDesign71.Common
+﻿namespace MebelDesign71.Common
 {
     public static class InfoConstant
     {

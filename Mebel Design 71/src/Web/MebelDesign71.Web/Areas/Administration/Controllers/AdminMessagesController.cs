@@ -1,23 +1,26 @@
 ﻿namespace MebelDesign71.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+    using MebelDesign71.Common;
     using MebelDesign71.Services.Data.Contracts;
+    using MebelDesign71.Services.Messaging;
     using MebelDesign71.Web.ViewModels.Messages;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class AdminMessagesController : AdministrationController
     {
         private readonly IMessagesService messagesService;
+        private readonly IEmailSender emailSender;
 
-        public AdminMessagesController(IMessagesService messagesService)
+        public AdminMessagesController(IMessagesService messagesService, IEmailSender emailSender)
         {
             this.messagesService = messagesService;
+            this.emailSender = emailSender;
         }
 
         public IActionResult Index()
         {
             var allMessages = this.messagesService.GetAllMessages();
-            var deletedMessage = this.messagesService.GetIsDeletedMessages();
             this.ViewData["allMessages"] = allMessages;
 
             return this.View();
@@ -56,6 +59,19 @@
             this.ViewData["allMessages"] = allSendMessages;
 
             return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Send(SendMessageInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.emailSender.SendEmailAsync(InfoConstant.SecondEmail, GlobalConstants.SystemName, input.Email, input.About, input.Description);
+
+            return this.RedirectToAction("Index");
         }
 
         public IActionResult Trash()
