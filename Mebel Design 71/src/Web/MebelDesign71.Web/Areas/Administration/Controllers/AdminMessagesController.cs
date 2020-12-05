@@ -36,14 +36,16 @@
         }
 
         [HttpPost]
-        public IActionResult Write(SendMessageInputModel input)
+        public async Task<IActionResult> Write(SendMessageInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
             }
+            //// ToDo: add database
+            await this.emailSender.SendEmailAsync(InfoConstant.SecondEmail, GlobalConstants.SystemName, input.Email, input.About, input.Description);
 
-            return this.View();
+            return this.RedirectToAction("Send");
         }
 
         public IActionResult Read(string id)
@@ -59,19 +61,6 @@
             this.ViewData["allMessages"] = allSendMessages;
 
             return this.View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Send(SendMessageInputModel input)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(input);
-            }
-
-            await this.emailSender.SendEmailAsync(InfoConstant.SecondEmail, GlobalConstants.SystemName, input.Email, input.About, input.Description);
-
-            return this.RedirectToAction("Index");
         }
 
         public IActionResult Trash()

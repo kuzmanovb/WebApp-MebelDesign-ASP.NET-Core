@@ -17,7 +17,7 @@
         public string About { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете вашето запитване")]
-        [StringLength(10000, ErrorMessage = "Съобщението трябва да е поне {2}  и не повече от {1} символа.", MinimumLength = 20)]
+        [StringLength(10000, ErrorMessage = "Съобщението трябва да е поне {2}  и не повече от {1} символа.", MinimumLength = 10)]
         [Display(Name = "Съобщение")]
         public string Description { get; set; }
     }

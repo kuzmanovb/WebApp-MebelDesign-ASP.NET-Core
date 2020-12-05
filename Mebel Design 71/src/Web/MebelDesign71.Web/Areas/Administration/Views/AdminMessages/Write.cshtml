@@ -33,23 +33,23 @@
                         <h3 class="box-title">Напиши ново съобщение</h3>
                     </div>
 
-                    <form asp-area="Administration" asp-controller="AdminMessages" asp-action="Send" method="post">
+                    <form asp-area="Administration" asp-controller="AdminMessages" asp-action="Write" method="post">
                         <div class="box-body">
                             <input type="hidden" asp-for="@Model.ToMessageId" value="@ViewData["toMessageId"]" />
                             <div class="form-group">
                                 <label asp-for="@Model.Email"></label>
                                 <input asp-for="@Model.Email" class="form-control" placeholder="До:"  value="@ViewData["email"]"/>
-                                <span asp-validation-for="@Model.Email"></span>
+                                <span asp-validation-for="@Model.Email" class="text-danger"></span>
                             </div>
                             <div>
                                 <label asp-for="@Model.About"></label>
                                 <input asp-for="@Model.About" class=" form-control" placeholder="Относно:" value="@ViewData["about"]" />
-                                <span asp-validation-for="@Model.About"></span>
+                                <span asp-validation-for="@Model.About" class="text-danger"></span>
                             </div>
                             <div>
                                 <label asp-for="@Model.Description"></label>
                                 <textarea asp-for="@Model.Description" rows="10" class="form-control" placeholder="Вашето съобщение"></textarea>
-                                <span asp-validation-for="@Model.Description"></span>
+                                <span asp-validation-for="@Model.Description" class="text-danger"></span>
                             </div>
                         </div>
                         <!-- /.box-body -->
