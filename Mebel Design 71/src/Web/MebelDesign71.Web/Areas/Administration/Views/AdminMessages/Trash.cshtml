@@ -46,7 +46,15 @@
                                                   <a asp-area="Administration" asp-controller="AdminMessages" asp-action="Read" asp-route-id=@message.Id>@message.FirstName @message.LastName</a>
                                               </td>
                                               <td class="mailbox-subject">
-                                                  <b>@message.About</b> - @message.Description.Substring(0, 50) .....
+
+                                                  @{var description = message.Description;}
+
+                                                  @if (description.Length > 50)
+                                                  {
+                                                      description = description.Substring(0, 50) + ".....";
+                                                  }
+
+                                                  <b>@message.About</b> - @description
                                               </td>
                                               <td>
                                                   <a asp-area="Administration" asp-controller="AdminMessages" asp-action="HardDelete" asp-route-id="@message.Id" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Премахни </a>

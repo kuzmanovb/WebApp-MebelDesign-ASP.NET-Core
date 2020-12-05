@@ -13,12 +13,12 @@
     public class MessagesService : IMessagesService
     {
         private readonly IDeletableEntityRepository<Message> dbMessage;
-        private readonly IDeletableEntityRepository<SendMessage> dbSenrMessage;
+        private readonly IDeletableEntityRepository<SendMessage> dbSendMessage;
 
-        public MessagesService(IDeletableEntityRepository<Message> dbMessage, IDeletableEntityRepository<SendMessage> dbSenrMessage)
+        public MessagesService(IDeletableEntityRepository<Message> dbMessage, IDeletableEntityRepository<SendMessage> dbSendMessage)
         {
             this.dbMessage = dbMessage;
-            this.dbSenrMessage = dbSenrMessage;
+            this.dbSendMessage = dbSendMessage;
         }
 
         public async Task<string> AddMessageAsync(MessageInputModel input)
@@ -36,6 +36,22 @@
             await this.dbMessage.SaveChangesAsync();
 
             return newMessage.Id;
+        }
+
+        public async Task<string> AddSendMessageAsync(SendMessageInputModel input)
+        {
+            var newSendEmail = new SendMessage
+            {
+                About = input.About,
+                Description = input.Description,
+                ToEmail = input.Email,
+                ToMessageId = input.ToMessageId,
+            };
+
+            await this.dbSendMessage.AddAsync(newSendEmail);
+            await this.dbSendMessage.SaveChangesAsync();
+
+            return newSendEmail.Id;
         }
 
         public ICollection<MessageViewModel> GetAllMessages()
@@ -62,7 +78,7 @@
 
         public ICollection<SendMessageViewModel> GetAllSendMessages()
         {
-            var allSendMessage = this.dbSenrMessage.All()
+            var allSendMessage = this.dbSendMessage.All()
                 .OrderByDescending(m => m.CreatedOn)
                  .Select(m => new SendMessageViewModel
                  {
@@ -124,26 +140,48 @@
             return message;
         }
 
-        public void SendEmail(MessageInputModel input)
+        public SendMessageViewModel GetSendMessagesById(string id)
         {
-            throw new NotImplementedException();
+            var allSendMessage = this.dbSendMessage.All()
+                .Where(m => m.Id == id)
+                 .Select(m => new SendMessageViewModel
+                 {
+                     Id = m.Id,
+                     Email = m.ToEmail,
+                     ToMessageId = m.ToMessageId,
+                     About = m.About,
+                     Description = m.Description,
+                     CreateOn = m.CreatedOn.ToString("dd.MM.yyyy HH:mm"),
+                     TimeAgo = CalculateTimeBetweenCreateAndNow(m.CreatedOn),
+                     ModifiedOn = m.ModifiedOn.GetValueOrDefault().ToString("dd.MM.yyyy"),
+                     IsDeleted = m.IsDeleted,
+                 }).FirstOrDefault();
+
+            return allSendMessage;
         }
 
-        public async Task Delete(string id)
+        public async Task DeleteAsync(string id)
         {
             var currentMessage = this.dbMessage.All().FirstOrDefault(m => m.Id == id);
             this.dbMessage.Delete(currentMessage);
             await this.dbMessage.SaveChangesAsync();
         }
 
-        public async Task Restore(string id)
+        public async Task DeleteSendMessageAsync(string id)
+        {
+            var currentMessage = this.dbSendMessage.All().FirstOrDefault(m => m.Id == id);
+            this.dbSendMessage.Delete(currentMessage);
+            await this.dbSendMessage.SaveChangesAsync();
+        }
+
+        public async Task RestoreAsync(string id)
         {
             var currentMessage = this.dbMessage.AllWithDeleted().FirstOrDefault(m => m.Id == id);
             this.dbMessage.Undelete(currentMessage);
             await this.dbMessage.SaveChangesAsync();
         }
 
-        public async Task HardDelete(string id)
+        public async Task HardDeleteAsync(string id)
         {
             var currentMessage = this.dbMessage.AllWithDeleted().FirstOrDefault(m => m.Id == id);
             this.dbMessage.HardDelete(currentMessage);
@@ -169,5 +207,6 @@
             return differentToMinets.ToString() + " mins ago";
 
         }
+
     }
 }
