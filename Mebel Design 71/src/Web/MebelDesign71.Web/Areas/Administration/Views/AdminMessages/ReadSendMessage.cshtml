@@ -1,0 +1,73 @@
+﻿@model MebelDesign71.Web.ViewModels.Messages.SendMessageViewModel
+@{ ViewData["Title"] = "ReadMail";
+    var messageData = new Dictionary<string, string>
+{
+                { "id", Model.Id },
+                { "email", Model.Email },
+                { "about", "Re: " + Model.About }
+             };
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Съобщение
+        </h1>
+        <ol class="breadcrumb">
+            <li><a asp-area="Administration" asp-controller="AdminMessage" asp-action="Index"><i class="fa fa-dashboard"></i> Поща</a></li>
+            <li class="active">Съобщение</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+
+            <div class="col-md-3">
+                <a asp-area="Administration" asp-controller="AdminMessages" asp-action="Index" class="btn btn-primary btn-block margin-bottom"> Обратно към пощата </a>
+
+                <partial name="_MesagesPanelPartial" />
+            </div>
+
+
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Съобщение</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="mailbox-read-info">
+                            <h3>@Model.About</h3>
+                            <h5>
+                                From: @Model.Email
+                                <span class="mailbox-read-time pull-right">@Model.CreateOn </span>
+                            </h5>
+                        </div>
+                        <!-- /.mailbox-read-info -->
+                        <div class="mailbox-controls with-border text-center"></div>
+                        <!-- /.mailbox-controls -->
+                        <div class="mailbox-read-message">@Model.Description</div>
+                        <!-- /.mailbox-read-message -->
+                    </div>
+                    <div class="box-footer">
+                      
+                         <a asp-area="Administration" asp-controller="AdminMessages" asp-action="DeleteSendMessage" asp-route-id="@Model.Id" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Изтрий </a>
+                         <button type="button" class="btn btn-default" onclick="window.print()"><i class="fa fa-print"></i> Принт</button>
+                     
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /. box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+

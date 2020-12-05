@@ -47,10 +47,18 @@
                                               <td><input type="checkbox"></td>
                                               <td></td>
                                               <td class="mailbox-name">
-                                                  <a asp-area="Administration" asp-controller="AdminMessages" asp-action="Read" asp-route-id=@message.Id>@message.Email</a>
+                                                  <a asp-area="Administration" asp-controller="AdminMessages" asp-action="ReadSendMessage" asp-route-id=@message.Id>@message.Email</a>
                                               </td>
                                               <td class="mailbox-subject">
-                                                  <b>@message.About</b> - @message.Description.Substring(0, 50) .....
+
+                                                  @{var description = message.Description;}
+
+                                                  @if (description.Length > 50)
+                                                  {
+                                                      description = description.Substring(0, 50) + ".....";
+                                                  }
+
+                                                  <b>@message.About</b> - @description
                                               </td>
                                               <td class="mailbox-attachment"></td>
                                               <td class="mailbox-date">@message.TimeAgo</td>

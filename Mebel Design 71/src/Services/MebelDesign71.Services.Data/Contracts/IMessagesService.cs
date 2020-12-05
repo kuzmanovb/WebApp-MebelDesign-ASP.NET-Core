@@ -9,6 +9,8 @@
     {
         Task<string> AddMessageAsync(MessageInputModel input);
 
+        Task<string> AddSendMessageAsync(SendMessageInputModel input);
+
         ICollection<MessageViewModel> GetAllMessages();
 
         ICollection<SendMessageViewModel> GetAllSendMessages();
@@ -17,12 +19,14 @@
 
         MessageViewModel GetMessageById(string id);
 
-        void SendEmail(MessageInputModel input);
+        SendMessageViewModel GetSendMessagesById(string id);
 
-        Task Restore(string id);
+        Task RestoreAsync(string id);
 
-        Task Delete(string id);
+        Task DeleteAsync(string id);
 
-        Task HardDelete(string id);
+        Task DeleteSendMessageAsync(string id);
+
+        Task HardDeleteAsync(string id);
     }
 }
