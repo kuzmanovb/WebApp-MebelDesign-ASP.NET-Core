@@ -33,14 +33,16 @@
         }
 
         [HttpPost]
-        public IActionResult Write(SendMessageInputModel input)
+        public async Task<IActionResult> Write(SendMessageInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
             }
+            //// ToDo: add database
+            await this.emailSender.SendEmailAsync(InfoConstant.SecondEmail, GlobalConstants.SystemName, input.Email, input.About, input.Description);
 
-            return this.View();
+            return this.RedirectToAction("Send");
         }
 
         public IActionResult Read(string id)
