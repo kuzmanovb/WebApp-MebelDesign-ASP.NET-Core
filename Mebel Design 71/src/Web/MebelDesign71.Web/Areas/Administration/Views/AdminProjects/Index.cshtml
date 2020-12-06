@@ -24,7 +24,7 @@
                         <h3 class="box-title">Всички проекти</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body no-padding table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -40,30 +40,28 @@
 
                                 </tr>
                             </thead>
-
-                            
-                            @foreach (var item in ViewData["AllProjects"] as IList<MebelDesign71.Web.ViewModels.Projects.ProjectViewModel>)
-                            {
-                                <tbody>
-                                    <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.Name</td>
-                                        <td><textarea cols="40" rows="6">@item.Description</textarea></td>
-                                        <td><img src="@item.HeadImage" width=180 height=120 asp-append-version="true" /></td>
-                                        <td>@item.IsDeleted</td>
-                                        <td><a class='btn btn-warning btn-xs' href="/Administration/AdminProjects/ChangeIsDeleted?id=@item.Id">Ативирай/Деактивирай</a></td>
-                                        <td><a class='btn btn-info btn-xs' href="/Administration/AdminProjects/UpdateProject?id=@item.Id">Промени</a></td>
-
-                                        @{var gallery = galleryService.GetGallery(item.Id).Result.Count;}
+                            <tbody>
+                                 @foreach (var item in ViewData["AllProjects"] as IList<MebelDesign71.Web.ViewModels.Projects.ProjectViewModel>)
+                                     {
+                                         <tr>
+                                             <td>@item.Id</td>
+                                             <td>@item.Name</td>
+                                             <td><textarea cols="40" rows="6">@item.Description</textarea></td>
+                                             <td><img src="@item.HeadImage" width=180 height=120 asp-append-version="true" /></td>
+                                             <td>@item.IsDeleted</td>
+                                             <td><a class='btn btn-warning btn-xs' href="/Administration/AdminProjects/ChangeIsDeleted?id=@item.Id">Ативирай/Деактивирай</a></td>
+                                             <td><a class='btn btn-info btn-xs' href="/Administration/AdminProjects/UpdateProject?id=@item.Id">Промени</a></td>
+                                     
+                                             @{var gallery = galleryService.GetGallery(item.Id).Result.Count;}
+                                             
+                                             @if (gallery == 0)
+                                            {
+                                                <td><a class='btn btn-danger btn-xs' href="/Administration/AdminProjects/Delete?id=@item.Id">Изтрии</a></td>
+                                            }
                                         
-                                        @if (gallery == 0)
-                                       {
-                                           <td><a class='btn btn-danger btn-xs' href="/Administration/AdminProjects/Delete?id=@item.Id">Изтрии</a></td>
-                                       }
-                               
-                                    </tr>
-                                </tbody>
-                            }
+                                         </tr>
+                                     }
+                            </tbody>
                         </table>
                     </div>
                     <!-- /.box-body -->

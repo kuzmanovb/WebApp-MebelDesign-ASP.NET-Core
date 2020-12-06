@@ -21,7 +21,7 @@
                         <h3 class="box-title">Всички проекти</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body no-padding table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -32,18 +32,18 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            @foreach (var item in ViewData["AllProjects"] as IList<MebelDesign71.Web.ViewModels.Projects.ProjectViewModel>)
-                                {
                             <tbody>
-                                <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.Name</td>
-                                    <td><img src="@item.HeadImage" width=150 height=100 asp-append-version="true" /></td>
-                                    <td><a class='btn btn-info' href="/Administration/AdminProjectsGallery/Gallery?id=@item.Id">Галерия на проекта</a></td>
-                                    <td><a class='btn btn-warning ' href="/Administration/AdminProjectsGallery/AddImage?id=@item.Id">Добави снимка към галерията</a></td>
-                                </tr>
+                                 @foreach (var item in ViewData["AllProjects"] as IList<MebelDesign71.Web.ViewModels.Projects.ProjectViewModel>)
+                                     {
+                                     <tr>
+                                         <td>@item.Id</td>
+                                         <td>@item.Name</td>
+                                         <td><img src="@item.HeadImage" width=150 height=100 asp-append-version="true" /></td>
+                                         <td><a class='btn btn-info' href="/Administration/AdminProjectsGallery/Gallery?id=@item.Id">Галерия на проекта</a></td>
+                                         <td><a class='btn btn-warning ' href="/Administration/AdminProjectsGallery/AddImage?id=@item.Id">Добави снимка към галерията</a></td>
+                                     </tr>
+                                 }
                             </tbody>
-                            }
                         </table>
                     </div>
                     <!-- /.box-body -->
