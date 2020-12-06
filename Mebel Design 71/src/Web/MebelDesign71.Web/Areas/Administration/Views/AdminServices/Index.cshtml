@@ -24,7 +24,7 @@
                         <h3 class="box-title">Всички услуги</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body no-padding table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -37,35 +37,38 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-
                                 </tr>
                             </thead>
-                            @foreach (var service in ViewData["AllService"] as IList<ServiceInputModel>)
-                            {
-                                <tbody>
+                            <tbody>
+                               @foreach (var service in ViewData["AllService"] as IList<ServiceInputModel>)
+                                {
                                     <tr>
                                         <td>@service.Id</td>
                                         <td>@service.Name</td>
                                         <td><textarea cols="40" rows="6">@service.Description</textarea></td>
                                         <td><img src="@service.ImagePath" width=180 height=120 asp-append-version="true" /></td>
+                               
                                         @if (service.DocumentId != null)
                                         {
-                                    <td><a class="btn btn-success btn-xs" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@service.DocumentId" />@service.DocumentName</td>
- }
-                                else
-                                {
-                                    <td>Няма прикачен документ</td>}
+                                           <td><a class="btn btn-success btn-xs" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@service.DocumentId" />@service.DocumentName</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Няма прикачен документ</td>
+                                        }
+                               
                                         <td>@service.IsDeleted</td>
                                         <td><a class='btn btn-warning btn-xs' href="/Administration/AdminServices/ChangeIsDeleted?id=@service.Id">Ативирай/Деактивирай</a></td>
                                         <td><a class='btn btn-info btn-xs' href="/Administration/AdminServices/UpdateService?id=@service.Id">Промени</a></td>
+                               
                                         @{ var orders = this.ViewData["Orders"] as List<OrderViewModel>;}
                                         @if (!orders.Any(o => o.ServiceId == service.Id))
                                         {
                                             <td><a class='btn btn-danger btn-xs' href="/Administration/AdminServices/Delete?id=@service.Id">Изтрии</a></td>
                                         }
                                     </tr>
-                                </tbody>
-                             }
+                                }
+                            </tbody>
                         </table>
                     </div>
                     <!-- /.box-body -->
