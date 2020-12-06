@@ -17,25 +17,30 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-
         <header class="main-header">
             <!-- Logo -->
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">Към сайта</a>
-            <nav class="navbar navbar-static-top"></nav>
-        </header>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>С</b>айт</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>О</b>братно към сайта</span>
+            </a>
 
-        <partial name="_LeftNavigation" />
-        
-        @RenderBody()
+            <partial name="_HeaderNavbar" />
+            </header>
 
-       <partial name="_Footer" />
-      
-    </div>
+            <partial name="_LeftNavigation" />
 
-   
-    @{ await Html.RenderPartialAsync("_JS");}
+            @RenderBody()
+
+            <partial name="_Footer" />
+
+        </div>
 
 
-    @RenderSection("Scripts", required: false)
-</body>
-</html>
+        @{ await Html.RenderPartialAsync("_JS");}
+
+
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>
