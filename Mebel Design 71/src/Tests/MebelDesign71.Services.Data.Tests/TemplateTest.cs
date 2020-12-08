@@ -61,7 +61,7 @@
                 Value = "Bulgaria, Sofia",
             };
 
-            await this.settingsService.AddSettingAsync(firstSetting);
+            await this.settingsService.AddSettingAsync(this.firstSetting);
             await this.settingsService.AddSettingAsync(model);
             var count = this.settingsService.GetCount();
 

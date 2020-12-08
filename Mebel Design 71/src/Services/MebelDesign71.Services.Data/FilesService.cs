@@ -48,7 +48,14 @@
             var fileName = Path.GetFileNameWithoutExtension(file.FileName);
             var filePath = Path.Combine(basePath, gen + file.FileName);
             var extension = Path.GetExtension(file.FileName);
-            var userId = this.httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            try
+            {
+                var userId = this.httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             if (!File.Exists(filePath))
             {
@@ -63,7 +70,7 @@
                     FileType = file.ContentType,
                     Extension = extension,
                     Name = fileName,
-                    UserId = userId,
+                    //UserId = userId,
                     Description = description,
                     FilePath = filePath,
                 };
