@@ -1,5 +1,7 @@
 ﻿namespace MebelDesign71.Services.Data.Tests
 {
+    using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data;
@@ -11,6 +13,8 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
+    using Moq;
+
     using Xunit;
 
     public class FilesServiceTests
@@ -19,7 +23,6 @@
         private readonly IFilesService filesService;
         private EfRepository<FileOnFileSystem> filesRepository;
         private ApplicationDbContext connection;
-        private HttpContextAccessor httpContextAccessor;
         private HostingEnvironment environment;
 
         public FilesServiceTests()
@@ -28,10 +31,9 @@
               .UseInMemoryDatabase(databaseName: "FileTestDb").Options;
             this.connection = new ApplicationDbContext(options);
             this.filesRepository = new EfRepository<FileOnFileSystem>(this.connection);
-            this.httpContextAccessor = new HttpContextAccessor();
             this.environment = new HostingEnvironment();
 
-            this.filesService = new FilesService(this.filesRepository, this.httpContextAccessor, this.environment);
+            this.filesService = new FilesService(this.filesRepository, this.environment);
         }
 
         public void Dispose()
@@ -91,28 +93,29 @@
             Assert.False(result);
         }
 
-        //[Fact]
-        //public async Task UploadToFileSystemExpectationCorrrectly()
-        //{
-        //    var fileMock = new Mock<IFormFile>();
-        //    var content = "Hello World from a Fake File";
-        //    var fileName = "test.pdf";
-        //    var ms = new MemoryStream();
-        //    var writer = new StreamWriter(ms);
-        //    writer.Write(content);
-        //    writer.Flush();
-        //    ms.Position = 0;
-        //    fileMock.Setup(_ => _.OpenReadStream()).Returns(ms);
-        //    fileMock.Setup(_ => _.FileName).Returns(fileName);
-        //    fileMock.Setup(_ => _.Length).Returns(ms.Length);
+        [Fact]
+        public async Task UploadToFileSystemExpectationCorrrectly()
+        {
+            var fileMock = new Mock<IFormFile>();
+            var content = "Hello World from a Fake File";
+            var fileName = "test.pdf";
+            var ms = new MemoryStream();
+            var writer = new StreamWriter(ms);
+            writer.Write(content);
+            writer.Flush();
+            ms.Position = 0;
+            fileMock.Setup(_ => _.OpenReadStream()).Returns(ms);
+            fileMock.Setup(_ => _.FileName).Returns(fileName);
+            fileMock.Setup(_ => _.Length).Returns(ms.Length);
 
-        //    var file = fileMock.Object;
+            var file = fileMock.Object;
 
-        //    //Act
-        //    var result = await this.filesService.UploadToFileSystem(file, "test");
+            var fileId = await this.filesService.UploadToFileSystem(file, "test");
 
-        //    //Assert.IsInstanceOfType(result, typeof(IActionResult));
+            var allRepo = this.filesRepository.All().FirstOrDefault();
 
-        //}
+            Assert.NotNull(allRepo);
+
+        }
     }
 }
