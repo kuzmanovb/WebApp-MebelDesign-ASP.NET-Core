@@ -3,7 +3,6 @@
     using System;
     using System.IO;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data.Common.Repositories;
@@ -18,19 +17,15 @@
         private const string EmptyString = "";
 
         private readonly IRepository<FileOnFileSystem> dbFileOnSystem;
-        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IHostingEnvironment environment;
 
-        public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem, IHttpContextAccessor httpContextAccessor, IHostingEnvironment environment)
+        public FilesService(IRepository<FileOnFileSystem> dbFileOnSystem, IHostingEnvironment environment)
         {
             this.dbFileOnSystem = dbFileOnSystem;
-            this.httpContextAccessor = httpContextAccessor;
             this.environment = environment;
         }
 
-
-
-        public async Task<string> UploadToFileSystem(IFormFile file, string folderInWwwRoot, string description = null)
+        public async Task<string> UploadToFileSystem(IFormFile file, string folderInWwwRoot, string description = null, string userId = null)
         {
 
             var basePath = Path.Combine(this.environment.WebRootPath + "\\" + folderInWwwRoot + "\\");
@@ -48,14 +43,6 @@
             var fileName = Path.GetFileNameWithoutExtension(file.FileName);
             var filePath = Path.Combine(basePath, gen + file.FileName);
             var extension = Path.GetExtension(file.FileName);
-            try
-            {
-                var userId = this.httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
 
             if (!File.Exists(filePath))
             {
@@ -70,7 +57,7 @@
                     FileType = file.ContentType,
                     Extension = extension,
                     Name = fileName,
-                    //UserId = userId,
+                    UserId = userId,
                     Description = description,
                     FilePath = filePath,
                 };
