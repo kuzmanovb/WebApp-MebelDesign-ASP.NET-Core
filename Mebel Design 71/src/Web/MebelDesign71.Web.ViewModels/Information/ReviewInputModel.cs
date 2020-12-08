@@ -7,6 +7,8 @@
 
     public class ReviewInputModel
     {
+        public string UserId { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете вашето име")]
         [StringLength(30, ErrorMessage = "Името трябва да бъде по-малко от {1}.")]
         [Display(Name = "Вашето име")]
