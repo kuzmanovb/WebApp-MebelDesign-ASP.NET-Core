@@ -7,7 +7,7 @@
 
     public interface IFilesService
     {
-        Task<string> UploadToFileSystem(IFormFile files, string folderInWwwRoot, string description = null);
+        Task<string> UploadToFileSystem(IFormFile files, string folderInWwwRoot, string description = null, string userId = null);
 
         Task<FileOnFileSystem> GetFileByIdFromFileSystem(string id);
 
