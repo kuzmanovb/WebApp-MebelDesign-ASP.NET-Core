@@ -37,20 +37,20 @@
 
         // Start Testing -------------------------------------------------------------------------------------------------------
 
-        [Fact]
-        public async Task TestAddingSetting()
-        {
-            var model = new Setting
-            {
-                Name = "Mol Sofia",
-                Value = "Bulgaria, Sofia",
-            };
+        //[Fact]
+        //public async Task TestAddingSetting()
+        //{
+        //    var model = new Setting
+        //    {
+        //        Name = "Mol Sofia",
+        //        Value = "Bulgaria, Sofia",
+        //    };
 
-            await this.settingsService.AddSettingAsync(model);
-            var count = await this.settingRepository.All().CountAsync();
+        //    await this.settingsService.AddSettingAsync(model);
+        //    var count = await this.settingRepository.All().CountAsync();
 
-            Assert.Equal(1, count);
-        }
+        //    Assert.Equal(1, count);
+        //}
 
         [Fact]
         public async Task TestGetCount()

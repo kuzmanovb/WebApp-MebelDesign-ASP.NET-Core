@@ -8,10 +8,10 @@
     public interface IInformationService
     {
 
-        Task<string> AddRewiev(ReviewInputModel input);
+        Task<string> AddRewievAsync(ReviewInputModel input);
 
-        Task<ICollection<ReviewViewModel>> GetAllReview();
+        Task<ICollection<ReviewViewModel>> GetAllReviewAsync();
 
-        Task DeleteReview(string id);
+        Task DeleteReviewAsync(string id);
     }
 }

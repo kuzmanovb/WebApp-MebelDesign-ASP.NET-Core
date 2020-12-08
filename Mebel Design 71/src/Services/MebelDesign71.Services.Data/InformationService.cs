@@ -26,7 +26,7 @@
             this.filesService = filesService;
         }
 
-        public async Task<string> AddRewiev(ReviewInputModel input)
+        public async Task<string> AddRewievAsync(ReviewInputModel input)
         {
 
             int imageId = this.dbImage.All().Where(i => i.File.Name == "DefaultImageReview").First().Id;
@@ -58,10 +58,9 @@
             await this.dbReview.SaveChangesAsync();
 
             return newReview.Id;
-
         }
 
-        public async Task<ICollection<ReviewViewModel>> GetAllReview()
+        public async Task<ICollection<ReviewViewModel>> GetAllReviewAsync()
         {
             var allReview = await this.dbReview.All()
                 .OrderBy(r => r.CreatedOn)
@@ -77,7 +76,7 @@
             return allReview;
         }
 
-        public async Task DeleteReview(string id)
+        public async Task DeleteReviewAsync(string id)
         {
             var currentReview = this.dbReview.All().FirstOrDefault(r => r.Id == id);
             this.dbReview.HardDelete(currentReview);
