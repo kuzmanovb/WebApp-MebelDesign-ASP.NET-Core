@@ -1,33 +1,26 @@
 ﻿namespace MebelDesign71.Services.Data.Tests
 {
-    using System.IO;
-    using System.Threading;
     using System.Threading.Tasks;
 
     using MebelDesign71.Data;
-    using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Data.Repositories;
     using MebelDesign71.Services.Data.Contracts;
+
     using Microsoft.AspNetCore.Hosting.Internal;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
-    using Moq;
+
     using Xunit;
 
     public class FilesServiceTests
     {
-        // DeleteFileFromFileSystem
-        // GetFileByIdFromFileSystem
-        // UploadToFileSystem
 
         private readonly IFilesService filesService;
         private EfRepository<FileOnFileSystem> filesRepository;
         private ApplicationDbContext connection;
         private HttpContextAccessor httpContextAccessor;
         private HostingEnvironment environment;
-
-        private Setting firstSetting;
 
         public FilesServiceTests()
         {
@@ -62,7 +55,6 @@
             Assert.Equal(getEntityTwo, getEntityTwo);
             Assert.False(getEntityOne == getEntityTwo);
         }
-
 
         [Fact]
         public async Task GetFileByIdReturnNull()
