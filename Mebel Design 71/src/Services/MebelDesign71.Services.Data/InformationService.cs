@@ -18,14 +18,12 @@
         private readonly IRepository<ImageToReview> dbImage;
         private readonly IDeletableEntityRepository<Review> dbReview;
         private readonly IFilesService filesService;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public InformationService(IRepository<ImageToReview> dbImage, IDeletableEntityRepository<Review> dbReview, IFilesService filesService, IHttpContextAccessor httpContextAccessor)
+        public InformationService(IRepository<ImageToReview> dbImage, IDeletableEntityRepository<Review> dbReview, IFilesService filesService)
         {
             this.dbImage = dbImage;
             this.dbReview = dbReview;
             this.filesService = filesService;
-            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<string> AddRewiev(ReviewInputModel input)
@@ -48,13 +46,11 @@
                 }
             }
 
-            var userId = this.httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             var newReview = new Review
             {
                 Name = input.Name,
                 ImageId = imageId,
-                UserId = userId,
+                UserId = input.UserId,
                 Description = input.Description,
             };
 
@@ -92,8 +88,6 @@
             await this.dbImage.SaveChangesAsync();
 
             await this.filesService.DeleteFileFromFileSystem(profilImage.FileId);
-
-
         }
 
         private static string RenameFilePath(string fullPath)
