@@ -205,8 +205,6 @@
             }
 
             return differentToMinets.ToString() + " mins ago";
-
         }
-
     }
 }
