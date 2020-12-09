@@ -4,12 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Ganss.XSS;
+
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.Infrastructure;
     using MebelDesign71.Web.ViewModels.Orders;
+
     using Microsoft.AspNetCore.Http;
 
     public class OrdersService : IOrdersService
