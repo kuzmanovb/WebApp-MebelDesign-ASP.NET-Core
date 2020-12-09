@@ -86,10 +86,15 @@
             await this.dbReview.SaveChangesAsync();
 
             var profilImage = this.dbImage.All().FirstOrDefault(i => i.Id == currentReview.ImageId);
-            this.dbImage.Delete(profilImage);
-            await this.dbImage.SaveChangesAsync();
+            int defaultImageId = this.dbImage.All().Where(i => i.File.Name == "DefaultImageReview").First().Id;
 
-            await this.filesService.DeleteFileFromFileSystem(profilImage.FileId);
+            if (profilImage.Id != defaultImageId)
+            {
+                this.dbImage.Delete(profilImage);
+                await this.dbImage.SaveChangesAsync();
+
+                await this.filesService.DeleteFileFromFileSystem(profilImage.FileId);
+            }
         }
 
         private static string RenameFilePath(string fullPath)
