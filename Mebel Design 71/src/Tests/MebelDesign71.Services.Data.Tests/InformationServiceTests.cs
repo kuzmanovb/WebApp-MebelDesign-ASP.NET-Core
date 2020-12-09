@@ -4,6 +4,8 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using Ganss.XSS;
+
     using MebelDesign71.Data;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Data.Repositories;
@@ -30,6 +32,7 @@
         private EfRepository<FileOnFileSystem> filesRepository;
 
         private HostingEnvironment environment;
+        private IHtmlSanitizer htmlSanitizer;
 
         private IFormFile imageFileDefault;
         private IFormFile imageFile;
@@ -45,9 +48,10 @@
             this.filesRepository = new EfRepository<FileOnFileSystem>(this.connection);
 
             this.environment = new HostingEnvironment();
+            this.htmlSanitizer = new HtmlSanitizer();
 
             this.filesService = new FilesService(this.filesRepository, this.environment);
-            this.informationService = new InformationService(this.imageRepository, this.reviewRepository, this.filesService);
+            this.informationService = new InformationService(this.imageRepository, this.reviewRepository, this.filesService, this.htmlSanitizer);
 
             this.InitializeTestFile();
         }
@@ -134,13 +138,6 @@
             Assert.Equal(0, countReview);
         }
 
-
-
-
-
-
-
-        // End Testing ---------------------------------------------------------------------------------------------------------------
         private void InitializeTestFile()
         {
             var imageFileDefaultMock = new Mock<IFormFile>();

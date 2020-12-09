@@ -2,14 +2,15 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
+
+    using Ganss.XSS;
 
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.ViewModels.Information;
-    using Microsoft.AspNetCore.Http;
+
     using Microsoft.EntityFrameworkCore;
 
     public class InformationService : IInformationService
@@ -18,12 +19,14 @@
         private readonly IRepository<ImageToReview> dbImage;
         private readonly IDeletableEntityRepository<Review> dbReview;
         private readonly IFilesService filesService;
+        private readonly IHtmlSanitizer sanitizer;
 
-        public InformationService(IRepository<ImageToReview> dbImage, IDeletableEntityRepository<Review> dbReview, IFilesService filesService)
+        public InformationService(IRepository<ImageToReview> dbImage, IDeletableEntityRepository<Review> dbReview, IFilesService filesService, IHtmlSanitizer sanitizer)
         {
             this.dbImage = dbImage;
             this.dbReview = dbReview;
             this.filesService = filesService;
+            this.sanitizer = sanitizer;
         }
 
         public async Task<string> AddRewievAsync(ReviewInputModel input)
@@ -48,10 +51,10 @@
 
             var newReview = new Review
             {
-                Name = input.Name,
+                Name = this.sanitizer.Sanitize(input.Name),
                 ImageId = imageId,
                 UserId = input.UserId,
-                Description = input.Description,
+                Description = this.sanitizer.Sanitize(input.Description),
             };
 
             await this.dbReview.AddAsync(newReview);
