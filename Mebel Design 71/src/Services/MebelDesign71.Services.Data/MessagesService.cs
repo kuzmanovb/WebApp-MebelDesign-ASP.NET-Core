@@ -140,7 +140,7 @@
             return message;
         }
 
-        public SendMessageViewModel GetSendMessagesById(string id)
+        public SendMessageViewModel GetSendMessageById(string id)
         {
             var allSendMessage = this.dbSendMessage.All()
                 .Where(m => m.Id == id)
@@ -160,7 +160,7 @@
             return allSendMessage;
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteMessageAsync(string id)
         {
             var currentMessage = this.dbMessage.All().FirstOrDefault(m => m.Id == id);
             this.dbMessage.Delete(currentMessage);
@@ -174,14 +174,14 @@
             await this.dbSendMessage.SaveChangesAsync();
         }
 
-        public async Task RestoreAsync(string id)
+        public async Task RestoreMessageAsync(string id)
         {
             var currentMessage = this.dbMessage.AllWithDeleted().FirstOrDefault(m => m.Id == id);
             this.dbMessage.Undelete(currentMessage);
             await this.dbMessage.SaveChangesAsync();
         }
 
-        public async Task HardDeleteAsync(string id)
+        public async Task HardDeleteMessageAsync(string id)
         {
             var currentMessage = this.dbMessage.AllWithDeleted().FirstOrDefault(m => m.Id == id);
             this.dbMessage.HardDelete(currentMessage);
