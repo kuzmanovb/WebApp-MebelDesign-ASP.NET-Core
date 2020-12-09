@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Ganss.XSS;
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Data.Contracts;
@@ -17,12 +17,14 @@
         private readonly IDeletableEntityRepository<OrderDocument> dbOrderDocument;
         private readonly IDeletableEntityRepository<Order> dbOrder;
         private readonly IFilesService filesService;
+        private readonly IHtmlSanitizer sanitizer;
 
-        public OrdersService(IDeletableEntityRepository<OrderDocument> dbOrderDocument, IDeletableEntityRepository<Order> dbOrder, IFilesService filesService)
+        public OrdersService(IDeletableEntityRepository<OrderDocument> dbOrderDocument, IDeletableEntityRepository<Order> dbOrder, IFilesService filesService, IHtmlSanitizer sanitizer)
         {
             this.dbOrderDocument = dbOrderDocument;
             this.dbOrder = dbOrder;
             this.filesService = filesService;
+            this.sanitizer = sanitizer;
         }
 
         public async Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId, string number)
@@ -46,7 +48,7 @@
             var newOrder = new Order
             {
                 ServiceId = input.ServiceId,
-                Description = input.Description,
+                Description = this.sanitizer.Sanitize(input.Description),
                 UserId = input.UserId,
                 Number = DateTime.UtcNow.ToString("yMdhms"),
             };
@@ -138,7 +140,7 @@
 
             if (currentOrder.Description != input.Description)
             {
-                currentOrder.Description = input.Description;
+                currentOrder.Description = this.sanitizer.Sanitize(input.Description);
             }
 
             if (currentOrder.Price != input.Price)
