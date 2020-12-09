@@ -35,7 +35,6 @@
 
                     <form asp-area="Administration" asp-controller="AdminMessages" asp-action="Write" method="post">
                         <div class="box-body">
-                            <input type="hidden" asp-for="@Model.ToMessageId" value="@ViewData["toMessageId"]" />
                             <div class="form-group">
                                 <label asp-for="@Model.Email"></label>
                                 <input asp-for="@Model.Email" class="form-control" placeholder="До:"  value="@ViewData["email"]"/>

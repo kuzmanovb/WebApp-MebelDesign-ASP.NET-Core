@@ -1,13 +1,13 @@
 ﻿namespace MebelDesign71.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
 
-    using System.Threading.Tasks;
-    using MebelDesign71.Services.Data.Contracts;
-    using MebelDesign71.Web.ViewModels.Messages;
-    using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
     using MebelDesign71.Common;
+    using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Services.Messaging;
+    using MebelDesign71.Web.ViewModels.Messages;
+
+    using Microsoft.AspNetCore.Mvc;
 
     public class AdminMessagesController : AdministrationController
     {
@@ -31,7 +31,6 @@
 
         public IActionResult Write(string id, string email, string about)
         {
-            this.ViewData["toMessageId"] = id;
             this.ViewData["email"] = email;
             this.ViewData["about"] = about;
 
