@@ -1,7 +1,7 @@
 ﻿namespace MebelDesign71.Web
 {
     using System.Reflection;
-
+    using Ganss.XSS;
     using MebelDesign71.Data;
     using MebelDesign71.Data.Common;
     using MebelDesign71.Data.Common.Repositories;
@@ -72,6 +72,7 @@
             services.AddTransient<IProjectsGalleryService, ProjectsGalleryService>();
             services.AddTransient<IServicesService, ServicesService>();
             services.AddTransient<IOrdersService, OrdersService>();
+            services.AddSingleton<IHtmlSanitizer>(_ => new HtmlSanitizer());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
