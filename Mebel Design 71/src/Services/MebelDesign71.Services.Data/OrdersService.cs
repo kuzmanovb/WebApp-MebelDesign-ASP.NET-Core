@@ -30,9 +30,9 @@
             this.sanitizer = sanitizer;
         }
 
-        public async Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId, string number)
+        public async Task<string> AddDocumentToOrderAsync(IFormFile document, string orderId, string userId, string orderNumber)
         {
-            var fileId = await this.filesService.UploadToFileSystem(document, "documents\\service\\orders\\" + number, "Service Document");
+            var fileId = await this.filesService.UploadToFileSystem(document, "documents\\service\\orders\\" + orderNumber, "Service Document");
             var newUserDocument = new OrderDocument
             {
                 UserId = userId,
@@ -46,7 +46,7 @@
             return newUserDocument.Id;
         }
 
-        public async Task<string> AddOrder(OrderInputModel input)
+        public async Task<string> AddOrderAsync(OrderInputModel input)
         {
             var newOrder = new Order
             {
@@ -61,7 +61,7 @@
 
             foreach (var document in input.Documents)
             {
-                await this.AddDocumentToOrder(document, newOrder.Id, input.UserId, newOrder.Number);
+                await this.AddDocumentToOrderAsync(document, newOrder.Id, input.UserId, newOrder.Number);
             }
 
             return newOrder.Id;
@@ -137,7 +137,7 @@
             return currentOrder;
         }
 
-        public async Task UpdateOrder(OrderViewModel input)
+        public async Task UpdateOrderAsync(OrderViewModel input)
         {
             var currentOrder = this.dbOrder.All().Where(o => o.Id == input.OrderId).FirstOrDefault();
 
@@ -160,7 +160,7 @@
             await this.dbOrder.SaveChangesAsync();
         }
 
-        public async Task DeletedOrder(string orderId)
+        public async Task DeletedOrderAsync(string orderId)
         {
             var curentOrder = this.dbOrder.All().Where(o => o.Id == orderId).FirstOrDefault();
 

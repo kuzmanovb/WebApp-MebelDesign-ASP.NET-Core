@@ -90,7 +90,7 @@
                 return this.View(input);
             }
 
-            await this.ordersService.UpdateOrder(input);
+            await this.ordersService.UpdateOrderAsync(input);
 
             return this.RedirectToAction("Index");
         }

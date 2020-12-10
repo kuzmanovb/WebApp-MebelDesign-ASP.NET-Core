@@ -62,7 +62,7 @@
                 return this.View(input);
             }
 
-            await this.ordersService.AddOrder(input);
+            await this.ordersService.AddOrderAsync(input);
 
             return this.RedirectToAction("ThankYou");
         }
@@ -96,7 +96,7 @@
 
         public async Task<IActionResult> DeletedOrder(string id)
         {
-            await this.ordersService.DeletedOrder(id);
+            await this.ordersService.DeletedOrderAsync(id);
 
             return this.RedirectToAction("Index");
         }
