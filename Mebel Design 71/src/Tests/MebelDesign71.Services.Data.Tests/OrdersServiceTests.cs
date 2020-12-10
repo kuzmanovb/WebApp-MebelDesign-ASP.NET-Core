@@ -88,15 +88,36 @@
         }
 
         [Fact]
-        public async Task TestUpdateOrderAsync()
+        public async Task TestGetAllOrders()
+        {
+            var orderId = await this.ordersService.AddOrderAsync(this.orderInputModel);
+
+            var orders = this.ordersService.GetAllOrders();
+
+            Assert.NotNull(orders);
+        }
+
+        //[Fact]
+        //public async Task TestGetOrderById()
+        //{
+        //    var orderId = await this.ordersService.AddOrderAsync(this.orderInputModel);
+
+        //    var orders = this.ordersService.GetOrderById(orderId);
+
+        //    Assert.NotNull(orders);
+        //}
+
+        [Fact]
+        public async Task TestUpdateOrder()
         {
             var orderId = await this.ordersService.AddOrderAsync(this.orderInputModel);
 
             var orderViewModel = new OrderViewModel
             {
+                OrderId = orderId,
                 UserId = "some userId",
                 ServiceId = 2,
-                Description = "Lorem Ipsum is simply dummy text ",
+                Description = "test",
                 Price = 10,
             };
 
@@ -105,21 +126,20 @@
             var order = this.orderRepository.All().FirstOrDefault();
 
             Assert.Equal(10, order.Price);
+            Assert.Equal("test", order.Description);
         }
 
         [Fact]
-        public async Task TestGetAllOrders()
+        public async Task TestDeletedOrder()
         {
             var orderId = await this.ordersService.AddOrderAsync(this.orderInputModel);
 
-            var orders = this.ordersService.GetAllOrders();
+            await this.ordersService.DeletedOrderAsync(orderId);
 
-            Assert.Equal(1, orders.Count);
+            var order = this.orderRepository.All().FirstOrDefault();
+
+            Assert.Null(order);
         }
-
-
-
-
 
         // End Testing ---------------------------------------------------------------------------------------------------------------
 
