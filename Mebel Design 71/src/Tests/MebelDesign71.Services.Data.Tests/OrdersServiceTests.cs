@@ -16,7 +16,6 @@
 
     using Microsoft.AspNetCore.Hosting.Internal;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using Moq;
@@ -28,7 +27,6 @@
         private readonly IFilesService filesService;
         private readonly IOrdersService ordersService;
 
-        private EfRepository<ApplicationUser> userRepository;
         private EfDeletableEntityRepository<Order> orderRepository;
         private EfDeletableEntityRepository<OrderDocument> orderDocumentRepository;
         private EfRepository<FileOnFileSystem> filesRepository;
@@ -47,7 +45,6 @@
               .UseInMemoryDatabase(databaseName: "TestDb").Options;
             this.connection = new ApplicationDbContext(options);
 
-            this.userRepository = new EfDeletableEntityRepository<ApplicationUser>(this.connection);
             this.orderRepository = new EfDeletableEntityRepository<Order>(this.connection);
             this.orderDocumentRepository = new EfDeletableEntityRepository<OrderDocument>(this.connection);
             this.filesRepository = new EfRepository<FileOnFileSystem>(this.connection);
