@@ -28,9 +28,6 @@
         private ApplicationDbContext connection;
         private IHtmlSanitizer htmlSanitizer;
 
-        private MessageInputModel messageInputModel;
-        private SendMessageInputModel sendMessageInputModel;
-
         public MessageServiceTests()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
@@ -41,8 +38,6 @@
             this.sendMessageRepository = new EfDeletableEntityRepository<SendMessage>(this.connection);
 
             this.htmlSanitizer = new HtmlSanitizer();
-
-            this.InitializeFields();
 
             this.messagesService = new MessagesService(this.messageRepository, this.sendMessageRepository, this.htmlSanitizer);
         }
@@ -56,7 +51,16 @@
         [Fact]
         public async Task TestAddMessageAsync()
         {
-            await this.messagesService.AddMessageAsync(this.messageInputModel);
+            var messageInputModel = new MessageInputModel
+            {
+                FirstName = "Test First Name",
+                LastName = "Test Last Name",
+                Email = "Test Email",
+                About = "Test About",
+                Description = "Test Description",
+            };
+
+            await this.messagesService.AddMessageAsync(messageInputModel);
             var messageFirstName = this.messageRepository.All().FirstOrDefault().FirstName;
 
             Assert.Equal("Test First Name", messageFirstName);
@@ -65,7 +69,14 @@
         [Fact]
         public async Task TestAddSendMessageAsync()
         {
-            await this.messagesService.AddSendMessageAsync(this.sendMessageInputModel);
+            var sendMessageInputModel = new SendMessageInputModel
+            {
+                About = "Test About",
+                Description = "Test Description",
+                Email = "Test Email",
+            };
+
+            await this.messagesService.AddSendMessageAsync(sendMessageInputModel);
             var sendMessageToEmail = this.sendMessageRepository.All().FirstOrDefault().ToEmail;
 
             Assert.Equal("Test Email", sendMessageToEmail);
@@ -74,9 +85,18 @@
         [Fact]
         public async Task TestGetAllMessages()
         {
-            await this.messagesService.AddMessageAsync(this.messageInputModel);
-            await this.messagesService.AddMessageAsync(this.messageInputModel);
-            await this.messagesService.AddMessageAsync(this.messageInputModel);
+            var messageInputModel = new MessageInputModel
+            {
+                FirstName = "Test First Name",
+                LastName = "Test Last Name",
+                Email = "Test Email",
+                About = "Test About",
+                Description = "Test Description",
+            };
+
+            await this.messagesService.AddMessageAsync(messageInputModel);
+            await this.messagesService.AddMessageAsync(messageInputModel);
+            await this.messagesService.AddMessageAsync(messageInputModel);
 
             var messageCount = this.messagesService.GetAllMessages().Count;
 
@@ -86,8 +106,15 @@
         [Fact]
         public async Task TestGetAllSendMessages()
         {
-            await this.messagesService.AddSendMessageAsync(this.sendMessageInputModel);
-            await this.messagesService.AddSendMessageAsync(this.sendMessageInputModel);
+            var sendMessageInputModel = new SendMessageInputModel
+            {
+                About = "Test About",
+                Description = "Test Description",
+                Email = "Test Email",
+            };
+
+            await this.messagesService.AddSendMessageAsync(sendMessageInputModel);
+            await this.messagesService.AddSendMessageAsync(sendMessageInputModel);
 
             var sendMessageCount = this.messagesService.GetAllSendMessages().Count;
 
@@ -97,8 +124,17 @@
         [Fact]
         public async Task TestGetIsDeletedMessages()
         {
-            var firstId = await this.messagesService.AddMessageAsync(this.messageInputModel);
-            var secondId = await this.messagesService.AddMessageAsync(this.messageInputModel);
+            var messageInputModel = new MessageInputModel
+            {
+                FirstName = "Test First Name",
+                LastName = "Test Last Name",
+                Email = "Test Email",
+                About = "Test About",
+                Description = "Test Description",
+            };
+
+            var firstId = await this.messagesService.AddMessageAsync(messageInputModel);
+            var secondId = await this.messagesService.AddMessageAsync(messageInputModel);
 
             await this.messagesService.DeleteMessageAsync(firstId);
             await this.messagesService.DeleteMessageAsync(secondId);
@@ -111,7 +147,16 @@
         [Fact]
         public async Task TestGetMessageById()
         {
-            var id = await this.messagesService.AddMessageAsync(this.messageInputModel);
+            var messageInputModel = new MessageInputModel
+            {
+                FirstName = "Test First Name",
+                LastName = "Test Last Name",
+                Email = "Test Email",
+                About = "Test About",
+                Description = "Test Description",
+            };
+
+            var id = await this.messagesService.AddMessageAsync(messageInputModel);
 
             var expectMessage = this.messagesService.GetMessageById(id);
 
@@ -121,7 +166,14 @@
         [Fact]
         public async Task TestGetSendMessagesById()
         {
-            var id = await this.messagesService.AddSendMessageAsync(this.sendMessageInputModel);
+            var sendMessageInputModel = new SendMessageInputModel
+            {
+                About = "Test About",
+                Description = "Test Description",
+                Email = "Test Email",
+            };
+
+            var id = await this.messagesService.AddSendMessageAsync(sendMessageInputModel);
 
             var expectMessage = this.messagesService.GetSendMessageById(id);
 
@@ -131,7 +183,16 @@
         [Fact]
         public async Task TestDeleteMessageAsync()
         {
-            var id = await this.messagesService.AddMessageAsync(this.messageInputModel);
+            var messageInputModel = new MessageInputModel
+            {
+                FirstName = "Test First Name",
+                LastName = "Test Last Name",
+                Email = "Test Email",
+                About = "Test About",
+                Description = "Test Description",
+            };
+
+            var id = await this.messagesService.AddMessageAsync(messageInputModel);
 
             await this.messagesService.DeleteMessageAsync(id);
 
@@ -143,7 +204,14 @@
         [Fact]
         public async Task TestDeleteSendMessageAsync()
         {
-            var id = await this.messagesService.AddSendMessageAsync(this.sendMessageInputModel);
+            var sendMessageInputModel = new SendMessageInputModel
+            {
+                About = "Test About",
+                Description = "Test Description",
+                Email = "Test Email",
+            };
+
+            var id = await this.messagesService.AddSendMessageAsync(sendMessageInputModel);
 
             await this.messagesService.DeleteSendMessageAsync(id);
 
@@ -155,7 +223,16 @@
         [Fact]
         public async Task TestRestoreMessageAsync()
         {
-            var id = await this.messagesService.AddMessageAsync(this.messageInputModel);
+            var messageInputModel = new MessageInputModel
+            {
+                FirstName = "Test First Name",
+                LastName = "Test Last Name",
+                Email = "Test Email",
+                About = "Test About",
+                Description = "Test Description",
+            };
+
+            var id = await this.messagesService.AddMessageAsync(messageInputModel);
 
             await this.messagesService.DeleteMessageAsync(id);
 
@@ -169,18 +246,7 @@
         [Fact]
         public async Task TestHardDeleteMessageAsync()
         {
-            var id = await this.messagesService.AddMessageAsync(this.messageInputModel);
-
-            await this.messagesService.HardDeleteMessageAsync(id);
-
-            var count = this.messageRepository.AllWithDeleted().ToList().Count;
-
-            Assert.Equal(0, count);
-        }
-
-        private void InitializeFields()
-        {
-            this.messageInputModel = new MessageInputModel
+            var messageInputModel = new MessageInputModel
             {
                 FirstName = "Test First Name",
                 LastName = "Test Last Name",
@@ -189,12 +255,13 @@
                 Description = "Test Description",
             };
 
-            this.sendMessageInputModel = new SendMessageInputModel
-            {
-                About = "Test About",
-                Description = "Test Description",
-                Email = "Test Email",
-            };
+            var id = await this.messagesService.AddMessageAsync(messageInputModel);
+
+            await this.messagesService.HardDeleteMessageAsync(id);
+
+            var message = this.messageRepository.AllWithDeleted().ToList();
+
+            Assert.Empty(message);
         }
     }
 }
