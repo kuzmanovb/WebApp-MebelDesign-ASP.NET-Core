@@ -62,6 +62,11 @@
         [HttpPost]
         public async Task<IActionResult> UpdateService(ServiceInputModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
             await this.servicesService.UpdateService(input);
 
             return this.RedirectToAction("Index");

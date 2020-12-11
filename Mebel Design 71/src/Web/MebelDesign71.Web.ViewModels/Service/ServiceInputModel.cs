@@ -9,7 +9,6 @@
     {
         public int? Id { get; set; }
 
-        // ToDo: Escape special symbol to name
         [Required]
         [Display(Name = "Име")]
         public string Name { get; set; }
@@ -19,12 +18,14 @@
         public string Description { get; set; }
 
         [Display(Name = "Профилна снимка")]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" }, ErrorMessage = "Снимката трябва да бъде в jpg, jpeg или png фомат.")]
         [FileSizeValidationAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
-        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
         public IFormFile HeadImage { get; set; }
 
-        // ToDo: Validate size and extension
         [Display(Name = "Прикачен файл")]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".doc", ".docx", ".xls", ".xlsx", ".txt ", ".pdf" },
+                           ErrorMessage = "Формата на документа трябва да бъде в jpg, jpeg, png, doc, docx, xls, xlsx, txt или pdf фомат.")]
+        [FileSizeValidationAttribute(sizeInBytes: 2 * 1024 * 1024, ErrorMessage = "Размерът на файла трябва да е по-малък от 2 MB")]
         public IFormFile Document { get; set; }
 
         public string ImagePath { get; set; }

@@ -20,7 +20,7 @@
 
         [Display(Name = "Снимка на проекта")]
         [FileSizeValidationAttribute(sizeInBytes: 5 * 1024 * 1024, ErrorMessage = "Размерът на файла на изображението трябва да е по-малък от 5 MB")]
-        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" }, ErrorMessage = "Формата на документа трябва да бъде в jpg, jpeg, png, doc, docx, xls, xlsx, txt или pdf фомат.")]
         public IFormFile HeadImage { get; set; }
 
         public string ImagePath { get; set; }
