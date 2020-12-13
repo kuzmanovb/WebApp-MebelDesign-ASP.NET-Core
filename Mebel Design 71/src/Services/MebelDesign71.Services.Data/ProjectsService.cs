@@ -21,6 +21,22 @@
             this.filesService = filesService;
         }
 
+        public async Task<int> CreateProjectAsync(ProjectInputModel input)
+        {
+            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\projectImages", "Project Hade Image");
+
+            var newProject = new Project
+            {
+                Name = input.Name,
+                Description = input.Description,
+                HeadImageId = imageId,
+            };
+
+            await this.dbProject.AddAsync(newProject);
+            await this.dbProject.SaveChangesAsync();
+
+            return newProject.Id;
+        }
 
         public IEnumerable<ProjectViewModel> GetAllProjects()
         {
@@ -52,9 +68,8 @@
             return allProjects;
         }
 
-        public async Task<ProjectInputModel> GetProjectById(int id)
+        public async Task<ProjectInputModel> GetProjectByIdAsync(int id)
         {
-
             var currentProject = await this.dbProject.AllWithDeleted().Where(p => p.Id == id)
                 .Select(p => new ProjectInputModel
                 {
@@ -68,25 +83,7 @@
             return currentProject;
         }
 
-        public async Task<int> CreateProject(ProjectInputModel input)
-        {
-
-            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\projectImages", "Project Hade Image");
-
-            var newProject = new Project
-            {
-                Name = input.Name,
-                Description = input.Description,
-                HeadImageId = imageId,
-            };
-
-            await this.dbProject.AddAsync(newProject);
-            await this.dbProject.SaveChangesAsync();
-
-            return newProject.Id;
-        }
-
-        public async Task UpdateProject(ProjectInputModel input)
+        public async Task UpdateProjectAsync(ProjectInputModel input)
         {
 
             var currentProject = this.dbProject.All().Where(p => p.Id == input.Id).FirstOrDefault();
@@ -111,7 +108,7 @@
             await this.dbProject.SaveChangesAsync();
         }
 
-        public async Task ChangeIsDeleteProject(int id)
+        public async Task ChangeIsDeleteProjectAsync(int id)
         {
 
             var currentProject = this.dbProject.AllWithDeleted().Where(p => p.Id == id).FirstOrDefault();
@@ -129,7 +126,7 @@
             await this.dbProject.SaveChangesAsync();
         }
 
-        public async Task DeleteProject(int id)
+        public async Task DeleteProjectAsync(int id)
         {
             var currentProject = this.dbProject.All().FirstOrDefault(p => p.Id == id);
             this.dbProject.HardDelete(currentProject);
@@ -144,7 +141,7 @@
             var newString = "/";
             var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
 
-            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
+            var getIndexStartWwwRoot = fullPath.LastIndexOf("wwwroot");
             var lengthWwwroot = "wwwroot".Length;
 
             if (getIndexStartWwwRoot >= 0)
