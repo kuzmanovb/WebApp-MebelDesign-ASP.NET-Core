@@ -185,7 +185,7 @@
             var newString = "/";
             var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
 
-            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
+            var getIndexStartWwwRoot = fullPath.LastIndexOf("wwwroot");
             var lengthWwwroot = "wwwroot".Length;
 
             if (getIndexStartWwwRoot >= 0)
