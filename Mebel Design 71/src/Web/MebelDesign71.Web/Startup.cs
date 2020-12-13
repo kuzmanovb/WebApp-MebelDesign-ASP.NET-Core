@@ -57,6 +57,8 @@
 
             services.AddSingleton(this.configuration);
 
+            services.AddApplicationInsightsTelemetry();
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
