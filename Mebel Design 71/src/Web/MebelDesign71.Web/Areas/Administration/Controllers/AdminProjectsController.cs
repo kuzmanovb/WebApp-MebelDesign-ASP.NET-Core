@@ -42,14 +42,14 @@
                 return this.View(input);
             }
 
-            var id = await this.projectsService.CreateProject(input);
+            var id = await this.projectsService.CreateProjectAsync(input);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> UpdateProject(int id)
         {
-            var currentProject = await this.projectsService.GetProjectById(id);
+            var currentProject = await this.projectsService.GetProjectByIdAsync(id);
 
             return this.View(currentProject);
         }
@@ -57,21 +57,26 @@
         [HttpPost]
         public async Task<IActionResult> UpdateProject(ProjectInputModel input)
         {
-            await this.projectsService.UpdateProject(input);
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.projectsService.UpdateProjectAsync(input);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> ChangeIsDeleted(int id)
         {
-            await this.projectsService.ChangeIsDeleteProject(id);
+            await this.projectsService.ChangeIsDeleteProjectAsync(id);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete (int id)
         {
-            await this.projectsService.DeleteProject(id);
+            await this.projectsService.DeleteProjectAsync(id);
 
             return this.RedirectToAction("Index");
         }

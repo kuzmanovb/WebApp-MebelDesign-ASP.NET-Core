@@ -30,7 +30,7 @@
                 return this.RedirectToAction("/");
             }
 
-            var currentProject = await this.projectsService.GetProjectById(id);
+            var currentProject = await this.projectsService.GetProjectByIdAsync(id);
 
             return this.View(currentProject);
         }
@@ -42,9 +42,9 @@
                 return this.RedirectToAction("/");
             }
 
-            var currentProject = await this.projectsService.GetProjectById(projectId);
+            var currentProject = await this.projectsService.GetProjectByIdAsync(projectId);
 
-            this.ViewData["gallery"] = await this.projectsGalleryService.GetGallery(projectId);
+            this.ViewData["gallery"] = await this.projectsGalleryService.GetGalleryAsync(projectId);
             this.ViewData["projectName"] = currentProject.Name;
             this.ViewData["projectDescription"] = currentProject.Description;
 
