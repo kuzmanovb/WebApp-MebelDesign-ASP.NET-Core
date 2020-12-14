@@ -2,6 +2,7 @@
 {
     using MebelDesign71.Services.Data;
     using MebelDesign71.Services.Data.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.IO;
     using System.Threading.Tasks;
@@ -32,6 +33,7 @@
             return this.View(currentService);
         }
 
+        [Authorize]
         public async Task<IActionResult> DownloadDocument(string id)
         {
             var file = await this.filesService.GetFileByIdFromFileSystemAsync(id);
