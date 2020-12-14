@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -16,11 +17,13 @@
     {
         private readonly IOrdersService ordersService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IFilesService filesService;
 
-        public AdminOrdersController(IOrdersService ordersService, UserManager<ApplicationUser> userManager)
+        public AdminOrdersController(IOrdersService ordersService, UserManager<ApplicationUser> userManager, IFilesService filesService)
         {
             this.ordersService = ordersService;
             this.userManager = userManager;
+            this.filesService = filesService;
         }
 
         public async Task<IActionResult> Index()
@@ -93,6 +96,26 @@
             await this.ordersService.UpdateOrderAsync(input);
 
             return this.RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DownloadDocument(string id)
+        {
+            var file = await this.filesService.GetFileByIdFromFileSystem(id);
+
+            if (file == null)
+            {
+                return null;
+            }
+
+            var memory = new MemoryStream();
+
+            using (var stream = new FileStream(file.FilePath, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+
+            memory.Position = 0;
+            return this.File(memory, file.FileType, file.Name + file.Extension);
         }
     }
 }

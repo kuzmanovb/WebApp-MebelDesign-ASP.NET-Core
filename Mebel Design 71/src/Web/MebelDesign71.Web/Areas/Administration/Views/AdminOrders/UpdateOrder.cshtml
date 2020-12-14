@@ -50,7 +50,7 @@
                               
                                 @foreach (var document in Model.Documents)
                                 {
-                                    <a class="btn btn-primary btn-lg" asp-controller="Orders" asp-action="DownloadDocument" asp-route-id="@document.Id">@document.Name</a>
+                                    <a class="btn btn-primary btn-lg"  asp-area="Administration" asp-controller="AdminOrders" asp-action="DownloadDocument" asp-route-id="@document.Id">@document.Name</a>
                                 }
                                 <p></p>
                             </div>
