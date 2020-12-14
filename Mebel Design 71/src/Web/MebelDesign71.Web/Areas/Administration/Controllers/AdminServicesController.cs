@@ -47,14 +47,14 @@
                 return this.View(input);
             }
 
-            await this.servicesService.CreateService(input);
+            await this.servicesService.CreateServiceAsync(input);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> UpdateService(int id)
         {
-            var currentService = await this.servicesService.GetServiceById(id);
+            var currentService = await this.servicesService.GetServiceByIdAsync(id);
 
             return this.View(currentService);
         }
@@ -67,21 +67,21 @@
                 return this.View(input);
             }
 
-            await this.servicesService.UpdateService(input);
+            await this.servicesService.UpdateServiceAsync(input);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> ChangeIsDeleted(int id)
         {
-            await this.servicesService.ChangeIsDeleteService(id);
+            await this.servicesService.ChangeIsDeleteServiceAsync(id);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            await this.servicesService.Delete(id);
+            await this.servicesService.DeleteAsync(id);
 
             return this.RedirectToAction("Index");
         }

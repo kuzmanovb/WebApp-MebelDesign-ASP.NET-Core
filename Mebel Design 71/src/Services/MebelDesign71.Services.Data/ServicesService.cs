@@ -22,6 +22,30 @@
             this.filesService = filesService;
         }
 
+        public async Task<int> CreateServiceAsync(ServiceInputModel input)
+        {
+            var headImageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\serviceImages", "Service Hade Image");
+            string documentId = null;
+
+            if (input.Document != null)
+            {
+                documentId = await this.filesService.UploadToFileSystem(input.Document, "documents\\service\\official", "Service " + input.Name + " document");
+            }
+
+            var newService = new Service
+            {
+                Name = input.Name,
+                Description = input.Description,
+                HeadImageId = headImageId,
+                DocumentId = documentId,
+            };
+
+            await this.dbService.AddAsync(newService);
+            await this.dbService.SaveChangesAsync();
+
+            return newService.Id;
+        }
+
         public IEnumerable<ServiceInputModel> GetAllService()
         {
             var allServices = this.dbService.All()
@@ -58,7 +82,7 @@
             return allServices;
         }
 
-        public async Task<ServiceViewModel> GetServiceByIdForView(int id)
+        public async Task<ServiceViewModel> GetServiceByIdForViewAsync(int id)
         {
             var allServices = await this.dbService.All()
                 .Where(s => s.Id == id)
@@ -76,7 +100,7 @@
             return allServices;
         }
 
-        public async Task<ServiceInputModel> GetServiceById(int id)
+        public async Task<ServiceInputModel> GetServiceByIdAsync(int id)
         {
             var currentServices = await this.dbService.AllWithDeleted()
                 .Where(s => s.Id == id)
@@ -94,31 +118,7 @@
             return currentServices;
         }
 
-        public async Task<int> CreateService(ServiceInputModel input)
-        {
-            var headImageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\serviceImages", "Service Hade Image");
-            string documentId = null;
-
-            if (input.Document != null)
-            {
-                documentId = await this.filesService.UploadToFileSystem(input.Document, "documents\\service\\official", "Service " + input.Name + " document");
-            }
-
-            var newService = new Service
-            {
-                Name = input.Name,
-                Description = input.Description,
-                HeadImageId = headImageId,
-                DocumentId = documentId,
-            };
-
-            await this.dbService.AddAsync(newService);
-            await this.dbService.SaveChangesAsync();
-
-            return newService.Id;
-        }
-
-        public async Task UpdateService(ServiceInputModel input)
+        public async Task UpdateServiceAsync(ServiceInputModel input)
         {
             var currentService = this.dbService.All().FirstOrDefault(s => s.Id == input.Id);
 
@@ -148,7 +148,7 @@
             await this.dbService.SaveChangesAsync();
         }
 
-        public async Task ChangeIsDeleteService(int id)
+        public async Task ChangeIsDeleteServiceAsync(int id)
         {
             var currentService = this.dbService.AllWithDeleted().Where(p => p.Id == id).FirstOrDefault();
 
@@ -165,7 +165,7 @@
             await this.dbService.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var currentService = this.dbService.All().FirstOrDefault(p => p.Id == id);
 

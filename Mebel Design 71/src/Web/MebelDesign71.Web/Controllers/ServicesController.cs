@@ -27,7 +27,7 @@
 
         public async Task<IActionResult> CurrentService(int id)
         {
-            var currentService = await this.servicesService.GetServiceByIdForView(id);
+            var currentService = await this.servicesService.GetServiceByIdForViewAsync(id);
 
             return this.View(currentService);
         }

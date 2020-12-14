@@ -11,16 +11,16 @@
 
         IEnumerable<ServiceInputModel> GetAllServiceWithDeleted();
 
-        Task<ServiceViewModel> GetServiceByIdForView(int id);
+        Task<ServiceViewModel> GetServiceByIdForViewAsync(int id);
 
-        Task<ServiceInputModel> GetServiceById(int id);
+        Task<ServiceInputModel> GetServiceByIdAsync(int id);
 
-        Task<int> CreateService(ServiceInputModel input);
+        Task<int> CreateServiceAsync(ServiceInputModel input);
 
-        Task UpdateService(ServiceInputModel input);
+        Task UpdateServiceAsync(ServiceInputModel input);
 
-        Task ChangeIsDeleteService(int id);
+        Task ChangeIsDeleteServiceAsync(int id);
 
-        Task Delete(int id);
+        Task DeleteAsync(int id);
     }
 }
