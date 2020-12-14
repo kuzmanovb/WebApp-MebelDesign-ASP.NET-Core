@@ -94,15 +94,15 @@
             Assert.NotNull(orders);
         }
 
-        //[Fact]
-        //public async Task TestGetOrderById()
-        //{
-        //    var orderId = await this.ordersService.AddOrderAsync(this.orderInputModel);
+        [Fact]
+        public async Task TestGetOrderById()
+        {
+            var orderId = await this.ordersService.AddOrderAsync(this.orderInputModel);
 
-        //    var orders = this.ordersService.GetOrderById(orderId);
+            var orders = this.ordersService.GetOrderById(orderId);
 
-        //    Assert.NotNull(orders);
-        //}
+            Assert.NotNull(orders);
+        }
 
         [Fact]
         public async Task TestUpdateOrder()
@@ -130,12 +130,13 @@
         public async Task TestDeletedOrder()
         {
             var orderId = await this.ordersService.AddOrderAsync(this.orderInputModel);
+            var orderIdTwo = await this.ordersService.AddOrderAsync(this.orderInputModel);
 
             await this.ordersService.DeletedOrderAsync(orderId);
 
             var order = this.orderRepository.All().FirstOrDefault();
 
-            Assert.Null(order);
+            Assert.Equal(orderIdTwo, order.Id);
         }
 
         // End Testing ---------------------------------------------------------------------------------------------------------------
