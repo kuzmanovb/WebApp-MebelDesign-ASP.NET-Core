@@ -2,6 +2,8 @@
 {
     using System.Reflection;
     using Ganss.XSS;
+    using GoogleReCaptcha.V3;
+    using GoogleReCaptcha.V3.Interface;
     using MebelDesign71.Data;
     using MebelDesign71.Data.Common;
     using MebelDesign71.Data.Common.Repositories;
@@ -57,7 +59,12 @@
 
             services.AddSingleton(this.configuration);
 
+            // Application insights
             services.AddApplicationInsightsTelemetry();
+
+            // GoogleReCaptcha
+            services.AddControllersWithViews();
+            services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));

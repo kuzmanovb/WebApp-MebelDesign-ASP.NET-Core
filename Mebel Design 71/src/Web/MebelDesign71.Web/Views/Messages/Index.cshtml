@@ -1,4 +1,5 @@
 ﻿@model MebelDesign71.Web.ViewModels.Messages.MessageInputModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 @using MebelDesign71.Common
 @{ this.ViewData["Title"] = "Contacts";}
 
@@ -44,108 +45,120 @@
                         <h3 class="service-heading">Телефон</h3>
                         <p>
                             @InfoConstant.FirstPhoneNumber<br />
-                        @InfoConstant.SecondPhoneNumber
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="service-1">
-                <div class="service-1-icon">
-                    <span class="flaticon-mail"></span>
-                </div>
-                <div class="service-1-content">
-                    <h3 class="service-heading">Имейл</h3>
-                    <p>@InfoConstant.FirstEmail<br /> @InfoConstant.SecondEmail</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="service-1">
-                <div class="service-1-icon">
-                    <span class="flaticon-worker"></span>
-                </div>
-                <div class="service-1-content">
-                    <h3 class="service-heading">Работно време</h3>
-                    <p>
-                        Понеделник-Петък 9.00 - 17.00
-                        <br> Събота 9.00 - 12.00
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<form asp-controller="Messages" asp-action="Index" method="post">
-    <div class="site-section">
-        <div class="container">
-
-            <div class="row mb-5 justify-content-center text-center">
-                <div class="col-lg-5">
-                    <h3 class="section-subtitle">Имате въпрос ?<br> Пишете ни.</h3>
+                            @InfoConstant.SecondPhoneNumber
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label asp-for="FirstName"></label>
-                    <input asp-for="FirstName" class="form-control form-control-lg">
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label asp-for="LastName"></label>
-                    <input asp-for="LastName" class="form-control form-control-lg">
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control form-control-lg">
-                    <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-1">
+                    <div class="service-1-icon">
+                        <span class="flaticon-mail"></span>
+                    </div>
+                    <div class="service-1-content">
+                        <h3 class="service-heading">Имейл</h3>
+                        <p>@InfoConstant.FirstEmail<br /> @InfoConstant.SecondEmail</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <label asp-for="About"></label>
-                    <input asp-for="About" class="form-control form-control-lg">
-                    <span asp-validation-for="About" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <label asp-for="Description"></label>
-                    <textarea asp-for="Description" cols="30" rows="10" class="form-control"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-            </div>
-
-            <p>
-                Натискайки бутона "Изпратете", вие потвърждавате, че сте запознати и съгласни с нашата политика за опазване на личните данни<br />
-                <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за опазване на личните данни</a>
-            </p>
-
-            <input type="hidden" id="RecaptchaValue" name="RecaptchaValue" />
-
-            <div class="row">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary rounded-0 px-3 px-5">Изпрати</button>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-1">
+                    <div class="service-1-icon">
+                        <span class="flaticon-worker"></span>
+                    </div>
+                    <div class="service-1-content">
+                        <h3 class="service-heading">Работно време</h3>
+                        <p>
+                            Понеделник-Петък 9.00 - 17.00
+                            <br> Събота 9.00 - 12.00
+                        </p>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
-</form>
 
-<div class="map-responsive">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.6816133142286!2d23.24502751369768!3d42.694713569064874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa9ae4448ffc1f%3A0x2bf8bc9b20f4eeb2!2zMTM3MyDQodC-0YTQuNGP!5e1!3m2!1sbg!2sbg!4v1598997882242!5m2!1sbg!2sbg"
-            width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-            tabindex="0"></iframe>
-</div>
+    <form asp-controller="Messages" asp-action="Index" method="post">
+        <div class="site-section">
+            <div class="container">
+                <input type="hidden" name="captcha" id="captchaInput" />
+                <div class="row mb-5 justify-content-center text-center">
+                    <div class="col-lg-5">
+                        <h3 class="section-subtitle">Имате въпрос ?<br> Пишете ни.</h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label asp-for="FirstName"></label>
+                        <input asp-for="FirstName" class="form-control form-control-lg">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="LastName"></label>
+                        <input asp-for="LastName" class="form-control form-control-lg">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control form-control-lg">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label asp-for="About"></label>
+                        <input asp-for="About" class="form-control form-control-lg">
+                        <span asp-validation-for="About" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description" cols="30" rows="10" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <p>
+                    Натискайки бутона "Изпратете", вие потвърждавате, че сте запознати и съгласни с нашата политика за опазване на личните данни<br />
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за опазване на личните данни</a>
+                </p>
+
+                <input type="hidden" id="RecaptchaValue" name="RecaptchaValue" />
+
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary rounded-0 px-3 px-5">Изпрати</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="map-responsive">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.6816133142286!2d23.24502751369768!3d42.694713569064874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa9ae4448ffc1f%3A0x2bf8bc9b20f4eeb2!2zMTM3MyDQodC-0YTQuNGP!5e1!3m2!1sbg!2sbg!4v1598997882242!5m2!1sbg!2sbg"
+                width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                tabindex="0"></iframe>
+    </div>
+
+    @section Scripts
+{
+        <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["googleReCaptcha:SiteKey"]"></script>
+        <script>
+        grecaptcha.ready(function() {
+            window.grecaptcha.execute('@Configuration["googleReCaptcha:SiteKey"]', { action: 'home' }).then(function (token) {
+                $("#captchaInput").val(token);
+            });
+        });
+        </script>
+    }
