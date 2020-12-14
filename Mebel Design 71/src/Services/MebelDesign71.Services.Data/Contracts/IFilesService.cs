@@ -7,10 +7,10 @@
 
     public interface IFilesService
     {
-        Task<string> UploadToFileSystem(IFormFile files, string folderInWwwRoot, string description = null, string userId = null);
+        Task<string> UploadToFileSystemAsync(IFormFile files, string folderInWwwRoot, string description = null, string userId = null);
 
-        Task<FileOnFileSystem> GetFileByIdFromFileSystem(string id);
+        Task<FileOnFileSystem> GetFileByIdFromFileSystemAsync(string id);
 
-        Task<bool> DeleteFileFromFileSystem(string id);
+        Task<bool> DeleteFileFromFileSystemAsync(string id);
     }
 }

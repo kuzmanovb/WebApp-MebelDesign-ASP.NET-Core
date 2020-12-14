@@ -88,7 +88,7 @@
 
         public async Task<IActionResult> DownloadDocument(string id)
         {
-            var file = await this.filesService.GetFileByIdFromFileSystem(id);
+            var file = await this.filesService.GetFileByIdFromFileSystemAsync(id);
 
             if (file == null)
             {

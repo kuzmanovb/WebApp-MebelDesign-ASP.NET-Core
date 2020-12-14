@@ -25,7 +25,7 @@
             this.environment = environment;
         }
 
-        public async Task<string> UploadToFileSystem(IFormFile file, string folderInWwwRoot, string description = null, string userId = null)
+        public async Task<string> UploadToFileSystemAsync(IFormFile file, string folderInWwwRoot, string description = null, string userId = null)
         {
 
             var basePath = Path.Combine(this.environment.WebRootPath + "\\" + folderInWwwRoot + "\\");
@@ -71,7 +71,7 @@
             return EmptyString;
         }
 
-        public async Task<FileOnFileSystem> GetFileByIdFromFileSystem(string id)
+        public async Task<FileOnFileSystem> GetFileByIdFromFileSystemAsync(string id)
         {
             var file = await this.dbFileOnSystem.All().Where(x => x.Id == id).FirstOrDefaultAsync();
 
@@ -83,7 +83,7 @@
             return file;
         }
 
-        public async Task<bool> DeleteFileFromFileSystem(string id)
+        public async Task<bool> DeleteFileFromFileSystemAsync(string id)
         {
             var file = await this.dbFileOnSystem.All().Where(x => x.Id == id).FirstOrDefaultAsync();
 

@@ -31,7 +31,7 @@
 
             var projectName = currentProject.Name;
 
-            var imageId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\projectImages\\" + projectName, "ImageTo" + projectName + "Gallery");
+            var imageId = await this.filesService.UploadToFileSystemAsync(input.ImageFile, "images\\projectImages\\" + projectName, "ImageTo" + projectName + "Gallery");
 
             var newImageToProject = new GalleryProject
             {
@@ -70,7 +70,7 @@
             this.dbImageToProject.Delete(currentImage);
             await this.dbImageToProject.SaveChangesAsync();
 
-            var currentFile = await this.filesService.DeleteFileFromFileSystem(fileId);
+            var currentFile = await this.filesService.DeleteFileFromFileSystemAsync(fileId);
         }
 
         private static string RenameFilePath(string fullPath)

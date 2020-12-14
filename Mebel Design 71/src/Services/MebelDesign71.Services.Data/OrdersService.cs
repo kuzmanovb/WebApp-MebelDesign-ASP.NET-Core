@@ -32,7 +32,7 @@
 
         public async Task<string> AddDocumentToOrderAsync(IFormFile document, string orderId, string userId, string orderNumber)
         {
-            var fileId = await this.filesService.UploadToFileSystem(document, "documents\\service\\orders\\" + orderNumber, "Service Document");
+            var fileId = await this.filesService.UploadToFileSystemAsync(document, "documents\\service\\orders\\" + orderNumber, "Service Document");
             var newUserDocument = new OrderDocument
             {
                 UserId = userId,
@@ -168,7 +168,7 @@
 
             foreach (var od in documentsToOrder)
             {
-                await this.filesService.DeleteFileFromFileSystem(od.DocumentId);
+                await this.filesService.DeleteFileFromFileSystemAsync(od.DocumentId);
                 this.dbOrderDocument.HardDelete(od);
             }
 

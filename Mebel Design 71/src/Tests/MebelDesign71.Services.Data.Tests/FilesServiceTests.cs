@@ -50,8 +50,8 @@
             var entityTwo = this.connection.FileOnFileSystems.Add(new FileOnFileSystem());
             await this.connection.SaveChangesAsync();
 
-            var getEntityOne = this.filesService.GetFileByIdFromFileSystem(entityOne.Entity.Id);
-            var getEntityTwo = this.filesService.GetFileByIdFromFileSystem(entityTwo.Entity.Id);
+            var getEntityOne = this.filesService.GetFileByIdFromFileSystemAsync(entityOne.Entity.Id);
+            var getEntityTwo = this.filesService.GetFileByIdFromFileSystemAsync(entityTwo.Entity.Id);
 
             Assert.Equal(getEntityOne, getEntityOne);
             Assert.Equal(getEntityTwo, getEntityTwo);
@@ -64,7 +64,7 @@
             var entityOne = this.connection.FileOnFileSystems.Add(new FileOnFileSystem());
             await this.connection.SaveChangesAsync();
 
-            var getEntityOne = await this.filesService.GetFileByIdFromFileSystem("whatever");
+            var getEntityOne = await this.filesService.GetFileByIdFromFileSystemAsync("whatever");
 
             Assert.Null(getEntityOne);
         }
@@ -75,9 +75,9 @@
             var entityOne = this.connection.FileOnFileSystems.Add(new FileOnFileSystem());
             await this.connection.SaveChangesAsync();
 
-            var entity = await this.filesService.GetFileByIdFromFileSystem(entityOne.Entity.Id);
+            var entity = await this.filesService.GetFileByIdFromFileSystemAsync(entityOne.Entity.Id);
 
-            var result = await this.filesService.DeleteFileFromFileSystem(entity.Id);
+            var result = await this.filesService.DeleteFileFromFileSystemAsync(entity.Id);
 
             Assert.True(result);
         }
@@ -88,7 +88,7 @@
             var entityOne = this.connection.FileOnFileSystems.Add(new FileOnFileSystem());
             await this.connection.SaveChangesAsync();
 
-            var result = await this.filesService.DeleteFileFromFileSystem("whatever");
+            var result = await this.filesService.DeleteFileFromFileSystemAsync("whatever");
 
             Assert.False(result);
         }
@@ -110,7 +110,7 @@
 
             var file = fileMock.Object;
 
-            var fileId = await this.filesService.UploadToFileSystem(file, "test");
+            var fileId = await this.filesService.UploadToFileSystemAsync(file, "test");
 
             var allRepo = this.filesRepository.All().FirstOrDefault();
 

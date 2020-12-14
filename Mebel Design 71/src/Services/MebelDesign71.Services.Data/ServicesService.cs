@@ -24,12 +24,12 @@
 
         public async Task<int> CreateServiceAsync(ServiceInputModel input)
         {
-            var headImageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\serviceImages", "Service Hade Image");
+            var headImageId = await this.filesService.UploadToFileSystemAsync(input.HeadImage, "images\\serviceImages", "Service Hade Image");
             string documentId = null;
 
             if (input.Document != null)
             {
-                documentId = await this.filesService.UploadToFileSystem(input.Document, "documents\\service\\official", "Service " + input.Name + " document");
+                documentId = await this.filesService.UploadToFileSystemAsync(input.Document, "documents\\service\\official", "Service " + input.Name + " document");
             }
 
             var newService = new Service
@@ -125,13 +125,13 @@
 
             if (input.HeadImage != null)
             {
-                var headImageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\serviceImages", "Service Hade Image");
+                var headImageId = await this.filesService.UploadToFileSystemAsync(input.HeadImage, "images\\serviceImages", "Service Hade Image");
                 currentService.HeadImageId = headImageId;
             }
 
             if (input.Document != null)
             {
-                var documentId = await this.filesService.UploadToFileSystem(input.Document, "documents\\service\\official", "Service " + input.Name + "document");
+                var documentId = await this.filesService.UploadToFileSystemAsync(input.Document, "documents\\service\\official", "Service " + input.Name + "document");
                 currentService.DocumentId = documentId;
             }
 
@@ -173,10 +173,10 @@
             this.dbService.HardDelete(currentService);
             await this.dbService.SaveChangesAsync();
 
-            await this.filesService.DeleteFileFromFileSystem(currentService.HeadImageId);
+            await this.filesService.DeleteFileFromFileSystemAsync(currentService.HeadImageId);
             if (currentService.DocumentId != null)
             {
-                await this.filesService.DeleteFileFromFileSystem(currentService.DocumentId);
+                await this.filesService.DeleteFileFromFileSystemAsync(currentService.DocumentId);
             }
         }
 

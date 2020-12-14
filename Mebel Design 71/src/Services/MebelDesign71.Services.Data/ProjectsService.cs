@@ -23,7 +23,7 @@
 
         public async Task<int> CreateProjectAsync(ProjectInputModel input)
         {
-            var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images\\projectImages", "Project Hade Image");
+            var imageId = await this.filesService.UploadToFileSystemAsync(input.HeadImage, "images\\projectImages", "Project Hade Image");
 
             var newProject = new Project
             {
@@ -90,7 +90,7 @@
 
             if (input.HeadImage != null)
             {
-                var imageId = await this.filesService.UploadToFileSystem(input.HeadImage, "images/projecImages");
+                var imageId = await this.filesService.UploadToFileSystemAsync(input.HeadImage, "images/projecImages");
                 currentProject.HeadImageId = imageId;
             }
 
@@ -132,7 +132,7 @@
             this.dbProject.HardDelete(currentProject);
             await this.dbProject.SaveChangesAsync();
 
-            await this.filesService.DeleteFileFromFileSystem(currentProject.HeadImageId);
+            await this.filesService.DeleteFileFromFileSystemAsync(currentProject.HeadImageId);
         }
 
         private static string RenameFilePath(string fullPath)

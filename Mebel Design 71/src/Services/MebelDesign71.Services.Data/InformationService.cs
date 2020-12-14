@@ -36,7 +36,7 @@
 
             if (input.ImageFile != null)
             {
-                var fileId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\profilImages", "User Image To Review", input.UserId);
+                var fileId = await this.filesService.UploadToFileSystemAsync(input.ImageFile, "images\\profilImages", "User Image To Review", input.UserId);
 
                 if (!string.IsNullOrEmpty(fileId))
                 {
@@ -93,7 +93,7 @@
                 this.dbImage.Delete(profilImage);
                 await this.dbImage.SaveChangesAsync();
 
-                await this.filesService.DeleteFileFromFileSystem(profilImage.FileId);
+                await this.filesService.DeleteFileFromFileSystemAsync(profilImage.FileId);
             }
         }
 
