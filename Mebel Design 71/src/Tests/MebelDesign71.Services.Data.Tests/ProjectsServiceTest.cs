@@ -1,20 +1,16 @@
 ﻿namespace MebelDesign71.Services.Data.Tests
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using Ganss.XSS;
 
     using MebelDesign71.Data;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Data.Repositories;
     using MebelDesign71.Services.Data.Contracts;
-    using MebelDesign71.Web.ViewModels.Orders;
     using MebelDesign71.Web.ViewModels.Projects;
-    using MebelDesign71.Web.ViewModels.ProjectsImage;
+
     using Microsoft.AspNetCore.Hosting.Internal;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
@@ -22,6 +18,7 @@
     using Moq;
 
     using Xunit;
+
     public class ProjectsServiceTest : IDisposable
     {
         private readonly IFilesService filesService;
@@ -35,7 +32,6 @@
         private HostingEnvironment environment;
 
         private IFormFile file;
-
 
         public ProjectsServiceTest()
         {
@@ -169,12 +165,14 @@
                 HeadImage = this.file,
             };
 
-            var progectId = await this.projectsService.CreateProjectAsync(projectInputModel);
+            var projectId = await this.projectsService.CreateProjectAsync(projectInputModel);
 
-            var projects = await this.projectsService.GetProjectByIdAsync(progectId);
+            await this.projectsService.DeleteProjectAsync(projectId);
 
-            //Assert.Null
-            
+            var project = await this.projectsService.GetProjectByIdAsync(projectId);
+
+            Assert.Null(project);
+
         }
 
         private void InitializeFields()
@@ -193,7 +191,5 @@
 
             this.file = fileMock.Object;
         }
-
-
     }
 }
