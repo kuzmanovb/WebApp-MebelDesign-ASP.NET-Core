@@ -101,7 +101,7 @@
 
             var orders = this.ordersService.GetOrderById(orderId);
 
-            Assert.NotNull(orders);
+            Assert.Equal(orderId, orders.OrderId);
         }
 
         [Fact]
@@ -134,9 +134,9 @@
 
             await this.ordersService.DeletedOrderAsync(orderId);
 
-            var order = this.orderRepository.All().FirstOrDefault();
+            var order = this.orderRepository.All().ToList();
 
-            Assert.Equal(orderIdTwo, order.Id);
+            Assert.Single(order);
         }
 
         // End Testing ---------------------------------------------------------------------------------------------------------------
