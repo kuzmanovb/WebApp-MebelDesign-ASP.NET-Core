@@ -20,8 +20,8 @@ https://mebeldesign.azurewebsites.net/
 - Bootstrap
 - Moq
 - xUnit
-- Theme by Colorlib
-- Admin LTE 3.0.2 by Colorlib
+- [Theme by Colorlib](https://colorlib.com/wp/template/engineers/)
+- [Admin LTE 3.0.2 by Colorlib](https://adminlte.io/themes/v3/)
 
 
 ## Using ASP.NET-MVC-Template originally developed by:
