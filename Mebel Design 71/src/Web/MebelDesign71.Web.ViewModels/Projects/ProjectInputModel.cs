@@ -9,7 +9,6 @@
     {
         public int? Id { get; set; }
 
-        // ToDo: Escape special symbol to name
         [Required]
         [Display(Name = "Име")]
         public string Name { get; set; }
