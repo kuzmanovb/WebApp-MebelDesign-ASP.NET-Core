@@ -82,6 +82,24 @@
             return allServices;
         }
 
+        public async Task<ServiceInputModel> GetServiceByIdAsync(int id)
+        {
+            var currentServices = await this.dbService.AllWithDeleted()
+                .Where(s => s.Id == id)
+                .Select(s => new ServiceInputModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Description = s.Description,
+                    ImagePath = RenameFilePath(s.HeadImage.FilePath),
+                    DocumentId = s.DocumentId,
+                    DocumentName = s.Document.Name,
+                })
+                .FirstOrDefaultAsync();
+
+            return currentServices;
+        }
+
         public async Task<ServiceViewModel> GetServiceByIdForViewAsync(int id)
         {
             var allServices = await this.dbService.All()
@@ -100,23 +118,6 @@
             return allServices;
         }
 
-        public async Task<ServiceInputModel> GetServiceByIdAsync(int id)
-        {
-            var currentServices = await this.dbService.AllWithDeleted()
-                .Where(s => s.Id == id)
-                .Select(s => new ServiceInputModel
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Description = s.Description,
-                    ImagePath = RenameFilePath(s.HeadImage.FilePath),
-                    DocumentId = s.DocumentId,
-                    DocumentName = s.Document.Name,
-                })
-                .FirstOrDefaultAsync();
-
-            return currentServices;
-        }
 
         public async Task UpdateServiceAsync(ServiceInputModel input)
         {
