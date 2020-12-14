@@ -1,10 +1,16 @@
-# ASP.NET Core Template
 
-A ready-to-use template for ASP.NET Core with repositories, services, models mapping, DI and StyleCop warnings fixed.
+## &copy; Mebel Design&trade; Logo
+![](https://res.cloudinary.com/kuzmanovb/image/upload/v1607981940/logo_fh73ah.png)
 
-## Build status
+## ASP.NET Core Mebel Design
 
-[![Build Status](https://nikolayit.visualstudio.com/AspNetCoreTemplate/_apis/build/status/NikolayIT.ASP.NET-Core-Template?branchName=master)](https://nikolayit.visualstudio.com/AspNetCoreTemplate/_build/latest?definitionId=15&branchName=master)
+Mebel Design is my defense project for ASP.NET Core course at [SoftUni](https://softuni.bg/trainings/3177/asp-dot-net-core-october-2020), this is web application for furniture factory.
+
+# Link
+https://mebeldesign.azurewebsites.net/
+
+
+
 
 ## Authors
 
