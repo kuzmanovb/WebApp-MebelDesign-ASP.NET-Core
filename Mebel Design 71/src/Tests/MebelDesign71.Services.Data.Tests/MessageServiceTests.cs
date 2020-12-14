@@ -160,7 +160,7 @@
 
             var expectMessage = this.messagesService.GetMessageById(id);
 
-            Assert.NotNull(expectMessage);
+            Assert.Equal(id, expectMessage.Id);
         }
 
         [Fact]
