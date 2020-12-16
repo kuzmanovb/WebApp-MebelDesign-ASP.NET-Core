@@ -34,14 +34,15 @@
                             </div>
                             @if (Model.DocumentId != null)
                             {
-                                <div class="form-group">
-                                    <h4 class="box-title">Документ към услугата</h4>
-                                    <a class="btn btn-warning btn-sm" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@Model.DocumentId">@Model.DocumentName</a>
-                                    <p></p>
-                                    <input asp-for="Document" />
-                                    <span asp-validation-for="Document" class="text-danger"></span>
-                                    <p class="text-danger text-uppercase">Прикачeте файл за да промените съществуващия документ</p>
-                                </div>
+                        <div class="form-group">
+                            <h4 class="box-title">Документ към услугата</h4>
+                            <a class="btn btn-warning btn-sm" asp-controller="AdminServices" asp-action="DownloadDocument" asp-route-id="@Model.DocumentId">Свали файла "@Model.DocumentName"</a>
+                            <p></p>
+                            <input asp-for="Document" />
+                            <span asp-validation-for="Document" class="text-danger"></span>
+                            <p class="text-danger text-uppercase">Прикачeте файл за да промените съществуващия документ</p>
+                            <a class="btn btn-danger btn-sm" asp-controller="AdminServices" asp-action="DeleteDocument" asp-route-serviceId="@Model.Id">Изтрий файла "@Model.DocumentName"</a>
+                        </div>
                             }
                             else
                             {

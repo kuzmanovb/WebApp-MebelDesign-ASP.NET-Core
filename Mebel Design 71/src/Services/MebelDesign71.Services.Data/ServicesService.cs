@@ -180,6 +180,17 @@
             }
         }
 
+        public async Task DeleteDocumentAsync(int id)
+        {
+            var currentService = this.dbService.All().FirstOrDefault(p => p.Id == id);
+
+            currentService.DocumentId = null;
+            this.dbService.Update(currentService);
+            await this.dbService.SaveChangesAsync();
+
+            await this.filesService.DeleteFileFromFileSystemAsync(currentService.DocumentId);
+        }
+
         private static string RenameFilePath(string fullPath)
         {
             var oldString = "\\";

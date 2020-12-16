@@ -22,5 +22,7 @@
         Task ChangeIsDeleteServiceAsync(int id);
 
         Task DeleteAsync(int id);
+
+        Task DeleteDocumentAsync(int id);
     }
 }

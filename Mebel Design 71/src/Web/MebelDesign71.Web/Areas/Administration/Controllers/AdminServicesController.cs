@@ -105,5 +105,12 @@
             memory.Position = 0;
             return this.File(memory, file.FileType, file.Name + file.Extension);
         }
+
+        public async Task<IActionResult> DeleteDocument(int serviceId)
+        {
+            await this.servicesService.DeleteDocumentAsync(serviceId);
+
+            return this.RedirectToAction("UpdateService", new { id = serviceId });
+        }
     }
 }
