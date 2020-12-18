@@ -142,7 +142,7 @@
 
             var service = await this.servicesService.GetServiceByIdForViewAsync(id);
 
-            Assert.NotNull(service);
+            Assert.Equal("test", service.Name);
         }
 
         [Fact]
