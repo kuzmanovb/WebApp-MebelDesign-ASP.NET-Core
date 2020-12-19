@@ -109,7 +109,7 @@
             Assert.Equal(2, services.ToList().Count);
         }
 
-        [Fact]
+        //[Fact]
         //public async Task TestGetServiceById()
         //{
         //    var newServiceInputModel = new ServiceInputModel
