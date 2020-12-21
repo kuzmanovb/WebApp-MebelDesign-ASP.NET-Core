@@ -62,19 +62,22 @@
             // Application insights
             services.AddApplicationInsightsTelemetry();
 
-            // GoogleReCaptcha
-            services.AddControllersWithViews();
-            services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
-
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
-            // Application services
+            // GoogleReCaptcha
+            services.AddControllersWithViews();
+            services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
+
+            // HTML Sanitizer
             services.AddSingleton<IHtmlSanitizer>(_ => new HtmlSanitizer());
 
+            // SendGrid
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
+
+            // Application services
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMessagesService, MessagesService>();
             services.AddTransient<IFilesService, FilesService>();
