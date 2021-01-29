@@ -12,6 +12,12 @@ https://mebeldesign.azurewebsites.net/
 
 ------------
 
+## :floppy_disk: Database Diagram
+![]( https://res.cloudinary.com/kuzmanovb/image/upload/v1611918833/Diagram_abehkh.png)
+
+
+------------
+
 ## :hammer: Built With
 - ASP.NET [CORE 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1 "CORE 3.1") MVC
 - ASP.NET Core areas
