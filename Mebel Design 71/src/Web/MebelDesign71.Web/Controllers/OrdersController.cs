@@ -62,7 +62,7 @@
                 return this.View(input);
             }
 
-            await this.ordersService.AddOrder(input);
+            await this.ordersService.AddOrderAsync(input);
 
             return this.RedirectToAction("ThankYou");
         }
@@ -76,7 +76,7 @@
 
         public async Task<IActionResult> DownloadDocument(string id)
         {
-            var file = await this.filesService.GetFileByIdFromFileSystem(id);
+            var file = await this.filesService.GetFileByIdFromFileSystemAsync(id);
 
             if (file == null)
             {
@@ -96,7 +96,7 @@
 
         public async Task<IActionResult> DeletedOrder(string id)
         {
-            await this.ordersService.DeletedOrder(id);
+            await this.ordersService.DeletedOrderAsync(id);
 
             return this.RedirectToAction("Index");
         }

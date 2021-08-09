@@ -51,8 +51,8 @@
                                              <td>@item.IsDeleted</td>
                                              <td><a class='btn btn-warning btn-xs' href="/Administration/AdminProjects/ChangeIsDeleted?id=@item.Id">Ативирай/Деактивирай</a></td>
                                              <td><a class='btn btn-info btn-xs' href="/Administration/AdminProjects/UpdateProject?id=@item.Id">Промени</a></td>
-                                     
-                                             @{var gallery = galleryService.GetGallery(item.Id).Result.Count;}
+
+                                             @{var gallery = galleryService.GetGalleryAsync(item.Id).Result.Count;}
                                              
                                              @if (gallery == 0)
                                             {

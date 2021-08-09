@@ -8,6 +8,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+    <ApplicationInsightsResourceId>/subscriptions/0d3906b7-4ab0-4564-97bb-99435bf3356e/resourceGroups/MebelDesign/providers/microsoft.insights/components/MebelDesign</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="GoogleReCaptcha.V3" Version="1.3.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>

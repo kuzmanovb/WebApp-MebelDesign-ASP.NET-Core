@@ -18,15 +18,15 @@
         ICollection<MessageViewModel> GetIsDeletedMessages();
 
         MessageViewModel GetMessageById(string id);
+        
+        SendMessageViewModel GetSendMessageById(string id);
 
-        SendMessageViewModel GetSendMessagesById(string id);
+        Task RestoreMessageAsync(string id);
 
-        Task RestoreAsync(string id);
-
-        Task DeleteAsync(string id);
+        Task DeleteMessageAsync(string id);
 
         Task DeleteSendMessageAsync(string id);
 
-        Task HardDeleteAsync(string id);
+        Task HardDeleteMessageAsync(string id);
     }
 }

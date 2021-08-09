@@ -3,10 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     using MebelDesign71.Data.Models;
 
     public class OrderViewModel
     {
+
+        public OrderViewModel()
+        {
+            this.Documents = new List<DocumentViewModel>();
+        }
+
         public string OrderId { get; set; }
 
         [Display(Name = "Номер на поръчката")]

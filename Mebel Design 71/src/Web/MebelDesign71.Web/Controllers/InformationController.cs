@@ -24,7 +24,7 @@
 
         public async Task<IActionResult> Reviews()
         {
-            var allReview = await this.informationService.GetAllReview();
+            var allReview = await this.informationService.GetAllReviewAsync();
 
             this.ViewData["Reviews"] = allReview;
 
@@ -47,7 +47,7 @@
                 return this.View();
             }
 
-            await this.informationService.AddRewiev(input);
+            await this.informationService.AddRewievAsync(input);
 
             return this.RedirectToAction("ThankYou");
         }
@@ -60,7 +60,7 @@
                 return this.RedirectToAction("Reviews");
             }
 
-            await this.informationService.DeleteReview(id);
+            await this.informationService.DeleteReviewAsync(id);
 
             return this.RedirectToAction("Reviews");
         }

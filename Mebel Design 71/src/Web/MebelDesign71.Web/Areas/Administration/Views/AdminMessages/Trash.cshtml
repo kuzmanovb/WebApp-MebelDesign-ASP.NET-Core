@@ -40,30 +40,31 @@
                                 {
                                     @foreach (var message in this.ViewData["allDeletedMessages"] as IList<MessageViewModel>)
                                     {
-                                          <tr>
-                                              <td><input type="checkbox"></td>
-                                              <td class="mailbox-name">
-                                                  <a asp-area="Administration" asp-controller="AdminMessages" asp-action="Read" asp-route-id=@message.Id>@message.FirstName @message.LastName</a>
-                                              </td>
-                                              <td class="mailbox-subject">
+=
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td class="mailbox-name">
+                                                <a asp-area="Administration" asp-controller="AdminMessages" asp-action="Read" asp-route-id=@message.Id>@message.FirstName @message.LastName</a>
+                                            </td>
+                                            <td class="mailbox-subject">
 
-                                                  @{var description = message.Description;}
+                                                @{var description = message.Description;}
 
-                                                  @if (description.Length > 50)
-                                                  {
-                                                      description = description.Substring(0, 50) + ".....";
-                                                  }
+                                                @if (description.Length > 50)
+                                                {
+                                                    description = description.Substring(0, 50) + ".....";
+                                                }
 
-                                                  <b>@message.About</b> - @description
-                                              </td>
-                                              <td>
-                                                  <a asp-area="Administration" asp-controller="AdminMessages" asp-action="HardDelete" asp-route-id="@message.Id" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Премахни </a>
+                                                <b>@message.About</b> - @description
+                                            </td>
+                                            <td>
+                                                <a asp-area="Administration" asp-controller="AdminMessages" asp-action="HardDelete" asp-route-id="@message.Id" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Премахни </a>
 
-                                              </td>
-                                              <td class="mailbox-attachment"></td>
-                                              <td class="mailbox-date">@message.TimeAgo</td>
-                                          </tr>
-                                     }
+                                            </td>
+                                            <td class="mailbox-attachment"></td>
+                                            <td class="mailbox-date">@message.TimeAgo</td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>

@@ -5,6 +5,8 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Ganss.XSS;
+
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Data.Contracts;
@@ -14,22 +16,24 @@
     {
         private readonly IDeletableEntityRepository<Message> dbMessage;
         private readonly IDeletableEntityRepository<SendMessage> dbSendMessage;
+        private readonly IHtmlSanitizer sanitizer;
 
-        public MessagesService(IDeletableEntityRepository<Message> dbMessage, IDeletableEntityRepository<SendMessage> dbSendMessage)
+        public MessagesService(IDeletableEntityRepository<Message> dbMessage, IDeletableEntityRepository<SendMessage> dbSendMessage, IHtmlSanitizer sanitizer)
         {
             this.dbMessage = dbMessage;
             this.dbSendMessage = dbSendMessage;
+            this.sanitizer = sanitizer;
         }
 
         public async Task<string> AddMessageAsync(MessageInputModel input)
         {
             var newMessage = new Message
             {
-                FirstName = input.FirstName,
-                LastName = input.LastName,
-                Email = input.Email,
-                About = input.About,
-                Description = input.Description,
+                FirstName = this.sanitizer.Sanitize(input.FirstName),
+                LastName = this.sanitizer.Sanitize(input.LastName),
+                Email = this.sanitizer.Sanitize(input.Email),
+                About = this.sanitizer.Sanitize(input.About),
+                Description = this.sanitizer.Sanitize(input.Description),
             };
 
             await this.dbMessage.AddAsync(newMessage);
@@ -42,10 +46,10 @@
         {
             var newSendEmail = new SendMessage
             {
-                About = input.About,
-                Description = input.Description,
-                ToEmail = input.Email,
-                ToMessageId = input.ToMessageId,
+
+                About = this.sanitizer.Sanitize(input.About),
+                Description = this.sanitizer.Sanitize(input.Description),
+                ToEmail = this.sanitizer.Sanitize(input.Email),
             };
 
             await this.dbSendMessage.AddAsync(newSendEmail);
@@ -140,7 +144,8 @@
             return message;
         }
 
-        public SendMessageViewModel GetSendMessagesById(string id)
+
+        public SendMessageViewModel GetSendMessageById(string id)
         {
             var allSendMessage = this.dbSendMessage.All()
                 .Where(m => m.Id == id)
@@ -160,7 +165,8 @@
             return allSendMessage;
         }
 
-        public async Task DeleteAsync(string id)
+
+        public async Task DeleteMessageAsync(string id)
         {
             var currentMessage = this.dbMessage.All().FirstOrDefault(m => m.Id == id);
             this.dbMessage.Delete(currentMessage);
@@ -174,14 +180,16 @@
             await this.dbSendMessage.SaveChangesAsync();
         }
 
-        public async Task RestoreAsync(string id)
+
+        public async Task RestoreMessageAsync(string id)
         {
             var currentMessage = this.dbMessage.AllWithDeleted().FirstOrDefault(m => m.Id == id);
             this.dbMessage.Undelete(currentMessage);
             await this.dbMessage.SaveChangesAsync();
         }
 
-        public async Task HardDeleteAsync(string id)
+
+        public async Task HardDeleteMessageAsync(string id)
         {
             var currentMessage = this.dbMessage.AllWithDeleted().FirstOrDefault(m => m.Id == id);
             this.dbMessage.HardDelete(currentMessage);
@@ -205,7 +213,6 @@
             }
 
             return differentToMinets.ToString() + " mins ago";
-
         }
 
     }

@@ -25,13 +25,13 @@
             this.projectsService = projectsService;
         }
 
-        public async Task<int> AddImageToGallery(ImageInputModel input)
+        public async Task<int> AddImageToGalleryAsync(ImageInputModel input)
         {
-            var currentProject = await this.projectsService.GetProjectById(input.ProjectId);
+            var currentProject = await this.projectsService.GetProjectByIdAsync(input.ProjectId);
 
             var projectName = currentProject.Name;
 
-            var imageId = await this.filesService.UploadToFileSystem(input.ImageFile, "images\\projectImages\\" + projectName, "ImageTo" + projectName + "Gallery");
+            var imageId = await this.filesService.UploadToFileSystemAsync(input.ImageFile, "images\\projectImages\\" + projectName, "ImageTo" + projectName + "Gallery");
 
             var newImageToProject = new GalleryProject
             {
@@ -47,7 +47,7 @@
             return newImageToProject.Id;
         }
 
-        public async Task<ICollection<ViewImageModel>> GetGallery(int id)
+        public async Task<ICollection<ViewImageModel>> GetGalleryAsync(int id)
         {
             var projectGallery = await this.dbImageToProject.All()
                 .Where(i => i.ProjectId == id)
@@ -62,7 +62,7 @@
             return projectGallery;
         }
 
-        public async Task DeleteImage(int id)
+        public async Task DeleteImageAsync(int id)
         {
             var currentImage = this.dbImageToProject.All().Where(i => i.Id == id).FirstOrDefault();
             var fileId = currentImage.FileId;
@@ -70,7 +70,7 @@
             this.dbImageToProject.Delete(currentImage);
             await this.dbImageToProject.SaveChangesAsync();
 
-            var currentFile = await this.filesService.DeleteFileFromFileSystem(fileId);
+            var currentFile = await this.filesService.DeleteFileFromFileSystemAsync(fileId);
         }
 
         private static string RenameFilePath(string fullPath)
@@ -79,7 +79,7 @@
             var newString = "/";
             var replaceSlashInFullPath = fullPath.Replace(oldString, newString);
 
-            var getIndexStartWwwRoot = fullPath.IndexOf("wwwroot");
+            var getIndexStartWwwRoot = fullPath.LastIndexOf("wwwroot");
             var lengthWwwroot = "wwwroot".Length;
 
             if (getIndexStartWwwRoot >= 0)

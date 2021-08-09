@@ -22,7 +22,7 @@
                 {
                     <div class="col-md-6 col-lg-4 item">
                         
-                            <a class="lightbox" href=@image.ImagePath>
+                            <a class="lightbox" href=@Uri.EscapeUriString(image.ImagePath) >
                                 <img class="img-fluid image scale-on-hover" src=@image.ImagePath asp-append-version="true">
                             </a>
                     </div>

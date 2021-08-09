@@ -11,14 +11,14 @@
 
         IEnumerable<ProjectViewModel> GetAllProjectsWithDeleted();
 
-        Task<ProjectInputModel> GetProjectById(int id);
+        Task<ProjectInputModel> GetProjectByIdAsync(int id);
 
-        Task<int> CreateProject(ProjectInputModel input);
+        Task<int> CreateProjectAsync(ProjectInputModel input);
 
-        Task UpdateProject(ProjectInputModel input);
+        Task UpdateProjectAsync(ProjectInputModel input);
 
-        Task ChangeIsDeleteProject(int id);
+        Task ChangeIsDeleteProjectAsync(int id);
 
-        Task DeleteProject(int id);
+        Task DeleteProjectAsync(int id);
     }
 }

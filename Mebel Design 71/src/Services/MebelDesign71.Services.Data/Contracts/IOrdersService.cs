@@ -8,9 +8,9 @@
 
     public interface IOrdersService
     {
-        Task<string> AddOrder(OrderInputModel input);
+        Task<string> AddOrderAsync(OrderInputModel input);
 
-        Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId, string number);
+        Task<string> AddDocumentToOrderAsync(IFormFile document, string orderId, string userId, string number);
 
         ICollection<OrderViewModel> GetOrdersByUserId(string userId);
 
@@ -18,9 +18,9 @@
 
         OrderViewModel GetOrderById(string orderId);
 
-        Task DeletedOrder(string orderId);
+        Task DeletedOrderAsync(string orderId);
 
-        Task UpdateOrder(OrderViewModel input);
+        Task UpdateOrderAsync(OrderViewModel input);
 
     }
 }

@@ -6,11 +6,11 @@
 
     public interface IProjectsGalleryService
     {
-        Task<int> AddImageToGallery(ImageInputModel input);
+        Task<int> AddImageToGalleryAsync(ImageInputModel input);
 
-        Task<ICollection<ViewImageModel>> GetGallery(int id);
+        Task<ICollection<ViewImageModel>> GetGalleryAsync(int id);
 
-        Task DeleteImage(int id);
+        Task DeleteImageAsync(int id);
 
     }
 }

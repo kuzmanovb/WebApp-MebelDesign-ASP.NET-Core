@@ -27,7 +27,7 @@
                 {
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-0 transform-on-hover">
-                            <a class="lightbox" href=@image.ImagePath>
+                            <a class="lightbox" href=@Uri.EscapeUriString(image.ImagePath) >
                                 <img src=@image.ImagePath alt="Gallery Image" class="card-img-top" width="400" height="250" asp-append-version="true">
                             </a>
                             <div class="card-body">

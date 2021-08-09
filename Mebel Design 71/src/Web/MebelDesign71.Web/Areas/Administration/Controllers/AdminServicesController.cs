@@ -47,14 +47,14 @@
                 return this.View(input);
             }
 
-            await this.servicesService.CreateService(input);
+            await this.servicesService.CreateServiceAsync(input);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> UpdateService(int id)
         {
-            var currentService = await this.servicesService.GetServiceById(id);
+            var currentService = await this.servicesService.GetServiceByIdAsync(id);
 
             return this.View(currentService);
         }
@@ -62,28 +62,33 @@
         [HttpPost]
         public async Task<IActionResult> UpdateService(ServiceInputModel input)
         {
-            await this.servicesService.UpdateService(input);
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.servicesService.UpdateServiceAsync(input);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> ChangeIsDeleted(int id)
         {
-            await this.servicesService.ChangeIsDeleteService(id);
+            await this.servicesService.ChangeIsDeleteServiceAsync(id);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            await this.servicesService.Delete(id);
+            await this.servicesService.DeleteAsync(id);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> DownloadDocument(string id)
         {
-            var file = await this.filesService.GetFileByIdFromFileSystem(id);
+            var file = await this.filesService.GetFileByIdFromFileSystemAsync(id);
 
             if (file == null)
             {
@@ -99,6 +104,13 @@
 
             memory.Position = 0;
             return this.File(memory, file.FileType, file.Name + file.Extension);
+        }
+
+        public async Task<IActionResult> DeleteDocument(int serviceId)
+        {
+            await this.servicesService.DeleteDocumentAsync(serviceId);
+
+            return this.RedirectToAction("UpdateService", new { id = serviceId });
         }
     }
 }

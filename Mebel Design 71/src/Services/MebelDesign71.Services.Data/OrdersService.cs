@@ -5,11 +5,14 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Ganss.XSS;
+
     using MebelDesign71.Data.Common.Repositories;
     using MebelDesign71.Data.Models;
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Web.Infrastructure;
     using MebelDesign71.Web.ViewModels.Orders;
+
     using Microsoft.AspNetCore.Http;
 
     public class OrdersService : IOrdersService
@@ -17,17 +20,19 @@
         private readonly IDeletableEntityRepository<OrderDocument> dbOrderDocument;
         private readonly IDeletableEntityRepository<Order> dbOrder;
         private readonly IFilesService filesService;
+        private readonly IHtmlSanitizer sanitizer;
 
-        public OrdersService(IDeletableEntityRepository<OrderDocument> dbOrderDocument, IDeletableEntityRepository<Order> dbOrder, IFilesService filesService)
+        public OrdersService(IDeletableEntityRepository<OrderDocument> dbOrderDocument, IDeletableEntityRepository<Order> dbOrder, IFilesService filesService, IHtmlSanitizer sanitizer)
         {
             this.dbOrderDocument = dbOrderDocument;
             this.dbOrder = dbOrder;
             this.filesService = filesService;
+            this.sanitizer = sanitizer;
         }
 
-        public async Task<string> AddDocumentToOrder(IFormFile document, string orderId, string userId, string number)
+        public async Task<string> AddDocumentToOrderAsync(IFormFile document, string orderId, string userId, string orderNumber)
         {
-            var fileId = await this.filesService.UploadToFileSystem(document, "documents\\service\\orders\\" + number, "Service Document");
+            var fileId = await this.filesService.UploadToFileSystemAsync(document, "documents\\service\\orders\\" + orderNumber, "Service Document");
             var newUserDocument = new OrderDocument
             {
                 UserId = userId,
@@ -41,12 +46,12 @@
             return newUserDocument.Id;
         }
 
-        public async Task<string> AddOrder(OrderInputModel input)
+        public async Task<string> AddOrderAsync(OrderInputModel input)
         {
             var newOrder = new Order
             {
                 ServiceId = input.ServiceId,
-                Description = input.Description,
+                Description = this.sanitizer.Sanitize(input.Description),
                 UserId = input.UserId,
                 Number = DateTime.UtcNow.ToString("yMdhms"),
             };
@@ -56,7 +61,7 @@
 
             foreach (var document in input.Documents)
             {
-                await this.AddDocumentToOrder(document, newOrder.Id, input.UserId, newOrder.Number);
+                await this.AddDocumentToOrderAsync(document, newOrder.Id, input.UserId, newOrder.Number);
             }
 
             return newOrder.Id;
@@ -132,13 +137,13 @@
             return currentOrder;
         }
 
-        public async Task UpdateOrder(OrderViewModel input)
+        public async Task UpdateOrderAsync(OrderViewModel input)
         {
             var currentOrder = this.dbOrder.All().Where(o => o.Id == input.OrderId).FirstOrDefault();
 
             if (currentOrder.Description != input.Description)
             {
-                currentOrder.Description = input.Description;
+                currentOrder.Description = this.sanitizer.Sanitize(input.Description);
             }
 
             if (currentOrder.Price != input.Price)
@@ -155,7 +160,7 @@
             await this.dbOrder.SaveChangesAsync();
         }
 
-        public async Task DeletedOrder(string orderId)
+        public async Task DeletedOrderAsync(string orderId)
         {
             var curentOrder = this.dbOrder.All().Where(o => o.Id == orderId).FirstOrDefault();
 
@@ -163,7 +168,7 @@
 
             foreach (var od in documentsToOrder)
             {
-                await this.filesService.DeleteFileFromFileSystem(od.DocumentId);
+                await this.filesService.DeleteFileFromFileSystemAsync(od.DocumentId);
                 this.dbOrderDocument.HardDelete(od);
             }
 

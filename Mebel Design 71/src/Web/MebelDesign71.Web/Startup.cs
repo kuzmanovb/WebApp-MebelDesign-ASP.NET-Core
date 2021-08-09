@@ -1,7 +1,9 @@
 ﻿namespace MebelDesign71.Web
 {
     using System.Reflection;
-
+    using Ganss.XSS;
+    using GoogleReCaptcha.V3;
+    using GoogleReCaptcha.V3.Interface;
     using MebelDesign71.Data;
     using MebelDesign71.Data.Common;
     using MebelDesign71.Data.Common.Repositories;
@@ -57,13 +59,25 @@
 
             services.AddSingleton(this.configuration);
 
+            // Application insights
+            services.AddApplicationInsightsTelemetry();
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
+            // GoogleReCaptcha
+            services.AddControllersWithViews();
+            services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
+
+            // HTML Sanitizer
+            services.AddSingleton<IHtmlSanitizer>(_ => new HtmlSanitizer());
+
+            // SendGrid
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
+
             // Application services
-            services.AddTransient<IEmailSender>(s => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMessagesService, MessagesService>();
             services.AddTransient<IFilesService, FilesService>();
@@ -72,6 +86,7 @@
             services.AddTransient<IProjectsGalleryService, ProjectsGalleryService>();
             services.AddTransient<IServicesService, ServicesService>();
             services.AddTransient<IOrdersService, OrdersService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

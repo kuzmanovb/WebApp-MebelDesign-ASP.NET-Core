@@ -4,7 +4,6 @@
 
     public class SendMessageInputModel
     {
-        public string ToMessageId { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Моля въведете email адрес")]
         [Display(Name = "Email адрес")]

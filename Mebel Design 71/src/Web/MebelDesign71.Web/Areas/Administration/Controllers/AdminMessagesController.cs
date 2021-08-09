@@ -1,9 +1,12 @@
 ﻿namespace MebelDesign71.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
+
+    using MebelDesign71.Common;
     using MebelDesign71.Services.Data.Contracts;
     using MebelDesign71.Services.Messaging;
     using MebelDesign71.Web.ViewModels.Messages;
+
     using Microsoft.AspNetCore.Mvc;
 
     public class AdminMessagesController : AdministrationController
@@ -27,7 +30,6 @@
 
         public IActionResult Write(string id, string email, string about)
         {
-            this.ViewData["toMessageId"] = id;
             this.ViewData["email"] = email;
             this.ViewData["about"] = about;
 
@@ -42,11 +44,11 @@
                 return this.View(input);
             }
 
-            //await this.emailSender.SendEmailAsync(InfoConstant.SecondEmail, GlobalConstants.SystemName, input.Email, input.About, input.Description);
+            await this.emailSender.SendEmailAsync(InfoConstant.SecondEmail, GlobalConstants.SystemName, input.Email, input.About, input.Description);
 
             await this.messagesService.AddSendMessageAsync(input);
 
-            return this.RedirectToAction("Send");
+            return this.RedirectToAction("Sent");
         }
 
         public IActionResult Read(string id)
@@ -58,7 +60,8 @@
 
         public IActionResult ReadSendMessage(string id)
         {
-            var currentMessage = this.messagesService.GetSendMessagesById(id);
+
+            var currentMessage = this.messagesService.GetSendMessageById(id);
 
             return this.View(currentMessage);
         }
@@ -81,7 +84,8 @@
 
         public async Task<IActionResult> Delete(string id)
         {
-            await this.messagesService.DeleteAsync(id);
+
+            await this.messagesService.DeleteMessageAsync(id);
 
             return this.RedirectToAction("Index");
         }
@@ -95,14 +99,16 @@
 
         public async Task<IActionResult> Undelete(string id)
         {
-            await this.messagesService.RestoreAsync(id);
+
+            await this.messagesService.RestoreMessageAsync(id);
 
             return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> HardDelete(string id)
         {
-            await this.messagesService.HardDeleteAsync(id);
+
+            await this.messagesService.HardDeleteMessageAsync(id);
 
             return this.RedirectToAction("Index");
         }

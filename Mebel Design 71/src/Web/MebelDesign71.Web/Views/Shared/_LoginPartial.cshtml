@@ -12,12 +12,12 @@
             <a class="nav-link" asp-area="Administration" asp-controller="AdminMessages" asp-action="Index" title="Admin">Admin</a>
         </li>
     }
-    //else
-    //{
+    else
+    {
         <li class="nav-item">
             <a class="nav-link" asp-controller="Orders" asp-action="Index"  title="Oders">Мойте поръчки</a>
-        </li>
-    //}
+        </li>  
+    }
     <li class="nav-item">
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
             <button type="submit" class="nav-link btn btn-link text-white"><b>Изход</b></button>

@@ -26,10 +26,10 @@
 
         public async Task<IActionResult> Gallery(int id)
         {
-            var currentProject = await this.projectsService.GetProjectById(id);
+            var currentProject = await this.projectsService.GetProjectByIdAsync(id);
             this.ViewData["projectId"] = id;
             this.ViewData["projectName"] = currentProject.Name;
-            var galery = await this.projectsGalleryService.GetGallery(id);
+            var galery = await this.projectsGalleryService.GetGalleryAsync(id);
             this.ViewData["projectGalery"] = galery;
 
             return this.View();
@@ -50,14 +50,14 @@
                 return this.View();
             }
 
-            await this.projectsGalleryService.AddImageToGallery(input);
+            await this.projectsGalleryService.AddImageToGalleryAsync(input);
 
             return this.RedirectToAction("Gallery", new { id = input.ProjectId});
         }
 
         public async Task<IActionResult> DeleteImage(int imageId, int projectId)
         {
-            await this.projectsGalleryService.DeleteImage(imageId);
+            await this.projectsGalleryService.DeleteImageAsync(imageId);
 
             return this.RedirectToAction("Gallery", new { id = projectId });
         }

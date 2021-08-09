@@ -2,6 +2,7 @@
 {
     using MebelDesign71.Services.Data;
     using MebelDesign71.Services.Data.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.IO;
     using System.Threading.Tasks;
@@ -27,14 +28,15 @@
 
         public async Task<IActionResult> CurrentService(int id)
         {
-            var currentService = await this.servicesService.GetServiceByIdForView(id);
+            var currentService = await this.servicesService.GetServiceByIdForViewAsync(id);
 
             return this.View(currentService);
         }
 
+        [Authorize]
         public async Task<IActionResult> DownloadDocument(string id)
         {
-            var file = await this.filesService.GetFileByIdFromFileSystem(id);
+            var file = await this.filesService.GetFileByIdFromFileSystemAsync(id);
 
             if (file == null)
             {
