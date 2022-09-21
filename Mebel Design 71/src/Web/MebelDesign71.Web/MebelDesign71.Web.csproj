@@ -12,10 +12,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Update="appsettings*.json" CopyToPublishDirectory="Never" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Compile Remove="wwwroot\ProfilImage\**" />
 		<Content Remove="wwwroot\ProfilImage\**" />
 		<EmbeddedResource Remove="wwwroot\ProfilImage\**" />
