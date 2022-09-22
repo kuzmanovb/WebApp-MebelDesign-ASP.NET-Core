@@ -25,10 +25,10 @@
         [HttpPost]
         public async Task<IActionResult> Index(MessageInputModel input, string captcha)
         {
-            if (!await this.captchaValidator.IsCaptchaPassedAsync(captcha))
-            {
-                this.ModelState.AddModelError("captcha", "Captcha validation failed");
-            }
+            //if (!await this.captchaValidator.IsCaptchaPassedAsync(captcha))
+            //{
+            //    this.ModelState.AddModelError("captcha", "Captcha validation failed");
+            //}
 
             if (!this.ModelState.IsValid)
             {
